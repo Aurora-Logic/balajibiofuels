@@ -662,6 +662,9 @@ function initializeTab(tabName) {
     case 'upload':
       setupUploadForm();
       break;
+    case 'settings':
+      loadSettings();
+      break;
   }
 }
 
@@ -1290,6 +1293,73 @@ function resetImageModal() {
   fileInput.setAttribute('required', '');
   fileLabel.textContent = 'Upload Image';
   fileHelp.classList.add('hidden');
+}
+
+// Settings Management Functions
+async function loadSettings() {
+  try {
+    const response = await fetch('../dbs/settings.php');
+    const result = await response.json();
+    
+    if (result.success) {
+      const settings = result.data;
+      
+      // Populate form fields with current settings
+      const maxImageSize = document.getElementById('max-image-size');
+      const maxVideoSize = document.getElementById('max-video-size');
+      const autoOptimize = document.getElementById('auto-optimize');
+      const requireApproval = document.getElementById('require-approval');
+      
+      if (maxImageSize) maxImageSize.value = settings.max_image_size || 10;
+      if (maxVideoSize) maxVideoSize.value = settings.max_video_size || 100;
+      if (autoOptimize) autoOptimize.checked = settings.auto_optimize === '1' || settings.auto_optimize === true;
+      if (requireApproval) requireApproval.checked = settings.require_approval === '1' || settings.require_approval === true;
+      
+      console.log('Settings loaded:', settings);
+    }
+  } catch (error) {
+    console.error('Error loading settings:', error);
+    showToast('Failed to load settings', 'error');
+  }
+}
+
+async function saveSettings() {
+  try {
+    const maxImageSize = document.getElementById('max-image-size');
+    const maxVideoSize = document.getElementById('max-video-size');
+    const autoOptimize = document.getElementById('auto-optimize');
+    const requireApproval = document.getElementById('require-approval');
+    
+    const settingsData = {
+      settings: {
+        max_image_size: maxImageSize ? maxImageSize.value : 10,
+        max_video_size: maxVideoSize ? maxVideoSize.value : 100,
+        auto_optimize: autoOptimize ? (autoOptimize.checked ? '1' : '0') : '0',
+        require_approval: requireApproval ? (requireApproval.checked ? '1' : '0') : '0'
+      }
+    };
+    
+    console.log('Saving settings:', settingsData);
+    
+    const response = await fetch('../dbs/settings.php', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(settingsData)
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      showToast('Settings saved successfully!', 'success');
+    } else {
+      throw new Error(result.error || 'Failed to save settings');
+    }
+  } catch (error) {
+    console.error('Error saving settings:', error);
+    showToast('Failed to save settings: ' + error.message, 'error');
+  }
 }
 
 // Initialize tooltips and modals

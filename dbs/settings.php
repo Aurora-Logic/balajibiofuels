@@ -98,8 +98,20 @@ switch ($method) {
                 
                 try {
                     foreach ($input['settings'] as $key => $value) {
-                        $stmt = $pdo->prepare('INSERT INTO settings (key_name, value) VALUES (?, ?) ON DUPLICATE KEY UPDATE value = VALUES(value)');
-                        $stmt->execute([$key, $value]);
+                        // Check if setting exists
+                        $checkStmt = $pdo->prepare('SELECT id FROM settings WHERE key_name = ?');
+                        $checkStmt->execute([$key]);
+                        $existingSetting = $checkStmt->fetch();
+                        
+                        if ($existingSetting) {
+                            // Update existing setting
+                            $stmt = $pdo->prepare('UPDATE settings SET value = ? WHERE key_name = ?');
+                            $stmt->execute([$value, $key]);
+                        } else {
+                            // Insert new setting
+                            $stmt = $pdo->prepare('INSERT INTO settings (key_name, value) VALUES (?, ?)');
+                            $stmt->execute([$key, $value]);
+                        }
                     }
                     
                     $pdo->commit();
@@ -124,9 +136,20 @@ switch ($method) {
                 throw new Exception('Setting key is required');
             }
             
-            // Use INSERT ... ON DUPLICATE KEY UPDATE to handle both insert and update
-            $stmt = $pdo->prepare('INSERT INTO settings (key_name, value) VALUES (?, ?) ON DUPLICATE KEY UPDATE value = VALUES(value)');
-            $stmt->execute([$key, $value]);
+            // Check if setting exists
+            $checkStmt = $pdo->prepare('SELECT id FROM settings WHERE key_name = ?');
+            $checkStmt->execute([$key]);
+            $existingSetting = $checkStmt->fetch();
+            
+            if ($existingSetting) {
+                // Update existing setting
+                $stmt = $pdo->prepare('UPDATE settings SET value = ? WHERE key_name = ?');
+                $stmt->execute([$value, $key]);
+            } else {
+                // Insert new setting
+                $stmt = $pdo->prepare('INSERT INTO settings (key_name, value) VALUES (?, ?)');
+                $stmt->execute([$key, $value]);
+            }
             
             // Log activity
             $activityStmt = $pdo->prepare('INSERT INTO activity_log (activity_type, description) VALUES (?, ?)');

@@ -15,10 +15,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
 
+// Helper function to get settings from database
+function getSettings($pdo) {
+    try {
+        $stmt = $pdo->query('SELECT key_name, value FROM settings');
+        $settings = $stmt->fetchAll();
+        
+        $settingsArray = [];
+        foreach ($settings as $setting) {
+            $settingsArray[$setting['key_name']] = $setting['value'];
+        }
+        
+        return $settingsArray;
+    } catch (Exception $e) {
+        // Return default values if settings table doesn't exist or has issues
+        return [
+            'max_image_size' => '10',
+            'max_video_size' => '100'
+        ];
+    }
+}
+
 // Helper function to handle file uploads
 function handleImageUpload($file, $uploadDir = '../uploads/') {
+    global $pdo;
+    
+    $settings = getSettings($pdo);
+    $maxSizeMB = isset($settings['max_image_size']) ? (int)$settings['max_image_size'] : 10;
+    
     $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-    $maxSize = 5 * 1024 * 1024; // 5MB
+    $maxSize = $maxSizeMB * 1024 * 1024; // Convert MB to bytes
     
     if (!isset($file['tmp_name']) || $file['error'] !== UPLOAD_ERR_OK) {
         throw new Exception('File upload error');
@@ -29,7 +55,7 @@ function handleImageUpload($file, $uploadDir = '../uploads/') {
     }
     
     if ($file['size'] > $maxSize) {
-        throw new Exception('File size too large. Maximum 5MB allowed.');
+        throw new Exception("File size too large. Maximum {$maxSizeMB}MB allowed.");
     }
     
     // Create upload directory if it doesn't exist
