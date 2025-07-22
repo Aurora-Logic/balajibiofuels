@@ -131,17 +131,67 @@ switch ($method) {
 
     case 'POST':
         try {
-            // Handle file upload
-            if (isset($_FILES['image'])) {
-                $imagePath = handleImageUpload($_FILES['image']);
-                
-                $title = $_POST['title'] ?? '';
-                $description = $_POST['description'] ?? '';
-                $categoryId = !empty($_POST['category_id']) ? $_POST['category_id'] : null;
-                
-                if (empty($title)) {
-                    throw new Exception('Title is required');
+            $action = $_POST['action'] ?? 'create';
+            $title = $_POST['title'] ?? '';
+            $description = $_POST['description'] ?? '';
+            $categoryId = !empty($_POST['category_id']) ? $_POST['category_id'] : null;
+            
+            if (empty($title)) {
+                throw new Exception('Title is required');
+            }
+            
+            if ($action === 'update') {
+                // Handle update operation
+                $id = $_POST['id'] ?? null;
+                if (!$id) {
+                    throw new Exception('Image ID is required for update');
                 }
+                
+                // Check if image exists
+                $checkStmt = $pdo->prepare('SELECT id, title, image_path FROM gallery_images WHERE id = ?');
+                $checkStmt->execute([$id]);
+                $existingImage = $checkStmt->fetch();
+                
+                if (!$existingImage) {
+                    http_response_code(404);
+                    echo json_encode(['success' => false, 'error' => 'Image not found']);
+                    break;
+                }
+                
+                // Handle optional file replacement
+                $imagePath = $existingImage['image_path']; // Keep existing path by default
+                if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                    // Delete old file
+                    $oldFullPath = '../' . $existingImage['image_path'];
+                    if (file_exists($oldFullPath)) {
+                        unlink($oldFullPath);
+                    }
+                    // Upload new file
+                    $imagePath = handleImageUpload($_FILES['image']);
+                }
+                
+                // Update database
+                $stmt = $pdo->prepare('UPDATE gallery_images SET title = ?, description = ?, category_id = ?, image_path = ? WHERE id = ?');
+                $stmt->execute([$title, $description, $categoryId, $imagePath, $id]);
+                
+                // Log activity
+                $activityStmt = $pdo->prepare('INSERT INTO activity_log (activity_type, description) VALUES (?, ?)');
+                $activityStmt->execute(['image_update', "Image updated: $title"]);
+                
+                // Get updated image
+                $getStmt = $pdo->prepare('SELECT gi.*, c.name AS category_name FROM gallery_images gi LEFT JOIN categories c ON gi.category_id = c.id WHERE gi.id = ?');
+                $getStmt->execute([$id]);
+                $updatedImage = $getStmt->fetch();
+                
+                echo json_encode(['success' => true, 'data' => $updatedImage, 'message' => 'Image updated successfully']);
+                
+            } else {
+                // Handle create operation
+                if (!isset($_FILES['image'])) {
+                    throw new Exception('No image file provided');
+                }
+                
+                $imagePath = handleImageUpload($_FILES['image']);
                 
                 $stmt = $pdo->prepare('INSERT INTO gallery_images (title, description, category_id, image_path) VALUES (?, ?, ?, ?)');
                 $stmt->execute([$title, $description, $categoryId, $imagePath]);
@@ -158,8 +208,6 @@ switch ($method) {
                 $newImage = $getStmt->fetch();
                 
                 echo json_encode(['success' => true, 'data' => $newImage, 'message' => 'Image uploaded successfully']);
-            } else {
-                throw new Exception('No image file provided');
             }
         } catch (Exception $e) {
             http_response_code(400);

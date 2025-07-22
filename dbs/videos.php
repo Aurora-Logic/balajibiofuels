@@ -137,17 +137,83 @@ switch ($method) {
 
     case 'POST':
         try {
-            // Handle file upload
-            if (isset($_FILES['video'])) {
+            $action = $_POST['action'] ?? 'create';
+            $title = $_POST['title'] ?? '';
+            $description = $_POST['description'] ?? '';
+            $categoryId = !empty($_POST['category_id']) ? $_POST['category_id'] : null;
+            
+            if (empty($title)) {
+                throw new Exception('Title is required');
+            }
+            
+            if ($action === 'update') {
+                // Handle update operation
+                $id = $_POST['id'] ?? null;
+                if (!$id) {
+                    throw new Exception('Video ID is required for update');
+                }
+                
+                // Check if video exists
+                $checkStmt = $pdo->prepare('SELECT id, title, video_path, duration FROM videos WHERE id = ?');
+                $checkStmt->execute([$id]);
+                $existingVideo = $checkStmt->fetch();
+                
+                if (!$existingVideo) {
+                    http_response_code(404);
+                    echo json_encode(['success' => false, 'error' => 'Video not found']);
+                    break;
+                }
+                
+                // Handle optional file replacement and duration
+                $videoPath = $existingVideo['video_path']; // Keep existing path by default
+                $duration = $existingVideo['duration']; // Keep existing duration by default
+                
+                if (isset($_FILES['video']) && $_FILES['video']['error'] === UPLOAD_ERR_OK) {
+                    // Delete old file
+                    $oldFullPath = '../' . $existingVideo['video_path'];
+                    if (file_exists($oldFullPath)) {
+                        unlink($oldFullPath);
+                    }
+                    // Upload new file
+                    $videoPath = handleVideoUpload($_FILES['video']);
+                    $duration = getVideoDuration('../' . $videoPath);
+                } else {
+                    // Use duration from form if provided (from JavaScript automatic detection)
+                    $formDuration = $_POST['duration'] ?? null;
+                    if ($formDuration !== null && is_numeric($formDuration)) {
+                        $duration = (int)$formDuration;
+                    }
+                }
+                
+                // Update database
+                $stmt = $pdo->prepare('UPDATE videos SET title = ?, description = ?, category_id = ?, video_path = ?, duration = ? WHERE id = ?');
+                $stmt->execute([$title, $description, $categoryId, $videoPath, $duration, $id]);
+                
+                // Log activity
+                $activityStmt = $pdo->prepare('INSERT INTO activity_log (activity_type, description) VALUES (?, ?)');
+                $activityStmt->execute(['video_update', "Video updated: $title"]);
+                
+                // Get updated video
+                $getStmt = $pdo->prepare('SELECT v.*, c.name AS category_name FROM videos v LEFT JOIN categories c ON v.category_id = c.id WHERE v.id = ?');
+                $getStmt->execute([$id]);
+                $updatedVideo = $getStmt->fetch();
+                
+                echo json_encode(['success' => true, 'data' => $updatedVideo, 'message' => 'Video updated successfully']);
+                
+            } else {
+                // Handle create operation
+                if (!isset($_FILES['video'])) {
+                    throw new Exception('No video file provided');
+                }
+                
                 $videoPath = handleVideoUpload($_FILES['video']);
-                $duration = getVideoDuration('../' . $videoPath);
                 
-                $title = $_POST['title'] ?? '';
-                $description = $_POST['description'] ?? '';
-                $categoryId = !empty($_POST['category_id']) ? $_POST['category_id'] : null;
-                
-                if (empty($title)) {
-                    throw new Exception('Title is required');
+                // Get duration from form (JavaScript detection) or calculate server-side
+                $duration = $_POST['duration'] ?? null;
+                if ($duration === null || !is_numeric($duration)) {
+                    $duration = getVideoDuration('../' . $videoPath);
+                } else {
+                    $duration = (int)$duration;
                 }
                 
                 $stmt = $pdo->prepare('INSERT INTO videos (title, description, category_id, video_path, duration) VALUES (?, ?, ?, ?, ?)');
@@ -165,8 +231,6 @@ switch ($method) {
                 $newVideo = $getStmt->fetch();
                 
                 echo json_encode(['success' => true, 'data' => $newVideo, 'message' => 'Video uploaded successfully']);
-            } else {
-                throw new Exception('No video file provided');
             }
         } catch (Exception $e) {
             http_response_code(400);

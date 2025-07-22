@@ -553,11 +553,91 @@ async function deleteCategory(id) {
 }
 
 function editImage(id) {
-  showToast('Edit image feature coming soon!');
+  // Fetch image details first
+  fetchImageDetails(id).then(image => {
+    if (image) {
+      // Populate the modal with existing data
+      document.getElementById('modal-image-title').value = image.title || '';
+      document.getElementById('modal-image-category').value = image.category_id || '';
+      document.getElementById('modal-image-description').value = image.description || '';
+      
+      // Change modal title and button text
+      document.querySelector('#add-image-modal h3').textContent = 'Edit Image';
+      document.getElementById('submit-image-btn').textContent = 'Update Image';
+      
+      // Update file input for edit mode
+      const fileInput = document.getElementById('modal-image-file');
+      const fileLabel = document.getElementById('image-file-label');
+      const fileHelp = document.getElementById('image-file-help');
+      
+      fileInput.removeAttribute('required');
+      fileLabel.textContent = 'Replace Image (Optional)';
+      fileHelp.classList.remove('hidden');
+      
+      // Store the image ID for update
+      document.getElementById('add-image-form').setAttribute('data-edit-id', id);
+      
+      // Open modal
+      const modal = document.getElementById('add-image-modal');
+      modal.classList.remove('hidden');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+  });
+}
+
+async function fetchImageDetails(id) {
+  try {
+    const response = await fetch(`../dbs/gallery.php?id=${id}`);
+    const result = await response.json();
+    return result.success ? result.data : null;
+  } catch (error) {
+    console.error('Error fetching image details:', error);
+    return null;
+  }
 }
 
 function editVideo(id) {
-  showToast('Edit video feature coming soon!');
+  // Fetch video details first
+  fetchVideoDetails(id).then(video => {
+    if (video) {
+      // Populate the modal with existing data
+      document.getElementById('modal-video-title').value = video.title || '';
+      document.getElementById('modal-video-category').value = video.category_id || '';
+      document.getElementById('modal-video-description').value = video.description || '';
+      
+      // Change modal title and button text
+      document.querySelector('#add-video-modal h3').textContent = 'Edit Video';
+      document.getElementById('submit-video-btn').textContent = 'Update Video';
+      
+      // Update file input for edit mode
+      const fileInput = document.getElementById('modal-video-file');
+      const fileLabel = document.getElementById('video-file-label');
+      const fileHelp = document.getElementById('video-file-help');
+      
+      fileInput.removeAttribute('required');
+      fileLabel.textContent = 'Replace Video (Optional)';
+      fileHelp.classList.remove('hidden');
+      
+      // Store the video ID for update
+      document.getElementById('add-video-form').setAttribute('data-edit-id', id);
+      
+      // Open modal
+      const modal = document.getElementById('add-video-modal');
+      modal.classList.remove('hidden');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+  });
+}
+
+async function fetchVideoDetails(id) {
+  try {
+    const response = await fetch(`../dbs/videos.php?id=${id}`);
+    const result = await response.json();
+    return result.success ? result.data : null;
+  } catch (error) {
+    console.error('Error fetching video details:', error);
+    return null;
+  }
 }
 
 function editCategory(id) {
@@ -722,6 +802,90 @@ document.addEventListener('DOMContentLoaded', function () {
   
   // Initialize the default active tab (dashboard)
   initializeTab('dashboard');
+
+  // Add event listener for modal image submission
+  const submitImageBtn = document.getElementById('submit-image-btn');
+  console.log('Submit button found:', !!submitImageBtn);
+  if (submitImageBtn) {
+    submitImageBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('Submit button clicked!');
+      handleModalImageSubmission();
+    });
+  } else {
+    console.error('Submit button not found!');
+  }
+
+  // Add form submission handler as backup
+  const addImageForm = document.getElementById('add-image-form');
+  console.log('Add image form found:', !!addImageForm);
+  if (addImageForm) {
+    addImageForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      console.log('Form submitted!');
+      handleModalImageSubmission();
+    });
+  } else {
+    console.error('Add image form not found!');
+  }
+
+  // Add event listener for modal video submission
+  const submitVideoBtn = document.getElementById('submit-video-btn');
+  console.log('Submit video button found:', !!submitVideoBtn);
+  if (submitVideoBtn) {
+    submitVideoBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('Submit video button clicked!');
+      handleModalVideoSubmission();
+    });
+  } else {
+    console.error('Submit video button not found!');
+  }
+
+  // Add form submission handler for video as backup
+  const addVideoForm = document.getElementById('add-video-form');
+  console.log('Add video form found:', !!addVideoForm);
+  if (addVideoForm) {
+    addVideoForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      console.log('Video form submitted!');
+      handleModalVideoSubmission();
+    });
+  } else {
+    console.error('Add video form not found!');
+  }
+
+  // Add event listeners for modal reset when opened for new items
+  document.querySelectorAll('[data-modal-target="add-image-modal"]').forEach(btn => {
+    btn.addEventListener('click', resetImageModal);
+  });
+  
+  document.querySelectorAll('[data-modal-target="add-video-modal"]').forEach(btn => {
+    btn.addEventListener('click', resetVideoModal);
+  });
+
+  // Debug modal elements
+  setTimeout(() => {
+    const fileInput = document.getElementById('modal-image-file');
+    const titleInput = document.getElementById('modal-image-title');
+    const categoryInput = document.getElementById('modal-image-category');
+    const descriptionInput = document.getElementById('modal-image-description');
+    
+    const videoFileInput = document.getElementById('modal-video-file');
+    const videoTitleInput = document.getElementById('modal-video-title');
+    const videoCategoryInput = document.getElementById('modal-video-category');
+    const videoDescriptionInput = document.getElementById('modal-video-description');
+    
+    console.log('Modal elements found:');
+    console.log('- Image File input:', !!fileInput);
+    console.log('- Image Title input:', !!titleInput);
+    console.log('- Image Category input:', !!categoryInput);
+    console.log('- Image Description input:', !!descriptionInput);
+    console.log('- Video File input:', !!videoFileInput);
+    console.log('- Video Title input:', !!videoTitleInput);
+    console.log('- Video Category input:', !!videoCategoryInput);
+    console.log('- Video Description input:', !!videoDescriptionInput);
+  }, 1000);
 });
 
 // Sidebar styles
@@ -800,6 +964,332 @@ async function createCategory(name, description) {
   } catch (error) {
     showToast('Error creating category: ' + error.message, 'error');
   }
+}
+
+// Handle modal video submission
+async function handleModalVideoSubmission() {
+  console.log('Starting video submission...');
+  
+  const fileInput = document.getElementById('modal-video-file');
+  const titleInput = document.getElementById('modal-video-title');
+  const categoryInput = document.getElementById('modal-video-category');
+  const descriptionInput = document.getElementById('modal-video-description');
+  const form = document.getElementById('add-video-form');
+  const editId = form.getAttribute('data-edit-id');
+  
+  const isEditing = !!editId;
+
+  // Validate required fields - file is only required for new uploads
+  if (!isEditing && !fileInput.files[0]) {
+    console.error('No file selected for new video');
+    showToast('Please select a video file', 'error');
+    return;
+  }
+
+  if (!titleInput.value.trim()) {
+    console.error('No title provided');
+    showToast('Please enter a title', 'error');
+    titleInput.focus();
+    return;
+  }
+
+  // Log form data
+  console.log('File:', fileInput.files[0]);
+  console.log('Title:', titleInput.value);
+  console.log('Category:', categoryInput.value);
+  console.log('Description:', descriptionInput.value);
+  console.log('Is Editing:', isEditing, editId);
+
+  const formData = new FormData();
+  
+  // Only append video if we have one (for new uploads or when replacing existing)
+  if (fileInput.files[0]) {
+    formData.append('video', fileInput.files[0]);
+    console.log('Video file added to FormData');
+    
+    // Get video duration automatically
+    try {
+      const duration = await getVideoDuration(fileInput.files[0]);
+      formData.append('duration', duration);
+      console.log('Video duration detected:', duration, 'seconds');
+    } catch (error) {
+      console.warn('Could not detect video duration:', error);
+    }
+  } else if (isEditing) {
+    console.log('No new video file - updating metadata only');
+  }
+  
+  formData.append('title', titleInput.value.trim());
+  formData.append('description', descriptionInput.value.trim());
+  formData.append('category_id', categoryInput.value);
+  
+  if (isEditing) {
+    formData.append('id', editId);
+    formData.append('action', 'update'); // Use 'action' instead of '_method'
+    console.log('Edit mode: ID =', editId);
+  } else {
+    formData.append('action', 'create');
+    console.log('Create mode');
+  }
+
+  try {
+    // Show loading state
+    const submitBtn = document.getElementById('submit-video-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = isEditing ? 'Updating...' : 'Uploading...';
+    submitBtn.disabled = true;
+
+    console.log('Sending request to videos.php...');
+    const response = await fetch('../dbs/videos.php', {
+      method: 'POST',
+      body: formData
+    });
+
+    console.log('Response status:', response.status);
+    const responseText = await response.text();
+    console.log('Response text:', responseText);
+    
+    let result;
+    try {
+      result = JSON.parse(responseText);
+    } catch (parseError) {
+      console.error('JSON parse error:', parseError);
+      console.error('Response was:', responseText);
+      throw new Error('Server returned invalid JSON. Response: ' + responseText.substring(0, 200));
+    }
+    
+    console.log('Parsed result:', result);
+    
+    if (result.success) {
+      showToast(isEditing ? 'Video updated successfully!' : 'Video uploaded successfully!');
+      
+      // Reset modal to add mode
+      resetVideoModal();
+      
+      // Close modal
+      const modal = document.getElementById('add-video-modal');
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden', 'true');
+      
+      // Remove backdrop
+      document.body.style.overflow = '';
+      const backdrop = document.querySelector('[modal-backdrop]');
+      if (backdrop) {
+        backdrop.remove();
+      }
+      
+      // Refresh videos if we're on the videos tab
+      const videosTab = document.getElementById('videos-tab');
+      if (!videosTab.classList.contains('hidden')) {
+        fetchAndRenderVideos(1);
+      }
+      
+      // Refresh dashboard stats
+      fetchDashboardData();
+      
+    } else {
+      throw new Error(result.error || (isEditing ? 'Update failed' : 'Upload failed'));
+    }
+  } catch (error) {
+    console.error('Upload error:', error);
+    showToast('Error ' + (isEditing ? 'updating' : 'uploading') + ' video: ' + error.message, 'error');
+  } finally {
+    // Restore button state
+    const submitBtn = document.getElementById('submit-video-btn');
+    if (submitBtn) {
+      submitBtn.textContent = isEditing ? 'Update Video' : 'Add Video';
+      submitBtn.disabled = false;
+    }
+  }
+}
+
+// Reset video modal to add mode
+function resetVideoModal() {
+  const form = document.getElementById('add-video-form');
+  form.reset();
+  form.removeAttribute('data-edit-id');
+  
+  // Reset modal title and button
+  document.querySelector('#add-video-modal h3').textContent = 'Add New Video';
+  document.getElementById('submit-video-btn').textContent = 'Add Video';
+  
+  // Reset file input labels
+  const fileInput = document.getElementById('modal-video-file');
+  const fileLabel = document.getElementById('video-file-label');
+  const fileHelp = document.getElementById('video-file-help');
+  
+  fileLabel.textContent = 'Upload Video';
+  fileHelp.classList.add('hidden');
+  
+  // Note: Video file input is never required since it's optional in both modes
+}
+
+// Get video duration automatically
+function getVideoDuration(file) {
+  return new Promise((resolve, reject) => {
+    const video = document.createElement('video');
+    video.preload = 'metadata';
+    
+    video.onloadedmetadata = function() {
+      window.URL.revokeObjectURL(video.src);
+      const duration = Math.round(video.duration);
+      resolve(duration);
+    };
+    
+    video.onerror = function() {
+      reject(new Error('Error loading video metadata'));
+    };
+    
+    video.src = URL.createObjectURL(file);
+  });
+}
+
+// Handle modal image submission
+async function handleModalImageSubmission() {
+  console.log('Starting image submission...');
+  
+  const fileInput = document.getElementById('modal-image-file');
+  const titleInput = document.getElementById('modal-image-title');
+  const categoryInput = document.getElementById('modal-image-category');
+  const descriptionInput = document.getElementById('modal-image-description');
+  const form = document.getElementById('add-image-form');
+  const editId = form.getAttribute('data-edit-id');
+  
+  const isEditing = !!editId;
+
+  // Validate required fields - file is only required for new uploads
+  if (!isEditing && !fileInput.files[0]) {
+    console.error('No file selected for new image');
+    showToast('Please select an image file', 'error');
+    return;
+  }
+
+  if (!titleInput.value.trim()) {
+    console.error('No title provided');
+    showToast('Please enter a title', 'error');
+    titleInput.focus();
+    return;
+  }
+
+  // Log form data
+  console.log('File:', fileInput.files[0]);
+  console.log('Title:', titleInput.value);
+  console.log('Category:', categoryInput.value);
+  console.log('Description:', descriptionInput.value);
+  console.log('Is Editing:', isEditing, editId);
+
+  const formData = new FormData();
+  
+  // Only append image if we have one (for new uploads or when replacing existing)
+  if (fileInput.files[0]) {
+    formData.append('image', fileInput.files[0]);
+    console.log('Image file added to FormData');
+  } else if (isEditing) {
+    console.log('No new image file - updating metadata only');
+  }
+  
+  formData.append('title', titleInput.value.trim());
+  formData.append('description', descriptionInput.value.trim());
+  formData.append('category_id', categoryInput.value);
+  
+  if (isEditing) {
+    formData.append('id', editId);
+    formData.append('action', 'update'); // Use 'action' instead of '_method'
+    console.log('Edit mode: ID =', editId);
+  } else {
+    formData.append('action', 'create');
+    console.log('Create mode');
+  }
+
+  try {
+    // Show loading state
+    const submitBtn = document.getElementById('submit-image-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = isEditing ? 'Updating...' : 'Uploading...';
+    submitBtn.disabled = true;
+
+    console.log('Sending request to gallery.php...');
+    const response = await fetch('../dbs/gallery.php', {
+      method: 'POST',
+      body: formData
+    });
+
+    console.log('Response status:', response.status);
+    const responseText = await response.text();
+    console.log('Response text:', responseText);
+    
+    let result;
+    try {
+      result = JSON.parse(responseText);
+    } catch (parseError) {
+      console.error('JSON parse error:', parseError);
+      console.error('Response was:', responseText);
+      throw new Error('Server returned invalid JSON. Response: ' + responseText.substring(0, 200));
+    }
+    
+    console.log('Parsed result:', result);
+    
+    if (result.success) {
+      showToast(isEditing ? 'Image updated successfully!' : 'Image uploaded successfully!');
+      
+      // Reset modal to add mode
+      resetImageModal();
+      
+      // Close modal
+      const modal = document.getElementById('add-image-modal');
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden', 'true');
+      
+      // Remove backdrop
+      document.body.style.overflow = '';
+      const backdrop = document.querySelector('[modal-backdrop]');
+      if (backdrop) {
+        backdrop.remove();
+      }
+      
+      // Refresh gallery if we're on the gallery tab
+      const galleryTab = document.getElementById('gallery-tab');
+      if (!galleryTab.classList.contains('hidden')) {
+        fetchAndRenderGallery(1);
+      }
+      
+      // Refresh dashboard stats
+      fetchDashboardData();
+      
+    } else {
+      throw new Error(result.error || (isEditing ? 'Update failed' : 'Upload failed'));
+    }
+  } catch (error) {
+    console.error('Upload error:', error);
+    showToast('Error ' + (isEditing ? 'updating' : 'uploading') + ' image: ' + error.message, 'error');
+  } finally {
+    // Restore button state
+    const submitBtn = document.getElementById('submit-image-btn');
+    if (submitBtn) {
+      submitBtn.textContent = isEditing ? 'Update Image' : 'Add Image';
+      submitBtn.disabled = false;
+    }
+  }
+}
+
+// Reset image modal to add mode
+function resetImageModal() {
+  const form = document.getElementById('add-image-form');
+  form.reset();
+  form.removeAttribute('data-edit-id');
+  
+  // Reset modal title and button
+  document.querySelector('#add-image-modal h3').textContent = 'Add New Image';
+  document.getElementById('submit-image-btn').textContent = 'Add Image';
+  
+  // Reset file input to required and original labels
+  const fileInput = document.getElementById('modal-image-file');
+  const fileLabel = document.getElementById('image-file-label');
+  const fileHelp = document.getElementById('image-file-help');
+  
+  fileInput.setAttribute('required', '');
+  fileLabel.textContent = 'Upload Image';
+  fileHelp.classList.add('hidden');
 }
 
 // Initialize tooltips and modals
