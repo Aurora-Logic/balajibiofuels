@@ -20,7 +20,16 @@ switch ($method) {
         try {
             // Handle single category request
             if (isset($_GET['id'])) {
-                $stmt = $pdo->prepare('SELECT c.*, COUNT(gi.id) as image_count FROM categories c LEFT JOIN gallery_images gi ON c.id = gi.category_id WHERE c.id = ? GROUP BY c.id');
+                $stmt = $pdo->prepare('
+                    SELECT c.*, 
+                           COUNT(DISTINCT gi.id) as image_count,
+                           COUNT(DISTINCT v.id) as video_count
+                    FROM categories c 
+                    LEFT JOIN gallery_images gi ON c.id = gi.category_id 
+                    LEFT JOIN videos v ON c.id = v.category_id
+                    WHERE c.id = ? 
+                    GROUP BY c.id
+                ');
                 $stmt->execute([$_GET['id']]);
                 $category = $stmt->fetch();
                 
@@ -33,8 +42,17 @@ switch ($method) {
                 break;
             }
             
-            // Get all categories with image counts
-            $stmt = $pdo->query('SELECT c.*, COUNT(gi.id) as image_count FROM categories c LEFT JOIN gallery_images gi ON c.id = gi.category_id GROUP BY c.id ORDER BY c.name ASC');
+            // Get all categories with image and video counts
+            $stmt = $pdo->query('
+                SELECT c.*, 
+                       COUNT(DISTINCT gi.id) as image_count,
+                       COUNT(DISTINCT v.id) as video_count
+                FROM categories c 
+                LEFT JOIN gallery_images gi ON c.id = gi.category_id 
+                LEFT JOIN videos v ON c.id = v.category_id
+                GROUP BY c.id 
+                ORDER BY c.name ASC
+            ');
             $categories = $stmt->fetchAll();
             
             echo json_encode(['success' => true, 'data' => $categories]);
@@ -70,7 +88,16 @@ switch ($method) {
             $activityStmt->execute(['category_create', "New category created: $name"]);
             
             // Get the created category
-            $getStmt = $pdo->prepare('SELECT c.*, COUNT(gi.id) as image_count FROM categories c LEFT JOIN gallery_images gi ON c.id = gi.category_id WHERE c.id = ? GROUP BY c.id');
+            $getStmt = $pdo->prepare('
+                SELECT c.*, 
+                       COUNT(DISTINCT gi.id) as image_count,
+                       COUNT(DISTINCT v.id) as video_count
+                FROM categories c 
+                LEFT JOIN gallery_images gi ON c.id = gi.category_id 
+                LEFT JOIN videos v ON c.id = v.category_id
+                WHERE c.id = ? 
+                GROUP BY c.id
+            ');
             $getStmt->execute([$categoryId]);
             $newCategory = $getStmt->fetch();
             
@@ -122,7 +149,16 @@ switch ($method) {
             $activityStmt->execute(['category_update', "Category updated: $name"]);
             
             // Get updated category
-            $getStmt = $pdo->prepare('SELECT c.*, COUNT(gi.id) as image_count FROM categories c LEFT JOIN gallery_images gi ON c.id = gi.category_id WHERE c.id = ? GROUP BY c.id');
+            $getStmt = $pdo->prepare('
+                SELECT c.*, 
+                       COUNT(DISTINCT gi.id) as image_count,
+                       COUNT(DISTINCT v.id) as video_count
+                FROM categories c 
+                LEFT JOIN gallery_images gi ON c.id = gi.category_id 
+                LEFT JOIN videos v ON c.id = v.category_id
+                WHERE c.id = ? 
+                GROUP BY c.id
+            ');
             $getStmt->execute([$id]);
             $updatedCategory = $getStmt->fetch();
             
@@ -144,8 +180,17 @@ switch ($method) {
                 throw new Exception('Category ID is required');
             }
             
-            // Get category info and check if it has images
-            $getStmt = $pdo->prepare('SELECT c.name, COUNT(gi.id) as image_count FROM categories c LEFT JOIN gallery_images gi ON c.id = gi.category_id WHERE c.id = ? GROUP BY c.id');
+            // Get category info and check if it has images or videos
+            $getStmt = $pdo->prepare('
+                SELECT c.name, 
+                       COUNT(DISTINCT gi.id) as image_count,
+                       COUNT(DISTINCT v.id) as video_count
+                FROM categories c 
+                LEFT JOIN gallery_images gi ON c.id = gi.category_id 
+                LEFT JOIN videos v ON c.id = v.category_id
+                WHERE c.id = ? 
+                GROUP BY c.id
+            ');
             $getStmt->execute([$id]);
             $category = $getStmt->fetch();
             
@@ -155,10 +200,13 @@ switch ($method) {
                 break;
             }
             
-            if ($category['image_count'] > 0) {
-                // Update images to have no category instead of preventing deletion
-                $updateStmt = $pdo->prepare('UPDATE gallery_images SET category_id = NULL WHERE category_id = ?');
-                $updateStmt->execute([$id]);
+            if ($category['image_count'] > 0 || $category['video_count'] > 0) {
+                // Update images and videos to have no category instead of preventing deletion
+                $updateImagesStmt = $pdo->prepare('UPDATE gallery_images SET category_id = NULL WHERE category_id = ?');
+                $updateImagesStmt->execute([$id]);
+                
+                $updateVideosStmt = $pdo->prepare('UPDATE videos SET category_id = NULL WHERE category_id = ?');
+                $updateVideosStmt->execute([$id]);
             }
             
             // Delete category

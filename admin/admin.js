@@ -354,11 +354,19 @@ async function fetchAndRenderCategories() {
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm mb-4">${category.description || 'No description'}</p>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
-                            </svg>
-                            ${category.image_count} images
+                        <div class="flex items-center justify-between text-sm text-gray-500">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                                </svg>
+                                ${category.image_count} images
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
+                                </svg>
+                                ${category.video_count} videos
+                            </div>
                         </div>
                     </div>
                 `).join('');
@@ -641,7 +649,131 @@ async function fetchVideoDetails(id) {
 }
 
 function editCategory(id) {
-  showToast('Edit category feature coming soon!');
+  // Fetch category details first
+  fetchCategoryDetails(id).then(category => {
+    if (category) {
+      showEditCategoryModal(category);
+    }
+  });
+}
+
+async function fetchCategoryDetails(id) {
+  try {
+    const response = await fetch(`../dbs/categories.php?id=${id}`);
+    const result = await response.json();
+    return result.success ? result.data : null;
+  } catch (error) {
+    console.error('Error fetching category details:', error);
+    return null;
+  }
+}
+
+function showEditCategoryModal(category) {
+  // Create modal HTML if it doesn't exist
+  let modal = document.getElementById('edit-category-modal');
+  if (!modal) {
+    const modalHTML = `
+      <div id="edit-category-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Edit Category</h3>
+              <button type="button" onclick="closeEditCategoryModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+              </button>
+            </div>
+            <div class="p-4 md:p-5">
+              <form id="edit-category-form" class="space-y-4">
+                <input type="hidden" id="edit-category-id">
+                <div>
+                  <label for="edit-category-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category Name</label>
+                  <input type="text" id="edit-category-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                </div>
+                <div>
+                  <label for="edit-category-description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                  <textarea id="edit-category-description" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"></textarea>
+                </div>
+                <div class="flex justify-end space-x-2">
+                  <button type="button" onclick="closeEditCategoryModal()" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+                  <button type="submit" class="text-white bg-primary hover:bg-accent focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update Category</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    modal = document.getElementById('edit-category-modal');
+    
+    // Add form submit handler
+    document.getElementById('edit-category-form').addEventListener('submit', handleEditCategorySubmit);
+  }
+
+  // Populate form with category data
+  document.getElementById('edit-category-id').value = category.id;
+  document.getElementById('edit-category-name').value = category.name;
+  document.getElementById('edit-category-description').value = category.description || '';
+
+  // Show modal
+  modal.classList.remove('hidden');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('overflow-hidden');
+}
+
+function closeEditCategoryModal() {
+  const modal = document.getElementById('edit-category-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('overflow-hidden');
+  }
+}
+
+async function handleEditCategorySubmit(e) {
+  e.preventDefault();
+  
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Updating...';
+  submitBtn.disabled = true;
+
+  const id = document.getElementById('edit-category-id').value;
+  const name = document.getElementById('edit-category-name').value.trim();
+  const description = document.getElementById('edit-category-description').value.trim();
+
+  try {
+    const response = await fetch('../dbs/categories.php', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: parseInt(id),
+        name: name,
+        description: description
+      })
+    });
+
+    const result = await response.json();
+    
+    if (result.success) {
+      showToast('Category updated successfully');
+      closeEditCategoryModal();
+      fetchAndRenderCategories();
+      fetchCategories(); // Refresh category dropdowns
+      fetchDashboardData(); // Refresh dashboard stats
+    } else {
+      throw new Error(result.error || 'Failed to update category');
+    }
+  } catch (error) {
+    showToast('Error updating category: ' + error.message, 'error');
+  } finally {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
 }
 
 // Initialize on tab switch
@@ -935,17 +1067,80 @@ async function handleFormUpload(event) {
   showToast('Please use the drag & drop area to upload files', 'error');
 }
 
-// Show add category modal (placeholder)
+// Show add category modal
 function showAddCategoryModal() {
-  const categoryName = prompt('Enter category name:');
-  if (categoryName && categoryName.trim()) {
-    const categoryDescription = prompt('Enter category description (optional):') || '';
-    createCategory(categoryName.trim(), categoryDescription.trim());
+  // Create modal HTML if it doesn't exist
+  let modal = document.getElementById('add-category-modal');
+  if (!modal) {
+    const modalHTML = `
+      <div id="add-category-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+              <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Add New Category</h3>
+              <button type="button" onclick="closeAddCategoryModal()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+              </button>
+            </div>
+            <div class="p-4 md:p-5">
+              <form id="add-category-form" class="space-y-4">
+                <div>
+                  <label for="add-category-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category Name</label>
+                  <input type="text" id="add-category-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                </div>
+                <div>
+                  <label for="add-category-description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                  <textarea id="add-category-description" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"></textarea>
+                </div>
+                <div class="flex justify-end space-x-2">
+                  <button type="button" onclick="closeAddCategoryModal()" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+                  <button type="submit" class="text-white bg-primary hover:bg-accent focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add Category</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    modal = document.getElementById('add-category-modal');
+    
+    // Add form submit handler
+    document.getElementById('add-category-form').addEventListener('submit', handleAddCategorySubmit);
+  }
+
+  // Reset form
+  document.getElementById('add-category-name').value = '';
+  document.getElementById('add-category-description').value = '';
+
+  // Show modal
+  modal.classList.remove('hidden');
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('overflow-hidden');
+}
+
+function closeAddCategoryModal() {
+  const modal = document.getElementById('add-category-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('overflow-hidden');
   }
 }
 
-// Create new category
-async function createCategory(name, description) {
+async function handleAddCategorySubmit(e) {
+  e.preventDefault();
+  
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Adding...';
+  submitBtn.disabled = true;
+
+  const name = document.getElementById('add-category-name').value.trim();
+  const description = document.getElementById('add-category-description').value.trim();
+
   try {
     const response = await fetch('../dbs/categories.php', {
       method: 'POST',
@@ -956,16 +1151,21 @@ async function createCategory(name, description) {
     });
 
     const result = await response.json();
+    
     if (result.success) {
       showToast('Category created successfully');
+      closeAddCategoryModal();
       fetchAndRenderCategories();
       fetchCategories(); // Refresh category dropdowns
       fetchDashboardData(); // Refresh dashboard stats
     } else {
-      throw new Error(result.error);
+      throw new Error(result.error || 'Failed to create category');
     }
   } catch (error) {
     showToast('Error creating category: ' + error.message, 'error');
+  } finally {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
   }
 }
 
@@ -1366,3 +1566,35 @@ async function saveSettings() {
 if (typeof Flowbite !== 'undefined') {
   // Flowbite initialization if needed
 }
+
+// Add modal backdrop event listeners
+document.addEventListener('click', function(event) {
+  // Close add category modal when clicking backdrop
+  const addCategoryModal = document.getElementById('add-category-modal');
+  if (addCategoryModal && event.target === addCategoryModal) {
+    closeAddCategoryModal();
+  }
+  
+  // Close edit category modal when clicking backdrop
+  const editCategoryModal = document.getElementById('edit-category-modal');
+  if (editCategoryModal && event.target === editCategoryModal) {
+    closeEditCategoryModal();
+  }
+});
+
+// Add keyboard event listeners for modal closing
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    // Close add category modal on Escape
+    const addCategoryModal = document.getElementById('add-category-modal');
+    if (addCategoryModal && !addCategoryModal.classList.contains('hidden')) {
+      closeAddCategoryModal();
+    }
+    
+    // Close edit category modal on Escape
+    const editCategoryModal = document.getElementById('edit-category-modal');
+    if (editCategoryModal && !editCategoryModal.classList.contains('hidden')) {
+      closeEditCategoryModal();
+    }
+  }
+});
