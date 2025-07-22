@@ -379,7 +379,7 @@ async function fetchAndRenderCategories() {
 // Update pagination (dynamic implementation)
 function updatePagination(type, pagination) {
   console.log(`Updating pagination for ${type}:`, pagination);
-  
+
   const paginationContainer = document.querySelector(`#${type}-tab .flex.items-center.justify-between.mt-6`);
   if (!paginationContainer) {
     console.error(`Pagination container not found for ${type}`);
@@ -398,11 +398,11 @@ function updatePagination(type, pagination) {
   const totalPages = pagination.total_pages || pagination.totalPages || 1;
   const totalCount = pagination.total_items || pagination.totalCount || 0;
   const itemsPerPage = pagination.items_per_page || pagination.itemsPerPage || 12;
-  
+
   // Calculate start and end indices
   const startIndex = Math.min((currentPage - 1) * itemsPerPage + 1, totalCount);
   const endIndex = Math.min(currentPage * itemsPerPage, totalCount);
-  
+
   // Update the results text
   const resultsText = paginationContainer.querySelector('.text-sm');
   if (resultsText) {
@@ -475,7 +475,7 @@ function updatePagination(type, pagination) {
 function handlePaginationClick(type, page) {
   const currentCategoryFilter = document.querySelector(`#${type}-tab .category-dropdown`)?.value || '';
   const currentSearch = document.querySelector(`#${type}-tab input[type="text"]`)?.value || '';
-  
+
   if (type === 'gallery') {
     fetchAndRenderGallery(page, currentCategoryFilter, currentSearch);
   } else if (type === 'videos') {
@@ -568,23 +568,23 @@ function editImage(id) {
       document.getElementById('modal-image-title').value = image.title || '';
       document.getElementById('modal-image-category').value = image.category_id || '';
       document.getElementById('modal-image-description').value = image.description || '';
-      
+
       // Change modal title and button text
       document.querySelector('#add-image-modal h3').textContent = 'Edit Image';
       document.getElementById('submit-image-btn').textContent = 'Update Image';
-      
+
       // Update file input for edit mode
       const fileInput = document.getElementById('modal-image-file');
       const fileLabel = document.getElementById('image-file-label');
       const fileHelp = document.getElementById('image-file-help');
-      
+
       fileInput.removeAttribute('required');
       fileLabel.textContent = 'Replace Image (Optional)';
       fileHelp.classList.remove('hidden');
-      
+
       // Store the image ID for update
       document.getElementById('add-image-form').setAttribute('data-edit-id', id);
-      
+
       // Open modal
       const modal = document.getElementById('add-image-modal');
       modal.classList.remove('hidden');
@@ -612,23 +612,23 @@ function editVideo(id) {
       document.getElementById('modal-video-title').value = video.title || '';
       document.getElementById('modal-video-category').value = video.category_id || '';
       document.getElementById('modal-video-description').value = video.description || '';
-      
+
       // Change modal title and button text
       document.querySelector('#add-video-modal h3').textContent = 'Edit Video';
       document.getElementById('submit-video-btn').textContent = 'Update Video';
-      
+
       // Update file input for edit mode
       const fileInput = document.getElementById('modal-video-file');
       const fileLabel = document.getElementById('video-file-label');
       const fileHelp = document.getElementById('video-file-help');
-      
+
       fileInput.removeAttribute('required');
       fileLabel.textContent = 'Replace Video (Optional)';
       fileHelp.classList.remove('hidden');
-      
+
       // Store the video ID for update
       document.getElementById('add-video-form').setAttribute('data-edit-id', id);
-      
+
       // Open modal
       const modal = document.getElementById('add-video-modal');
       modal.classList.remove('hidden');
@@ -707,7 +707,7 @@ function showEditCategoryModal(category) {
     `;
     document.body.insertAdjacentHTML('beforeend', modalHTML);
     modal = document.getElementById('edit-category-modal');
-    
+
     // Add form submit handler
     document.getElementById('edit-category-form').addEventListener('submit', handleEditCategorySubmit);
   }
@@ -734,7 +734,7 @@ function closeEditCategoryModal() {
 
 async function handleEditCategorySubmit(e) {
   e.preventDefault();
-  
+
   const submitBtn = e.target.querySelector('button[type="submit"]');
   const originalText = submitBtn.textContent;
   submitBtn.textContent = 'Updating...';
@@ -758,7 +758,7 @@ async function handleEditCategorySubmit(e) {
     });
 
     const result = await response.json();
-    
+
     if (result.success) {
       showToast('Category updated successfully');
       closeEditCategoryModal();
@@ -934,7 +934,7 @@ document.addEventListener('DOMContentLoaded', function () {
       initializeTab(targetTab);
     });
   });
-  
+
   // Initialize the default active tab (dashboard)
   initializeTab('dashboard');
 
@@ -994,7 +994,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('[data-modal-target="add-image-modal"]').forEach(btn => {
     btn.addEventListener('click', resetImageModal);
   });
-  
+
   document.querySelectorAll('[data-modal-target="add-video-modal"]').forEach(btn => {
     btn.addEventListener('click', resetVideoModal);
   });
@@ -1005,12 +1005,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const titleInput = document.getElementById('modal-image-title');
     const categoryInput = document.getElementById('modal-image-category');
     const descriptionInput = document.getElementById('modal-image-description');
-    
+
     const videoFileInput = document.getElementById('modal-video-file');
     const videoTitleInput = document.getElementById('modal-video-title');
     const videoCategoryInput = document.getElementById('modal-video-category');
     const videoDescriptionInput = document.getElementById('modal-video-description');
-    
+
     console.log('Modal elements found:');
     console.log('- Image File input:', !!fileInput);
     console.log('- Image Title input:', !!titleInput);
@@ -1106,7 +1106,7 @@ function showAddCategoryModal() {
     `;
     document.body.insertAdjacentHTML('beforeend', modalHTML);
     modal = document.getElementById('add-category-modal');
-    
+
     // Add form submit handler
     document.getElementById('add-category-form').addEventListener('submit', handleAddCategorySubmit);
   }
@@ -1132,7 +1132,7 @@ function closeAddCategoryModal() {
 
 async function handleAddCategorySubmit(e) {
   e.preventDefault();
-  
+
   const submitBtn = e.target.querySelector('button[type="submit"]');
   const originalText = submitBtn.textContent;
   submitBtn.textContent = 'Adding...';
@@ -1151,7 +1151,7 @@ async function handleAddCategorySubmit(e) {
     });
 
     const result = await response.json();
-    
+
     if (result.success) {
       showToast('Category created successfully');
       closeAddCategoryModal();
@@ -1172,14 +1172,14 @@ async function handleAddCategorySubmit(e) {
 // Handle modal video submission
 async function handleModalVideoSubmission() {
   console.log('Starting video submission...');
-  
+
   const fileInput = document.getElementById('modal-video-file');
   const titleInput = document.getElementById('modal-video-title');
   const categoryInput = document.getElementById('modal-video-category');
   const descriptionInput = document.getElementById('modal-video-description');
   const form = document.getElementById('add-video-form');
   const editId = form.getAttribute('data-edit-id');
-  
+
   const isEditing = !!editId;
 
   // Validate required fields - file is only required for new uploads
@@ -1204,12 +1204,12 @@ async function handleModalVideoSubmission() {
   console.log('Is Editing:', isEditing, editId);
 
   const formData = new FormData();
-  
+
   // Only append video if we have one (for new uploads or when replacing existing)
   if (fileInput.files[0]) {
     formData.append('video', fileInput.files[0]);
     console.log('Video file added to FormData');
-    
+
     // Get video duration automatically
     try {
       const duration = await getVideoDuration(fileInput.files[0]);
@@ -1221,11 +1221,11 @@ async function handleModalVideoSubmission() {
   } else if (isEditing) {
     console.log('No new video file - updating metadata only');
   }
-  
+
   formData.append('title', titleInput.value.trim());
   formData.append('description', descriptionInput.value.trim());
   formData.append('category_id', categoryInput.value);
-  
+
   if (isEditing) {
     formData.append('id', editId);
     formData.append('action', 'update'); // Use 'action' instead of '_method'
@@ -1251,7 +1251,7 @@ async function handleModalVideoSubmission() {
     console.log('Response status:', response.status);
     const responseText = await response.text();
     console.log('Response text:', responseText);
-    
+
     let result;
     try {
       result = JSON.parse(responseText);
@@ -1260,36 +1260,36 @@ async function handleModalVideoSubmission() {
       console.error('Response was:', responseText);
       throw new Error('Server returned invalid JSON. Response: ' + responseText.substring(0, 200));
     }
-    
+
     console.log('Parsed result:', result);
-    
+
     if (result.success) {
       showToast(isEditing ? 'Video updated successfully!' : 'Video uploaded successfully!');
-      
+
       // Reset modal to add mode
       resetVideoModal();
-      
+
       // Close modal
       const modal = document.getElementById('add-video-modal');
       modal.classList.add('hidden');
       modal.setAttribute('aria-hidden', 'true');
-      
+
       // Remove backdrop
       document.body.style.overflow = '';
       const backdrop = document.querySelector('[modal-backdrop]');
       if (backdrop) {
         backdrop.remove();
       }
-      
+
       // Refresh videos if we're on the videos tab
       const videosTab = document.getElementById('videos-tab');
       if (!videosTab.classList.contains('hidden')) {
         fetchAndRenderVideos(1);
       }
-      
+
       // Refresh dashboard stats
       fetchDashboardData();
-      
+
     } else {
       throw new Error(result.error || (isEditing ? 'Update failed' : 'Upload failed'));
     }
@@ -1311,19 +1311,19 @@ function resetVideoModal() {
   const form = document.getElementById('add-video-form');
   form.reset();
   form.removeAttribute('data-edit-id');
-  
+
   // Reset modal title and button
   document.querySelector('#add-video-modal h3').textContent = 'Add New Video';
   document.getElementById('submit-video-btn').textContent = 'Add Video';
-  
+
   // Reset file input labels
   const fileInput = document.getElementById('modal-video-file');
   const fileLabel = document.getElementById('video-file-label');
   const fileHelp = document.getElementById('video-file-help');
-  
+
   fileLabel.textContent = 'Upload Video';
   fileHelp.classList.add('hidden');
-  
+
   // Note: Video file input is never required since it's optional in both modes
 }
 
@@ -1332,17 +1332,17 @@ function getVideoDuration(file) {
   return new Promise((resolve, reject) => {
     const video = document.createElement('video');
     video.preload = 'metadata';
-    
-    video.onloadedmetadata = function() {
+
+    video.onloadedmetadata = function () {
       window.URL.revokeObjectURL(video.src);
       const duration = Math.round(video.duration);
       resolve(duration);
     };
-    
-    video.onerror = function() {
+
+    video.onerror = function () {
       reject(new Error('Error loading video metadata'));
     };
-    
+
     video.src = URL.createObjectURL(file);
   });
 }
@@ -1350,14 +1350,14 @@ function getVideoDuration(file) {
 // Handle modal image submission
 async function handleModalImageSubmission() {
   console.log('Starting image submission...');
-  
+
   const fileInput = document.getElementById('modal-image-file');
   const titleInput = document.getElementById('modal-image-title');
   const categoryInput = document.getElementById('modal-image-category');
   const descriptionInput = document.getElementById('modal-image-description');
   const form = document.getElementById('add-image-form');
   const editId = form.getAttribute('data-edit-id');
-  
+
   const isEditing = !!editId;
 
   // Validate required fields - file is only required for new uploads
@@ -1382,7 +1382,7 @@ async function handleModalImageSubmission() {
   console.log('Is Editing:', isEditing, editId);
 
   const formData = new FormData();
-  
+
   // Only append image if we have one (for new uploads or when replacing existing)
   if (fileInput.files[0]) {
     formData.append('image', fileInput.files[0]);
@@ -1390,11 +1390,11 @@ async function handleModalImageSubmission() {
   } else if (isEditing) {
     console.log('No new image file - updating metadata only');
   }
-  
+
   formData.append('title', titleInput.value.trim());
   formData.append('description', descriptionInput.value.trim());
   formData.append('category_id', categoryInput.value);
-  
+
   if (isEditing) {
     formData.append('id', editId);
     formData.append('action', 'update'); // Use 'action' instead of '_method'
@@ -1420,7 +1420,7 @@ async function handleModalImageSubmission() {
     console.log('Response status:', response.status);
     const responseText = await response.text();
     console.log('Response text:', responseText);
-    
+
     let result;
     try {
       result = JSON.parse(responseText);
@@ -1429,36 +1429,36 @@ async function handleModalImageSubmission() {
       console.error('Response was:', responseText);
       throw new Error('Server returned invalid JSON. Response: ' + responseText.substring(0, 200));
     }
-    
+
     console.log('Parsed result:', result);
-    
+
     if (result.success) {
       showToast(isEditing ? 'Image updated successfully!' : 'Image uploaded successfully!');
-      
+
       // Reset modal to add mode
       resetImageModal();
-      
+
       // Close modal
       const modal = document.getElementById('add-image-modal');
       modal.classList.add('hidden');
       modal.setAttribute('aria-hidden', 'true');
-      
+
       // Remove backdrop
       document.body.style.overflow = '';
       const backdrop = document.querySelector('[modal-backdrop]');
       if (backdrop) {
         backdrop.remove();
       }
-      
+
       // Refresh gallery if we're on the gallery tab
       const galleryTab = document.getElementById('gallery-tab');
       if (!galleryTab.classList.contains('hidden')) {
         fetchAndRenderGallery(1);
       }
-      
+
       // Refresh dashboard stats
       fetchDashboardData();
-      
+
     } else {
       throw new Error(result.error || (isEditing ? 'Update failed' : 'Upload failed'));
     }
@@ -1480,16 +1480,16 @@ function resetImageModal() {
   const form = document.getElementById('add-image-form');
   form.reset();
   form.removeAttribute('data-edit-id');
-  
+
   // Reset modal title and button
   document.querySelector('#add-image-modal h3').textContent = 'Add New Image';
   document.getElementById('submit-image-btn').textContent = 'Add Image';
-  
+
   // Reset file input to required and original labels
   const fileInput = document.getElementById('modal-image-file');
   const fileLabel = document.getElementById('image-file-label');
   const fileHelp = document.getElementById('image-file-help');
-  
+
   fileInput.setAttribute('required', '');
   fileLabel.textContent = 'Upload Image';
   fileHelp.classList.add('hidden');
@@ -1500,21 +1500,21 @@ async function loadSettings() {
   try {
     const response = await fetch('../dbs/settings.php');
     const result = await response.json();
-    
+
     if (result.success) {
       const settings = result.data;
-      
+
       // Populate form fields with current settings
       const maxImageSize = document.getElementById('max-image-size');
       const maxVideoSize = document.getElementById('max-video-size');
       const autoOptimize = document.getElementById('auto-optimize');
       const requireApproval = document.getElementById('require-approval');
-      
+
       if (maxImageSize) maxImageSize.value = settings.max_image_size || 10;
       if (maxVideoSize) maxVideoSize.value = settings.max_video_size || 100;
       if (autoOptimize) autoOptimize.checked = settings.auto_optimize === '1' || settings.auto_optimize === true;
       if (requireApproval) requireApproval.checked = settings.require_approval === '1' || settings.require_approval === true;
-      
+
       console.log('Settings loaded:', settings);
     }
   } catch (error) {
@@ -1529,7 +1529,7 @@ async function saveSettings() {
     const maxVideoSize = document.getElementById('max-video-size');
     const autoOptimize = document.getElementById('auto-optimize');
     const requireApproval = document.getElementById('require-approval');
-    
+
     const settingsData = {
       settings: {
         max_image_size: maxImageSize ? maxImageSize.value : 10,
@@ -1538,9 +1538,9 @@ async function saveSettings() {
         require_approval: requireApproval ? (requireApproval.checked ? '1' : '0') : '0'
       }
     };
-    
+
     console.log('Saving settings:', settingsData);
-    
+
     const response = await fetch('../dbs/settings.php', {
       method: 'PUT',
       headers: {
@@ -1548,9 +1548,9 @@ async function saveSettings() {
       },
       body: JSON.stringify(settingsData)
     });
-    
+
     const result = await response.json();
-    
+
     if (result.success) {
       showToast('Settings saved successfully!', 'success');
     } else {
@@ -1568,13 +1568,13 @@ if (typeof Flowbite !== 'undefined') {
 }
 
 // Add modal backdrop event listeners
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
   // Close add category modal when clicking backdrop
   const addCategoryModal = document.getElementById('add-category-modal');
   if (addCategoryModal && event.target === addCategoryModal) {
     closeAddCategoryModal();
   }
-  
+
   // Close edit category modal when clicking backdrop
   const editCategoryModal = document.getElementById('edit-category-modal');
   if (editCategoryModal && event.target === editCategoryModal) {
@@ -1583,14 +1583,14 @@ document.addEventListener('click', function(event) {
 });
 
 // Add keyboard event listeners for modal closing
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
   if (event.key === 'Escape') {
     // Close add category modal on Escape
     const addCategoryModal = document.getElementById('add-category-modal');
     if (addCategoryModal && !addCategoryModal.classList.contains('hidden')) {
       closeAddCategoryModal();
     }
-    
+
     // Close edit category modal on Escape
     const editCategoryModal = document.getElementById('edit-category-modal');
     if (editCategoryModal && !editCategoryModal.classList.contains('hidden')) {
@@ -1598,3 +1598,10 @@ document.addEventListener('keydown', function(event) {
     }
   }
 });
+
+// Logout function
+function logout() {
+  if (confirm('Are you sure you want to logout?')) {
+    window.location.href = '../dbs/auth/logout.php';
+  }
+}

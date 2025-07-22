@@ -1,3 +1,35 @@
+<?php
+    // admin/index.php
+    // Main admin panel with authentication
+
+    require_once '../dbs/auth/auth.php';
+
+    // Check if authentication object exists
+    if (! isset($auth)) {
+        header('Location: login.php?error=auth_error');
+        exit;
+    }
+
+    // Require login to access admin panel
+    $auth->requireLogin();
+
+    // Double check if user is actually logged in
+    if (! $auth->isLoggedIn()) {
+        header('Location: login.php?error=session_expired');
+        exit;
+    }
+
+    // Get current admin info
+    $currentAdmin = $auth->getCurrentAdmin();
+
+    // If we can't get current admin info, something is wrong with the session
+    if (! $currentAdmin) {
+        session_destroy();
+        header('Location: login.php?error=invalid_session');
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -28,7 +60,7 @@
     </script>
 </head>
 <body class="font-jakarta antialiased bg-gray-50 dark:bg-gray-900">
-    
+
     <!-- Sidebar -->
     <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
@@ -105,15 +137,22 @@
             </ul>
 
             <!-- User Profile -->
-            <!-- <div class="absolute bottom-4 left-3 right-3">
+            <div class="absolute bottom-4 left-3 right-3">
                 <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                    <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="Admin">
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-gray-900 dark:text-white">Admin User</p>
-                        <p class="text-xs text-gray-500">admin@biofuels.com</p>
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-semibold">
+                        <?php echo strtoupper(substr($currentAdmin['name'] ?? 'A', 0, 1)); ?>
                     </div>
+                    <div class="ml-3 flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-900 dark:text-white truncate"><?php echo htmlspecialchars($currentAdmin['name'] ?? 'Admin'); ?></p>
+                        <p class="text-xs text-gray-500 truncate"><?php echo htmlspecialchars($currentAdmin['phone'] ?? ''); ?></p>
+                    </div>
+                    <button onclick="logout()" class="ml-2 text-gray-400 hover:text-red-600" title="Logout">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
                 </div>
-            </div> -->
+            </div>
         </div>
     </aside>
 
@@ -345,7 +384,7 @@
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <!-- Pagination for Videos -->
                     <div class="flex items-center justify-between mt-6">
                         <div class="text-sm text-gray-500 dark:text-gray-400">
@@ -605,5 +644,21 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
     <script src="./admin.js"></script>
+    <script>
+    // Session timeout check - check every 5 minutes
+    setInterval(function() {
+        fetch('../dbs/auth/auth_check.php')
+            .then(response => response.json())
+            .then(data => {
+                if (!data.logged_in) {
+                    alert('Your session has expired. Please log in again.');
+                    window.location.href = 'login.php?error=session_expired';
+                }
+            })
+            .catch(error => {
+                console.error('Session check failed:', error);
+            });
+    }, 300000); // 5 minutes
+    </script>
 </body>
 </html>
