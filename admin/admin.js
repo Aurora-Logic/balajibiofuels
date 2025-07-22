@@ -85,7 +85,11 @@ async function fetchCategories() {
 function populateCategoryDropdowns() {
   const dropdowns = document.querySelectorAll('.category-dropdown');
   dropdowns.forEach(dropdown => {
-    dropdown.innerHTML = '<option value="">All Categories</option>' +
+    // Check if this is a filter dropdown or a form dropdown
+    const isFilter = dropdown.hasAttribute('onchange') && dropdown.getAttribute('onchange').includes('fetch');
+    const defaultText = isFilter ? 'All Categories' : 'Select Category';
+
+    dropdown.innerHTML = `<option value="">${defaultText}</option>` +
       categories.map(cat => `<option value="${cat.id}">${cat.name}</option>`).join('');
   });
 }
@@ -136,8 +140,8 @@ function updateDashboard(data) {
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">Total Images</dt>
-                                <dd class="text-lg font-medium text-gray-900">${data.total_images}</dd>
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Images</dt>
+                                <dd class="text-lg font-medium text-gray-900 dark:text-white">${data.total_images}</dd>
                             </dl>
                         </div>
                     </div>
@@ -152,8 +156,8 @@ function updateDashboard(data) {
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">Total Videos</dt>
-                                <dd class="text-lg font-medium text-gray-900">${data.total_videos}</dd>
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Videos</dt>
+                                <dd class="text-lg font-medium text-gray-900 dark:text-white">${data.total_videos}</dd>
                             </dl>
                         </div>
                     </div>
@@ -168,8 +172,8 @@ function updateDashboard(data) {
                         </div>
                         <div class="ml-5 w-0 flex-1">
                             <dl>
-                                <dt class="text-sm font-medium text-gray-500 truncate">Categories</dt>
-                                <dd class="text-lg font-medium text-gray-900">${data.total_categories}</dd>
+                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Categories</dt>
+                                <dd class="text-lg font-medium text-gray-900 dark:text-white">${data.total_categories}</dd>
                             </dl>
                         </div>
                     </div>
@@ -189,21 +193,12 @@ function updateDashboard(data) {
                             </div>
                         </div>
                         <div class="flex-1 min-w-0">
-                            <p class="text-sm text-gray-900">${activity.description}</p>
-                            <p class="text-xs text-gray-500">${new Date(activity.created_at).toLocaleString()}</p>
+                            <p class="text-sm text-gray-900 dark:text-white">${activity.description}</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">${new Date(activity.created_at).toLocaleString()}</p>
                         </div>
                     </div>
-                `).join('') || '<p class="text-gray-500 text-center">No recent activity</p>';
+                `).join('') || '<p class="text-gray-500 dark:text-gray-400 text-center">No recent activity</p>';
   }
-}
-
-// Search functionality
-const imageSearch = document.getElementById('image-search');
-if (imageSearch) {
-  imageSearch.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    fetchAndRenderGallery(1, '', searchTerm);
-  });
 }
 
 // Dynamic Gallery Fetch and Render
@@ -373,9 +368,111 @@ async function fetchAndRenderCategories() {
   }
 }
 
-// Update pagination (placeholder)
+// Update pagination (dynamic implementation)
 function updatePagination(type, pagination) {
-  console.log(`${type} pagination:`, pagination);
+  console.log(`Updating pagination for ${type}:`, pagination);
+  
+  const paginationContainer = document.querySelector(`#${type}-tab .flex.items-center.justify-between.mt-6`);
+  if (!paginationContainer) {
+    console.error(`Pagination container not found for ${type}`);
+    return;
+  }
+
+  // If no pagination data, hide the pagination
+  if (!pagination) {
+    paginationContainer.style.display = 'none';
+    return;
+  } else {
+    paginationContainer.style.display = 'flex';
+  }
+
+  const currentPage = pagination.current_page || pagination.currentPage || 1;
+  const totalPages = pagination.total_pages || pagination.totalPages || 1;
+  const totalCount = pagination.total_items || pagination.totalCount || 0;
+  const itemsPerPage = pagination.items_per_page || pagination.itemsPerPage || 12;
+  
+  // Calculate start and end indices
+  const startIndex = Math.min((currentPage - 1) * itemsPerPage + 1, totalCount);
+  const endIndex = Math.min(currentPage * itemsPerPage, totalCount);
+  
+  // Update the results text
+  const resultsText = paginationContainer.querySelector('.text-sm');
+  if (resultsText) {
+    if (totalCount === 0) {
+      resultsText.textContent = 'No results found';
+    } else {
+      resultsText.textContent = `Showing ${startIndex} to ${endIndex} of ${totalCount} results`;
+    }
+  }
+
+  // Generate pagination buttons
+  const nav = paginationContainer.querySelector('nav');
+  if (!nav) return;
+
+  // Don't show pagination if there's only one page or no results
+  if (totalPages <= 1) {
+    nav.innerHTML = '';
+    return;
+  }
+
+  let paginationHtml = '';
+
+  // Previous button
+  if (currentPage > 1) {
+    paginationHtml += `<button onclick="handlePaginationClick('${type}', ${currentPage - 1})" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700">Previous</button>`;
+  } else {
+    paginationHtml += `<button disabled class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-gray-100 text-sm font-medium text-gray-400 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:text-gray-500">Previous</button>`;
+  }
+
+  // Page numbers
+  const startPage = Math.max(1, currentPage - 2);
+  const endPage = Math.min(totalPages, currentPage + 2);
+
+  // First page and ellipsis
+  if (startPage > 1) {
+    paginationHtml += `<button onclick="handlePaginationClick('${type}', 1)" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700">1</button>`;
+    if (startPage > 2) {
+      paginationHtml += `<span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">...</span>`;
+    }
+  }
+
+  // Current page range
+  for (let i = startPage; i <= endPage; i++) {
+    if (i === currentPage) {
+      paginationHtml += `<button class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-primary text-sm font-medium text-white">${i}</button>`;
+    } else {
+      paginationHtml += `<button onclick="handlePaginationClick('${type}', ${i})" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700">${i}</button>`;
+    }
+  }
+
+  // Last page and ellipsis
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) {
+      paginationHtml += `<span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">...</span>`;
+    }
+    paginationHtml += `<button onclick="handlePaginationClick('${type}', ${totalPages})" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700">${totalPages}</button>`;
+  }
+
+  // Next button
+  if (currentPage < totalPages) {
+    paginationHtml += `<button onclick="handlePaginationClick('${type}', ${currentPage + 1})" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700">Next</button>`;
+  } else {
+    paginationHtml += `<button disabled class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-gray-100 text-sm font-medium text-gray-400 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:text-gray-500">Next</button>`;
+  }
+
+  nav.innerHTML = paginationHtml;
+}
+
+// Handle pagination clicks
+function handlePaginationClick(type, page) {
+  const currentCategoryFilter = document.querySelector(`#${type}-tab .category-dropdown`)?.value || '';
+  const currentSearch = document.querySelector(`#${type}-tab input[type="text"]`)?.value || '';
+  
+  if (type === 'gallery') {
+    fetchAndRenderGallery(page, currentCategoryFilter, currentSearch);
+  } else if (type === 'videos') {
+    fetchAndRenderVideos(page, currentCategoryFilter, currentSearch);
+  }
 }
 
 // CRUD Operations
@@ -587,6 +684,18 @@ document.addEventListener('DOMContentLoaded', function () {
   fetchCategories();
   fetchDashboardData();
 
+  // Initialize search functionality
+  setTimeout(() => {
+    const imageSearch = document.getElementById('image-search');
+    if (imageSearch) {
+      imageSearch.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const currentCategory = document.querySelector('#gallery-tab .category-dropdown')?.value || '';
+        fetchAndRenderGallery(1, currentCategory, searchTerm);
+      });
+    }
+  }, 100);
+
   // Update sidebar link event listeners to initialize tabs
   sidebarLinks.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -610,12 +719,10 @@ document.addEventListener('DOMContentLoaded', function () {
       initializeTab(targetTab);
     });
   });
+  
+  // Initialize the default active tab (dashboard)
+  initializeTab('dashboard');
 });
-
-// Call on tab switch and on page load
-document.querySelector('[data-tab="gallery"]').addEventListener('click', () => fetchAndRenderGallery());
-document.querySelector('[data-tab="videos"]').addEventListener('click', () => fetchAndRenderVideos());
-document.querySelector('[data-tab="categories"]').addEventListener('click', () => fetchAndRenderCategories());
 
 // Sidebar styles
 const style = document.createElement('style');
