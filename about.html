@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Shree Balalji BioFuels</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'jakarta': ['Plus Jakarta Sans', 'sans-serif']
+                    },
+                    colors: {
+                        primary: '#10b981',
+                        accent: '#059669'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-jakarta antialiased bg-white text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-xl z-50 border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10  rounded-xl flex items-center justify-center">
+                       <img src="logo.png" alt="">
+                    </div>
+                    <div class="font-semibold text-lg tracking-tight">Shree Balalji BioFuels</div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Home</a>
+                    <a href="/about.html" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">About</a>
+                    <a href="/#vision" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Vision</a>
+                    <a href="/#model" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Model</a>
+                    <a href="/#benefits" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Benefits</a>
+                    <a href="/gallery.html" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Gallery</a>
+                    <a href="/contact" class="text-sm font-medium text-primary">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-6 py-4 space-y-4">
+                <a href="/" class="block text-sm font-medium text-gray-600">Home</a>
+                <a href="/about" class="block text-sm font-medium text-gray-600">About</a>
+                <a href="/#vision" class="block text-sm font-medium text-gray-600">Vision</a>
+                <a href="/#model" class="block text-sm font-medium text-gray-600">Model</a>
+                <a href="/#benefits" class="block text-sm font-medium text-gray-600">Benefits</a>
+                <a href="/contact" class="block text-sm font-medium text-primary">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-16 pb-12 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6 py-20">
+            <div class="text-center fade-in">
+                <h1 class="text-6xl md:text-7xl font-light tracking-tight mb-8 leading-none">
+                    About <span class="font-medium text-primary">Us</span>
+                </h1>
+                <p class="text-2xl font-light text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    A revolutionary step towards sustainable energy and rural empowerment through 
+                    cooperative excellence and ex-servicemen leadership
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Story Section -->
+    <section class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in">
+                    <h2 class="text-4xl font-light mb-8">Building a Sustainable Future Through Collaboration</h2>
+                    <div class="space-y-6 text-gray-600 leading-relaxed text-lg">
+                        <p>
+                            At Shree Balalji BioFuels, we believe in building a sustainable future through collaboration. 
+                            Our ethanol plant represents a revolutionary cooperative-driven initiative where procurement, 
+                            operations, and management are conducted through <strong class="text-gray-900">Venkateshwara 
+                            Co-operative Power and Agro Processing Ltd.</strong>
+                        </p>
+                        <p>
+                            What makes us unique is the leadership of ex-servicemen, who bring discipline, commitment, 
+                            and integrity to every aspect of our operations—from agriculture support to raw material 
+                            procurement and plant management. This approach ensures operational excellence while 
+                            maintaining our commitment to social responsibility.
+                        </p>
+                        <p>
+                            Our mission is simple but powerful: to promote clean and green energy, empower Indian farmers, 
+                            and contribute to India's energy security through sustainable ethanol production.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <div class="bg-white rounded-3xl p-12 shadow-xl">
+                        <div class="text-center space-y-8">
+                            <div class="w-24 h-24 bg-primary rounded-full flex items-center justify-center mx-auto">
+                                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-3xl font-bold text-gray-900 mb-4">सहकार से समृद्धि</h3>
+                                <p class="text-gray-600 text-xl">Prosperity through Cooperation</p>
+                                <p class="text-gray-500 mt-4">Our guiding principle that drives everything we do</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Facts Section -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-light mb-4">Our Operations</h2>
+                <p class="text-xl text-gray-600 font-light">Leading India's sustainable energy revolution</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white rounded-3xl p-8 text-center shadow-lg fade-in">
+                    <div class="text-4xl font-bold text-primary mb-4 counter" data-target="200">0</div>
+                    <div class="text-lg font-medium text-gray-900 mb-2">KLPD</div>
+                    <div class="text-gray-600">Daily Production Capacity</div>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 text-center shadow-lg fade-in">
+                    <div class="text-4xl font-bold text-primary mb-4">2</div>
+                    <div class="text-lg font-medium text-gray-900 mb-2">Primary Crops</div>
+                    <div class="text-gray-600">Maize & Rice Processing</div>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 text-center shadow-lg fade-in">
+                    <div class="text-4xl font-bold text-primary mb-4">100%</div>
+                    <div class="text-lg font-medium text-gray-900 mb-2">Cooperative</div>
+                    <div class="text-gray-600">Farmer-Centric Model</div>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 text-center shadow-lg fade-in">
+                    <div class="text-4xl font-bold text-primary mb-4 counter" data-target="50000">0</div>
+                    <div class="text-lg font-medium text-gray-900 mb-2">Farmers</div>
+                    <div class="text-gray-600">In Our Network</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Philosophy Section -->
+    <section class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-light mb-4">Ex-Servicemen Leadership</h2>
+                <p class="text-xl text-gray-600 font-light">Discipline, integrity, and commitment to excellence</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-blue-100 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Disciplined Operations</h3>
+                    <p class="text-gray-600">Military precision in every aspect of plant operations and quality control</p>
+                </div>
+                
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Social Responsibility</h3>
+                    <p class="text-gray-600">Commitment to community service and empowering rural populations</p>
+                </div>
+                
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-purple-100 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Operational Excellence</h3>
+                    <p class="text-gray-600">Strategic leadership ensuring efficient and reliable operations</p>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-primary/5 to-blue-50 rounded-3xl p-12 fade-in">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Why Ex-Servicemen Leadership Matters</h3>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                        Our ex-servicemen leaders bring decades of experience in managing complex operations, 
+                        maintaining the highest standards of integrity, and ensuring mission-critical objectives 
+                        are met. Their leadership ensures that our cooperative model operates with transparency, 
+                        efficiency, and unwavering commitment to farmer welfare.
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-6 text-center">
+                        <div>
+                            <div class="text-3xl font-bold text-primary mb-2">25+</div>
+                            <div class="text-sm text-gray-600">Years Average Service</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-primary mb-2">100%</div>
+                            <div class="text-sm text-gray-600">Mission Success Rate</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-primary mb-2">24/7</div>
+                            <div class="text-sm text-gray-600">Operational Readiness</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cooperative Model Section -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-light mb-4">Venkateshwara Co-operative</h2>
+                <p class="text-xl text-gray-600 font-light">Power and Agro Processing Ltd.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center" 
+                         alt="Cooperative operations" 
+                         class="w-full h-96 object-cover rounded-3xl shadow-xl">
+                </div>
+                
+                <div class="fade-in">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-8">Our Cooperative Framework</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white text-sm font-bold">1</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Farmer-Owned Operations</h4>
+                                <p class="text-gray-600">All major decisions are made collectively by farmer members, ensuring their interests remain paramount.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white text-sm font-bold">2</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Transparent Governance</h4>
+                                <p class="text-gray-600">Open books, regular meetings, and democratic decision-making processes ensure complete transparency.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white text-sm font-bold">3</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Profit Sharing</h4>
+                                <p class="text-gray-600">All surplus revenue is shared among farmer members, ensuring they benefit from the value they create.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white text-sm font-bold">4</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">Continuous Support</h4>
+                                <p class="text-gray-600">Ongoing technical assistance, training, and market support to enhance farmer productivity and income.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission, Vision, Values Section -->
+    <section class="py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center mx-auto mb-8">
+                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Our Mission</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        To promote clean and green energy, empower Indian farmers, and contribute to India's energy 
+                        security through sustainable grain-based ethanol production with a cooperative-driven approach.
+                    </p>
+                </div>
+                
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-blue-100 rounded-3xl flex items-center justify-center mx-auto mb-8">
+                        <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Our Vision</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        To be India's leading cooperative in sustainable energy production, setting the benchmark for 
+                        farmer empowerment, environmental stewardship, and energy independence.
+                    </p>
+                </div>
+                
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-purple-100 rounded-3xl flex items-center justify-center mx-auto mb-8">
+                        <svg class="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Our Values</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Integrity, transparency, sustainability, farmer empowerment, and excellence in operations. 
+                        We believe in prosperity through cooperation and mutual respect.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-light mb-4">Our Journey</h2>
+                <p class="text-xl text-gray-600 font-light">Milestones in sustainable energy and farmer empowerment</p>
+            </div>
+            
+            <div class="space-y-12">
+                <div class="flex items-center space-x-8 fade-in">
+                    <div class="flex-shrink-0 w-24 h-24 bg-primary rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">2024</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Plant Inauguration</h3>
+                        <p class="text-gray-600">Commissioning of our 200 KLPD ethanol production facility with state-of-the-art technology.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-8 fade-in">
+                    <div class="flex-shrink-0 w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">2023</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Cooperative Formation</h3>
+                        <p class="text-gray-600">Establishment of Venkateshwara Co-operative Power and Agro Processing Ltd. with founding farmer members.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-8 fade-in">
+                    <div class="flex-shrink-0 w-24 h-24 bg-purple-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">2022</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Leadership Team</h3>
+                        <p class="text-gray-600">Assembly of experienced ex-servicemen leadership team committed to operational excellence.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-8 fade-in">
+                    <div class="flex-shrink-0 w-24 h-24 bg-green-600 rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">2021</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Vision Conception</h3>
+                        <p class="text-gray-600">Initial planning and vision development for sustainable ethanol production and farmer empowerment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-primary text-white">
+        <div class="max-w-4xl mx-auto text-center px-6 fade-in">
+            <h2 class="text-5xl font-light mb-6">
+                Join Our Cooperative
+            </h2>
+            <p class="text-xl font-light text-primary-100 mb-12 opacity-90">
+                Be part of India's sustainable energy revolution and rural prosperity movement
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-primary px-8 py-3 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors">
+                    Become a Member
+                </button>
+                <button class="border border-white/30 text-white px-8 py-3 rounded-full text-sm font-medium hover:border-white/60 hover:bg-white/10 transition-colors">
+                    Learn More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-gray-900 text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="font-semibold text-lg">Shree Balalji BioFuels</div>
+                    </div>
+                    <p class="text-gray-300 mb-8 max-w-md">
+                        Leading India's sustainable energy revolution through cooperative excellence and innovation.
+                    </p>
+                    <div class="border-t border-gray-700 pt-8">
+                        <div class="text-xl font-medium mb-2 text-primary">सहकार से समृद्धि</div>
+                        <div class="text-sm text-gray-400">Prosperity through Cooperation</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-medium mb-6">Quick Links</h3>
+                    <div class="space-y-4">
+                        <a href="/" class="block text-gray-300 hover:text-white transition-colors">Home</a>
+                        <a href="/about" class="block text-gray-300 hover:text-white transition-colors">About Us</a>
+                        <a href="/#vision" class="block text-gray-300 hover:text-white transition-colors">Our Vision</a>
+                        <a href="/#model" class="block text-gray-300 hover:text-white transition-colors">Our Model</a>
+                        <a href="/#benefits" class="block text-gray-300 hover:text-white transition-colors">Benefits</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-medium mb-6">Connect</h3>
+                    <div class="space-y-4 text-gray-300">
+                        <div>India</div>
+                        <div>+91 XXXX XXXX</div>
+                        <div>info@shreebalaljibiofuels.com</div>
+                        <a href="/contact" class="block text-primary hover:text-primary/80 transition-colors">Contact Us →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-16 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Shree Balalji BioFuels. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* Same optimized CSS as homepage */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hover\:shadow-xl:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+    </style>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Counter animation
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.target);
+            const duration = 1500;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += step;
+                element.textContent = Math.floor(current);
+
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                }
+            }, 16);
+        }
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('counter')) {
+                        animateCounter(entry.target);
+                    }
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe elements
+        document.querySelectorAll('.fade-in, .counter').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

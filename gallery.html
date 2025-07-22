@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Shree Balalji BioFuels</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'jakarta': ['Plus Jakarta Sans', 'sans-serif']
+                    },
+                    colors: {
+                        primary: '#10b981',
+                        accent: '#059669'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-jakarta antialiased bg-white text-gray-900">
+    <!-- Navigation -->
+      <!-- Navigation -->
+      <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-xl z-50 border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10  rounded-xl flex items-center justify-center">
+                       <img src="logo.png" alt="">
+                    </div>
+                    <div class="font-semibold text-lg tracking-tight">Shree Balalji BioFuels</div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Home</a>
+                    <a href="/about." class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">About</a>
+                    <a href="/#vision" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Vision</a>
+                    <a href="/#model" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Model</a>
+                    <a href="/#benefits" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Benefits</a>
+                    <a href="/gallery.html" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Benefi
+                    <a href="/contact" class="text-sm font-medium text-primary">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-6 py-4 space-y-4">
+                <a href="/" class="block text-sm font-medium text-gray-600">Home</a>
+                <a href="/about" class="block text-sm font-medium text-gray-600">About</a>
+                <a href="/#vision" class="block text-sm font-medium text-gray-600">Vision</a>
+                <a href="/#model" class="block text-sm font-medium text-gray-600">Model</a>
+                <a href="/#benefits" class="block text-sm font-medium text-gray-600">Benefits</a>
+                <a href="/contact" class="block text-sm font-medium text-primary">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-16 pb-12 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6 py-20">
+            <div class="text-center fade-in">
+                <h1 class="text-6xl md:text-7xl font-light tracking-tight mb-8 leading-none">
+                    Our <span class="font-medium text-primary">Gallery</span>
+                </h1>
+                <p class="text-2xl font-light text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    Witness sustainability in action - from grain to green energy, see how we're transforming 
+                    India's energy landscape through cooperative excellence
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Navigation -->
+    <section class="py-8 bg-white sticky top-16 z-40 border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-center">
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="facility">Facility</button>
+                    <button class="filter-btn" data-filter="farming">Farming</button>
+                    <button class="filter-btn" data-filter="leadership">Leadership</button>
+                    <button class="filter-btn" data-filter="cooperative">Cooperative</button>
+                    <button class="filter-btn" data-filter="sustainability">Sustainability</button>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+
+    <!-- Photo Gallery Sections -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Facility Operations -->
+            <div class="filter-section facility mb-20">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-4xl font-light mb-4">Facility Operations</h2>
+                    <p class="text-gray-600">State-of-the-art ethanol production facility</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="gallery-item fade-in cursor-pointer" data-category="facility">
+                        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=500&h=400&fit=crop&crop=center" 
+                             alt="Production facility exterior" 
+                             class="w-full h-80 object-cover rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-gray-900">Production Facility</h3>
+                            <p class="text-gray-600 text-sm">200 KLPD capacity ethanol plant</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="facility">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop&crop=center" 
+                             alt="Control room operations" 
+                             class="w-full h-80 object-cover rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-gray-900">Control Room</h3>
+                            <p class="text-gray-600 text-sm">Advanced monitoring systems</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="facility">
+                        <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?w=500&h=400&fit=crop&crop=center" 
+                             alt="Quality testing laboratory" 
+                             class="w-full h-80 object-cover rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-gray-900">Quality Lab</h3>
+                            <p class="text-gray-600 text-sm">Rigorous quality control testing</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="facility">
+                        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=500&h=400&fit=crop&crop=center" 
+                             alt="Storage tanks" 
+                             class="w-full h-80 object-cover rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-gray-900">Storage Facility</h3>
+                            <p class="text-gray-600 text-sm">Large capacity storage tanks</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="facility">
+                        <img src="https://images.unsplash.com/photo-1586528116493-a029325540fa?w=500&h=400&fit=crop&crop=center" 
+                             alt="Processing equipment" 
+                             class="w-full h-80 object-cover rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-gray-900">Processing Unit</h3>
+                            <p class="text-gray-600 text-sm">Advanced distillation equipment</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="facility">
+                        <img src="https://images.unsplash.com/photo-1562813733-b31f71025d54?w=500&h=400&fit=crop&crop=center" 
+                             alt="Loading and dispatch" 
+                             class="w-full h-80 object-cover rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-gray-900">Dispatch Center</h3>
+                            <p class="text-gray-600 text-sm">Efficient loading and distribution</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Farming & Agriculture -->
+            <div class="filter-section farming mb-20">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-4xl font-light mb-4">Farming & Agriculture</h2>
+                    <p class="text-gray-600">Supporting farmers with modern agricultural practices</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="gallery-item fade-in cursor-pointer" data-category="farming">
+                        <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&h=300&fit=crop&crop=center" 
+                             alt="Maize cultivation" 
+                             class="w-full h-64 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-3">
+                            <h3 class="font-semibold text-gray-900">Maize Fields</h3>
+                            <p class="text-gray-600 text-sm">Premium quality maize cultivation</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="farming">
+                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop&crop=center" 
+                             alt="Rice harvesting" 
+                             class="w-full h-64 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-3">
+                            <h3 class="font-semibold text-gray-900">Rice Harvesting</h3>
+                            <p class="text-gray-600 text-sm">Mechanized harvesting operations</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="farming">
+                        <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=400&h=300&fit=crop&crop=center" 
+                             alt="Seed distribution" 
+                             class="w-full h-64 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-3">
+                            <h3 class="font-semibold text-gray-900">Seed Distribution</h3>
+                            <p class="text-gray-600 text-sm">High-quality seed supply</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="farming">
+                        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop&crop=center" 
+                             alt="Modern farming equipment" 
+                             class="w-full h-64 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-3">
+                            <h3 class="font-semibold text-gray-900">Modern Equipment</h3>
+                            <p class="text-gray-600 text-sm">Advanced farming technology</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leadership -->
+            <div class="filter-section leadership mb-20">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-4xl font-light mb-4">Ex-Servicemen Leadership</h2>
+                    <p class="text-gray-600">Disciplined leadership driving operational excellence</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="gallery-item fade-in cursor-pointer" data-category="leadership">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=center" 
+                             alt="Leadership team meeting" 
+                             class="w-full h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-gray-900">Leadership Team</h3>
+                            <p class="text-gray-600 text-sm">Strategic planning session</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="leadership">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=500&fit=crop&crop=center" 
+                             alt="Operations briefing" 
+                             class="w-full h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-gray-900">Operations Briefing</h3>
+                            <p class="text-gray-600 text-sm">Daily operations coordination</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="leadership">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=500&fit=crop&crop=center" 
+                             alt="Training session" 
+                             class="w-full h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-gray-900">Training Programs</h3>
+                            <p class="text-gray-600 text-sm">Skill development initiatives</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cooperative Activities -->
+            <div class="filter-section cooperative mb-20">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-4xl font-light mb-4">Cooperative Activities</h2>
+                    <p class="text-gray-600">Building stronger farming communities together</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="gallery-item fade-in cursor-pointer" data-category="cooperative">
+                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=500&h=400&fit=crop&crop=center" 
+                             alt="Farmer meeting" 
+                             class="w-full h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-gray-900">Farmer Meetings</h3>
+                            <p class="text-gray-600 text-sm">Monthly cooperative gatherings</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="cooperative">
+                        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=500&h=400&fit=crop&crop=center" 
+                             alt="Training workshop" 
+                             class="w-full h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-gray-900">Training Workshops</h3>
+                            <p class="text-gray-600 text-sm">Skill development programs</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="cooperative">
+                        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=500&h=400&fit=crop&crop=center" 
+                             alt="Community event" 
+                             class="w-full h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-4">
+                            <h3 class="font-semibold text-gray-900">Community Events</h3>
+                            <p class="text-gray-600 text-sm">Celebrating milestones together</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sustainability -->
+            <div class="filter-section sustainability">
+                <div class="text-center mb-12 fade-in">
+                    <h2 class="text-4xl font-light mb-4">Sustainability Impact</h2>
+                    <p class="text-gray-600">Our commitment to environmental stewardship</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="gallery-item fade-in cursor-pointer" data-category="sustainability">
+                        <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=400&h=300&fit=crop&crop=center" 
+                             alt="Clean energy production" 
+                             class="w-full h-64 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-3">
+                            <h3 class="font-semibold text-gray-900">Clean Energy</h3>
+                            <p class="text-gray-600 text-sm">Renewable ethanol production</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="sustainability">
+                        <img src="https://images.unsplash.com/photo-1593783388607-fae18b9c5f93?w=400&h=300&fit=crop&crop=center" 
+                             alt="Waste management" 
+                             class="w-full h-64 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-3">
+                            <h3 class="font-semibold text-gray-900">Waste Management</h3>
+                            <p class="text-gray-600 text-sm">Zero waste initiatives</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="sustainability">
+                        <img src="https://images.unsplash.com/photo-1473773508845-188df298d2d1?w=400&h=300&fit=crop&crop=center" 
+                             alt="Carbon footprint reduction" 
+                             class="w-full h-64 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-3">
+                            <h3 class="font-semibold text-gray-900">Carbon Reduction</h3>
+                            <p class="text-gray-600 text-sm">Minimizing environmental impact</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item fade-in cursor-pointer" data-category="sustainability">
+                        <img src="https://images.unsplash.com/photo-1569163139394-de4e4f43e4e3?w=400&h=300&fit=crop&crop=center" 
+                             alt="Renewable resources" 
+                             class="w-full h-64 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <div class="mt-3">
+                            <h3 class="font-semibold text-gray-900">Renewable Resources</h3>
+                            <p class="text-gray-600 text-sm">Sustainable resource utilization</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="relative max-w-4xl w-full mx-4">
+            <button id="close-video" class="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div class="bg-black rounded-lg overflow-hidden">
+                <div id="video-content" class="aspect-w-16 aspect-h-9">
+                    <!-- Video content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox -->
+    <div id="image-lightbox" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden">
+        <div class="relative max-w-6xl max-h-screen mx-4">
+            <button id="close-lightbox" class="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <img id="lightbox-image" src="" alt="" class="max-w-full max-h-screen object-contain rounded-lg">
+            <div id="lightbox-caption" class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 text-white p-4 rounded-b-lg">
+                <h3 id="lightbox-title" class="font-semibold"></h3>
+                <p id="lightbox-description" class="text-sm text-gray-300"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section
+    <section class="py-24 bg-primary text-white">
+        <div class="max-w-4xl mx-auto text-center px-6 fade-in">
+            <h2 class="text-5xl font-light mb-6">
+                Experience Our Operations
+            </h2>
+            <p class="text-xl font-light text-primary-100 mb-12 opacity-90">
+                Visit our facility and see sustainable energy production in action
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-primary px-8 py-3 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors">
+                    Schedule a Visit
+            </button>
+                <button class="border border-white/30 text-white px-8 py-3 rounded-full text-sm font-medium hover:border-white/60 hover:bg-white/10 transition-colors">
+                    Download Media Kit
+                </button> 
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Footer -->
+    <footer class="py-16 bg-gray-900 text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="font-semibold text-lg">Shree Balalji BioFuels</div>
+                    </div>
+                    <p class="text-gray-300 mb-8 max-w-md">
+                        Leading India's sustainable energy revolution through cooperative excellence and innovation.
+                    </p>
+                    <div class="border-t border-gray-700 pt-8">
+                        <div class="text-xl font-medium mb-2 text-primary">सहकार से समृद्धि</div>
+                        <div class="text-sm text-gray-400">Prosperity through Cooperation</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-medium mb-6">Quick Links</h3>
+                    <div class="space-y-4">
+                        <a href="/" class="block text-gray-300 hover:text-white transition-colors">Home</a>
+                        <a href="/about" class="block text-gray-300 hover:text-white transition-colors">About Us</a>
+                        <a href="/#vision" class="block text-gray-300 hover:text-white transition-colors">Our Vision</a>
+                        <a href="/#model" class="block text-gray-300 hover:text-white transition-colors">Our Model</a>
+                        <a href="/contact" class="block text-gray-300 hover:text-white transition-colors">Contact</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-medium mb-6">Connect</h3>
+                    <div class="space-y-4 text-gray-300">
+                        <div>Maharashtra, India</div>
+                        <div>+91 20 XXXX XXXX</div>
+                        <div>info@shreebalaljibiofuels.com</div>
+                        <a href="/contact" class="block text-primary hover:text-primary/80 transition-colors">Contact Us →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-16 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Shree Balalji BioFuels. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* Gallery specific styles */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: white;
+            color: #6b7280;
+            border: 1px solid #e5e7eb;
+        }
+
+        .filter-btn:hover {
+            color: #10b981;
+            border-color: #10b981;
+        }
+
+        .filter-btn.active {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        .gallery-item img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .video-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .filter-section {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .filter-section.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            position: absolute;
+            left: -9999px;
+        }
+    </style>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const filterSections = document.querySelectorAll('.filter-section');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Show/hide sections and items
+                if (filter === 'all') {
+                    filterSections.forEach(section => section.classList.remove('hidden'));
+                    galleryItems.forEach(item => item.style.display = 'block');
+                } else if (filter === 'videos') {
+                    filterSections.forEach(section => {
+                        if (section.classList.contains('videos')) {
+                            section.classList.remove('hidden');
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    });
+                } else {
+                    filterSections.forEach(section => {
+                        if (section.classList.contains(filter)) {
+                            section.classList.remove('hidden');
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    });
+                    
+                    galleryItems.forEach(item => {
+                        if (item.dataset.category === filter || filter === 'all') {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        // Video modal functionality
+        const videoModal = document.getElementById('video-modal');
+        const videoContent = document.getElementById('video-content');
+        const closeVideo = document.getElementById('close-video');
+        const videoPlayBtns = document.querySelectorAll('.video-play-btn, .video-item');
+
+        const videoSources = {
+            'facility-tour': '<div class="w-full h-96 bg-gray-800 flex items-center justify-center"><div class="text-center text-white"><h3 class="text-2xl mb-4">Facility Tour Video</h3><p>Complete walkthrough of our 200 KLPD facility</p><div class="mt-4 text-sm text-gray-300">Duration: 5:30 minutes</div></div></div>',
+            'farmer-stories': '<div class="w-full h-96 bg-gray-800 flex items-center justify-center"><div class="text-center text-white"><h3 class="text-2xl mb-4">Farmer Success Stories</h3><p>Testimonials from our cooperative members</p><div class="mt-4 text-sm text-gray-300">Duration: 3:45 minutes</div></div></div>',
+            'sustainability': '<div class="w-full h-96 bg-gray-800 flex items-center justify-center"><div class="text-center text-white"><h3 class="text-2xl mb-4">Sustainability Impact</h3><p>Our contribution to clean energy goals</p><div class="mt-4 text-sm text-gray-300">Duration: 4:20 minutes</div></div></div>',
+            'technology': '<div class="w-full h-96 bg-gray-800 flex items-center justify-center"><div class="text-center text-white"><h3 class="text-2xl mb-4">Technology & Innovation</h3><p>Advanced ethanol production processes</p><div class="mt-4 text-sm text-gray-300">Duration: 6:15 minutes</div></div></div>'
+        };
+
+        videoPlayBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const videoId = btn.dataset.video;
+                if (videoSources[videoId]) {
+                    videoContent.innerHTML = videoSources[videoId];
+                    videoModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        closeVideo.addEventListener('click', () => {
+            videoModal.classList.add('hidden');
+            videoContent.innerHTML = '';
+            document.body.style.overflow = '';
+        });
+
+        // Image lightbox functionality
+        const imageLightbox = document.getElementById('image-lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxDescription = document.getElementById('lightbox-description');
+        const closeLightbox = document.getElementById('close-lightbox');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                const title = item.querySelector('h3').textContent;
+                const description = item.querySelector('p').textContent;
+                
+                lightboxImage.src = img.src;
+                lightboxImage.alt = img.alt;
+                lightboxTitle.textContent = title;
+                lightboxDescription.textContent = description;
+                
+                imageLightbox.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeLightbox.addEventListener('click', () => {
+            imageLightbox.classList.add('hidden');
+            document.body.style.overflow = '';
+        });
+
+        // Close modals on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                videoModal.classList.add('hidden');
+                imageLightbox.classList.add('hidden');
+                videoContent.innerHTML = '';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close modals on backdrop click
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                videoModal.classList.add('hidden');
+                videoContent.innerHTML = '';
+                document.body.style.overflow = '';
+            }
+        });
+
+        imageLightbox.addEventListener('click', (e) => {
+            if (e.target === imageLightbox) {
+                imageLightbox.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
