@@ -63,9 +63,9 @@
             <form id="loginForm" class="space-y-6">
                 <div>
                     <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required
+                    <input type="tel" id="phone" name="phone" required minlength="10" maxlength="10"
                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                           placeholder="Enter your phone number">
+                           placeholder="Enter your phone number" inputmode="numeric" pattern="[0-9]*">
                 </div>
 
                 <div>
@@ -110,6 +110,13 @@
             hideError();
 
             const formData = new FormData(loginForm);
+            const phone = formData.get('phone');
+            // Phone number regex: 10-15 digits, optional + at start
+            const phoneRegex = /^\d{10}$/;
+            if (!phoneRegex.test(phone)) {
+                showError('Please enter a valid 10-digit phone number.');
+                return;
+            }
 
             loginBtn.textContent = 'Signing In...';
             loginBtn.disabled = true;
@@ -137,6 +144,9 @@
 
         // Auto-focus phone field
         document.getElementById('phone').focus();
+        document.getElementById('phone').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
     </script>
 </body>
 </html>

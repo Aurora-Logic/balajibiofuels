@@ -55,9 +55,9 @@
 
                 <div>
                     <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required 
+                    <input type="tel" id="phone" name="phone" required minlength="10" maxlength="10"
                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
-                           placeholder="Enter phone number">
+                           placeholder="Enter phone number" inputmode="numeric" pattern="[0-9]*">
                 </div>
 
                 <div>
@@ -105,6 +105,13 @@
             const formData = new FormData(setupForm);
             const password = formData.get('password');
             const confirmPassword = formData.get('confirmPassword');
+            const phone = formData.get('phone');
+            // Phone number regex: 10-15 digits, optional + at start
+            const phoneRegex = /^\d{10}$/;
+            if (!phoneRegex.test(phone)) {
+                showMessage('Please enter a valid 10-digit phone number!', 'error');
+                return;
+            }
 
             // Validate passwords match
             if (password !== confirmPassword) {
@@ -115,13 +122,6 @@
             // Validate password length
             if (password.length < 6) {
                 showMessage('Password must be at least 6 characters long!', 'error');
-                return;
-            }
-
-            // Validate phone number
-            const phone = formData.get('phone');
-            if (phone.length < 10) {
-                showMessage('Please enter a valid phone number!', 'error');
                 return;
             }
 
@@ -150,6 +150,10 @@
                 setupBtn.textContent = 'Create Admin Account';
                 setupBtn.disabled = false;
             }
+        });
+
+        document.getElementById('phone').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
         });
     </script>
 </body>
