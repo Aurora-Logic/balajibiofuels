@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -26,247 +28,358 @@
         }
     </script>
 </head>
+
 <body class="font-jakarta antialiased bg-white text-gray-900">
     <!-- Navigation -->
-   <!-- Navigation -->
-   <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-xl z-50 border-b border-gray-100">
-    <div class="max-w-6xl mx-auto px-6">
-        <div class="flex justify-between items-center h-16">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10  rounded-xl flex items-center justify-center">
-                   <img src="logo.png" alt="">
+    <!-- Navigation -->
+    <nav id="main-navbar" class="fixed top-0 w-full z-50 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10  rounded-xl flex items-center justify-center">
+                        <img src="logo.png" alt="">
+                    </div>
+                    <div
+                        class="font-semibold text-lg tracking-tight nav-title text-white transition-colors duration-300">
+                        Shree Balalji BioFuels</div>
                 </div>
-                <div class="font-semibold text-lg tracking-tight">Shree Balalji BioFuels</div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/"
+                        class="text-sm font-medium nav-link text-white hover:text-primary transition-colors">Home</a>
+                    <a href="/about.html"
+                        class="text-sm font-medium nav-link text-white hover:text-primary transition-colors">About</a>
+                    <a href="/#vision"
+                        class="text-sm font-medium nav-link text-white hover:text-primary transition-colors">Vision</a>
+                    <a href="/#model"
+                        class="text-sm font-medium nav-link text-white hover:text-primary transition-colors">Model</a>
+                    <a href="/#benefits"
+                        class="text-sm font-medium nav-link text-white hover:text-primary transition-colors">Benefits</a>
+                    <a href="/gallery.html"
+                        class="text-sm font-medium nav-link text-white hover:text-primary transition-colors">Gallery</a>
+                    <a href="/contact.html"
+                        class="text-sm font-medium nav-link text-white hover:text-primary transition-colors">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden relative z-50 p-2 group">
+                    <div class="w-6 h-5 flex flex-col justify-between overflow-hidden">
+                        <span
+                            class="w-full h-0.5 bg-white transform transition-all duration-300 origin-left group-[.active]:rotate-45"></span>
+                        <span
+                            class="w-full h-0.5 bg-white transform transition-all duration-300 group-[.active]:translate-x-full group-[.active]:opacity-0"></span>
+                        <span
+                            class="w-full h-0.5 bg-white transform transition-all duration-300 origin-left group-[.active]:-rotate-45"></span>
+                    </div>
+                </button>
             </div>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="/" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Home</a>
-                <a href="/about.html" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">About</a>
-                <a href="/#vision" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Vision</a>
-                <a href="/#model" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Model</a>
-                <a href="/#benefits" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Benefits</a>
-                <a href="/gallery.html" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Gallery</a>
-                <a href="/contact.html" class="text-sm font-medium text-primary">Contact</a>
+        </div>
+        <!-- Fullscreen Mobile Menu -->
+        <div id="mobile-menu" class="fixed inset-0 z-40 hidden md:hidden">
+            <!-- Backdrop -->
+            <div class="absolute inset-0 bg-black/80 backdrop-blur-md opacity-0 transition-opacity duration-500"></div>
+
+            <!-- Menu Content -->
+            <div
+                class="absolute inset-0 flex flex-col justify-between items-center transform translate-y-full transition-transform duration-500 ease-in-out py-10">
+                <!-- Logo Section (Top) -->
+                <div class="w-full text-center">
+                    <img src="logo.png" alt="Logo" class="w-14 h-14 mx-auto">
+                    <div class="text-white text-lg font-medium mt-3 text-center">Shree Balalji BioFuels</div>
+                </div>
+
+                <!-- Navigation Links (Center) -->
+                <nav class="w-full flex flex-col items-center space-y-4">
+                    <a href="/"
+                        class="mobile-nav-link text-lg font-light text-white hover:text-primary transition-colors transform hover:scale-105">Home</a>
+                    <a href="/about.html"
+                        class="mobile-nav-link text-lg font-light text-white hover:text-primary transition-colors transform hover:scale-105">About</a>
+                    <a href="/#vision"
+                        class="mobile-nav-link text-lg font-light text-white hover:text-primary transition-colors transform hover:scale-105">Vision</a>
+                    <a href="/#model"
+                        class="mobile-nav-link text-lg font-light text-white hover:text-primary transition-colors transform hover:scale-105">Model</a>
+                    <a href="/#benefits"
+                        class="mobile-nav-link text-lg font-light text-white hover:text-primary transition-colors transform hover:scale-105">Benefits</a>
+                    <a href="/gallery.html"
+                        class="mobile-nav-link text-lg font-light text-white hover:text-primary transition-colors transform hover:scale-105">Gallery</a>
+                    <a href="/contact.html"
+                        class="mobile-nav-link text-lg font-light text-primary hover:text-primary/80 transition-colors transform hover:scale-105">Contact</a>
+                </nav>
+
+                <!-- Social Icons (Bottom) -->
+                <div class="w-full text-center">
+                    <div class="flex justify-center space-x-6">
+                        <a href="#" class="text-white hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-white hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-white hover:text-primary transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <button id="mobile-menu-btn" class="md:hidden p-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
         </div>
-    </div>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
-        <div class="px-6 py-4 space-y-4">
-            <a href="/" class="block text-sm font-medium text-gray-600">Home</a>
-            <a href="/about.html" class="block text-sm font-medium text-gray-600">About</a>
-            <a href="/#vision" class="block text-sm font-medium text-gray-600">Vision</a>
-            <a href="/#model" class="block text-sm font-medium text-gray-600">Model</a>
-            <a href="/#benefits" class="block text-sm font-medium text-gray-600">Benefits</a>
-            <a href="/gallery.html" class="block text-sm font-medium text-gray-600">Gallery</a>
-            <a href="/contact.html" class="block text-sm font-medium text-primary">Contact</a>
-        </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-16 min-h-screen flex items-center">
-        <div class="max-w-6xl mx-auto px-6 py-24">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="fade-in">
-                    <h1 class="text-6xl md:text-7xl font-light tracking-tight mb-8 leading-none">
-                        Grain-Based<br>
-                        <span class="font-medium text-primary">Ethanol</span><br>
-                        <span class="text-4xl md:text-5xl text-gray-600">for a Greener Tomorrow</span>
-                    </h1>
-                    <p class="text-xl font-light text-gray-600 mb-12 leading-relaxed">
-                        Leading India's sustainable energy revolution with 200 KLPD production capacity, 
-                        empowering farmers through cooperative excellence.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="bg-primary text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-accent transition-all duration-300 transform hover:scale-105">
-                            Explore Our Impact
-                        </button>
-                        <button class="border border-gray-300 text-gray-900 px-8 py-3 rounded-full text-sm font-medium hover:border-primary hover:text-primary transition-colors">
-                            Learn More
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="fade-in">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&h=400&fit=crop&crop=center" 
-                             alt="Sustainable farming" 
-                             class="w-full h-96 object-cover rounded-3xl shadow-2xl">
-                        <div class="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm rounded-2xl p-4">
-                            <div class="text-2xl font-bold text-primary">200 KLPD</div>
-                            <div class="text-sm text-gray-600">Production Capacity</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Stats -->
-            <div class="grid grid-cols-3 gap-8 mt-24 max-w-2xl mx-auto fade-in">
-                <div class="text-center">
-                    <div class="text-4xl font-light mb-2 text-primary counter" data-target="200">0</div>
-                    <div class="text-sm text-gray-500 font-medium">KLPD Capacity</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-light mb-2 text-primary counter" data-target="100">0</div>
-                    <div class="text-sm text-gray-500 font-medium">% Cooperative</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-light mb-2 text-primary counter" data-target="2">0</div>
-                    <div class="text-sm text-gray-500 font-medium">Primary Crops</div>
+    <section id="home" class="min-h-screen w-full relative overflow-hidden grid place-items-center">
+        <!-- Video Background -->
+        <video class="absolute inset-0 w-full h-full object-cover z-0" src="video.mp4" autoplay loop muted
+            playsinline></video>
+        <!-- Optional: Overlay for readability -->
+        <div class="absolute inset-0 bg-black/50 z-10"></div>
+        <div class="max-w-6xl mx-auto px-6 relative z-20 w-full">
+            <div class="flex flex-col items-center text-center fade-in">
+                <h1 class="text-3xl md:text-7xl font-light tracking-tight mb-8 text-white leading-none">
+                    Grain-Based
+                    <span class="font-medium text-primary">Ethanol</span><br>
+                    <span class="text-3xl md:text-5xl text-gray-200">for a Greener Tomorrow</span>
+                </h1>
+                <p class="text-lg md:text-xl font-light text-gray-200 mb-12 leading-relaxed max-w-2xl">
+                    Leading India's sustainable energy revolution with 200 KLPD production capacity,
+                    empowering farmers through cooperative excellence.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button
+                        class="w-44 bg-primary text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-accent transition-all duration-300 transform hover:scale-105 box-border">
+                        Explore
+                    </button>
+                    <button
+                        class="w-44 px-8 py-3 rounded-full text-sm font-medium bg-white hover:border-primary text-black hover:text-primary transition-colors box-border">
+                        Learn More
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Vision Section -->
-    <section id="vision" class="py-24 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-5xl font-light mb-4">Our Vision</h2>
-                <p class="text-xl text-gray-600 font-light">One Goal — Prosperity Through Cooperation</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center p-8 fade-in">
-                    <div class="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-medium mb-4">Energy Independence</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Establish a sustainable ethanol production ecosystem that reduces fossil fuel dependency 
-                        and saves precious foreign exchange.
-                    </p>
+    <section id="vision" class="relative min-h-screen flex items-center overflow-hidden">
+
+        <div class="relative z-10 w-full">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16 fade-in pt-20">
+                    <div
+                        class="inline-block px-6 py-2 bg-primary/20 backdrop-blur-sm rounded-full text-black mb-6 text-lg">
+                        OUR VISION</div>
+                    <h2 class="text-4xl md:text-7xl font-light mb-12 text-black max-w-4xl mx-auto leading-tight">
+                        Transforming India's<br>Energy Future</h2>
                 </div>
-                
-                <div class="text-center p-8 fade-in">
-                    <div class="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-                        </svg>
+
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Left Side - Image -->
+                    <div class="relative fade-in">
+                        <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b" alt="Vision"
+                            class="w-full h-[500px] object-cover rounded-3xl">
+                        <div
+                            class="absolute inset-0 bg-primary/10 rounded-3xl backdrop-blur-[2px] opacity-0 transition-all duration-500">
+                        </div>
                     </div>
-                    <h3 class="text-xl font-medium mb-4">Farmer Empowerment</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Create a farmer-first ecosystem ensuring fair pricing, timely payments, 
-                        and direct market access for sustainable prosperity.
-                    </p>
-                </div>
-                
-                <div class="text-center p-8 fade-in">
-                    <div class="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+
+                    <!-- Right Side - Vision Points -->
+                    <div class="space-y-12">
+                        <!-- Energy Independence -->
+                        <div class="group fade-in">
+                            <div class="flex items-start gap-8">
+                                <div
+                                    class="relative w-20 h-20 bg-accent/10 backdrop-blur-sm rounded-3xl flex items-center justify-center flex-shrink-0 overflow-hidden group-hover:bg-accent/20 transition-all duration-500">
+                                    <svg class="w-10 h-10 text-primary relative z-10" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-r from-transparent via-accent/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000">
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-medium mb-4 text-black">Energy Independence</h3>
+                                    <p class="text-gray-900 leading-relaxed">
+                                        Establish a sustainable ethanol production ecosystem that reduces fossil fuel
+                                        dependency
+                                        and saves precious foreign exchange.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Farmer Empowerment -->
+                        <div class="group fade-in">
+                            <div class="flex items-start gap-8">
+                                <div
+                                    class="relative w-20 h-20 bg-accent/10 backdrop-blur-sm rounded-3xl flex items-center justify-center flex-shrink-0 overflow-hidden group-hover:bg-accent/20 transition-all duration-500">
+                                    <svg class="w-10 h-10 text-primary relative z-10" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
+                                        </path>
+                                    </svg>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-r from-transparent via-accent/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000">
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-medium mb-4 text-black">Farmer Empowerment</h3>
+                                    <p class="text-gray-900 leading-relaxed">
+                                        Create a farmer-first ecosystem ensuring fair pricing, timely payments,
+                                        and direct market access for sustainable prosperity.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Environmental Impact -->
+                        <div class="group fade-in">
+                            <div class="flex items-start gap-8">
+                                <div
+                                    class="relative w-20 h-20 bg-accent/10 backdrop-blur-sm rounded-3xl flex items-center justify-center flex-shrink-0 overflow-hidden group-hover:bg-accent/20 transition-all duration-500">
+                                    <svg class="w-10 h-10 text-primary relative z-10" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                        </path>
+                                    </svg>
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-r from-transparent via-accent/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000">
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-medium mb-4 text-black">Environmental Impact</h3>
+                                    <p class="text-gray-900 leading-relaxed">
+                                        Support the Ethanol Blending Programme and contribute to
+                                        carbon emission reduction and climate resilience.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-medium mb-4">Environmental Impact</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        Support the Ethanol Blending Programme and contribute to 
-                        carbon emission reduction and climate resilience.
-                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Model Section -->
-    <section id="model" class="py-24">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-5xl font-light mb-4">Our Cooperative Model</h2>
+    <section id="model" class="py-24 bg-gradient-to-b from-white to-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20 fade-in">
+                <h2 class="text-3xl md:text-5xl font-light mb-4">Our Cooperative Model</h2>
                 <p class="text-xl text-gray-600 font-light">End-to-End Engagement with Farmers</p>
             </div>
-            
-            <div class="space-y-20">
-                <div class="grid md:grid-cols-2 gap-16 items-center">
-                    <div class="order-2 md:order-1 fade-in">
-                        <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center text-lg font-medium mr-6">1</div>
-                            <h3 class="text-2xl font-medium">Agri-Input Support</h3>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed text-lg mb-6">
-                            Farmers receive high-quality seeds, fertilizers, and pesticides—all coordinated 
-                            and delivered through our cooperative framework.
-                        </p>
-                        <div class="bg-primary/5 rounded-2xl p-6">
-                            <div class="text-sm text-primary font-medium">Key Benefits</div>
-                            <div class="text-gray-600 mt-2">Quality assured inputs • Timely delivery • Competitive pricing</div>
-                        </div>
-                    </div>
-                    <div class="order-1 md:order-2 fade-in">
-                        <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=600&h=400&fit=crop&crop=center" 
-                             alt="Agricultural inputs" 
-                             class="w-full h-80 object-cover rounded-3xl shadow-xl">
-                    </div>
-                </div>
 
-                <div class="grid md:grid-cols-2 gap-16 items-center">
-                    <div class="fade-in">
-                        <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=400&fit=crop&crop=center" 
-                             alt="Direct procurement" 
-                             class="w-full h-80 object-cover rounded-3xl shadow-xl">
-                    </div>
-                    <div class="fade-in">
+            <!-- Process Timeline -->
+            <div class="relative">
+                <!-- Connection Line -->
+                <div class="hidden lg:block absolute left-1/2 top-0 bottom-0 w-1 bg-primary/20 -translate-x-1/2"></div>
+
+                <!-- Step 1 -->
+                <div class="relative mb-24 fade-in">
+                    <div class="lg:w-1/2 lg:pr-16">
                         <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center text-lg font-medium mr-6">2</div>
-                            <h3 class="text-2xl font-medium">Direct Procurement</h3>
+                            <div
+                                class="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center text-xl font-medium mr-6 shadow-lg">
+                                1
+                            </div>
+                            <h3 class="text-xl md:text-3xl font-medium">Agri-Input Support</h3>
                         </div>
-                        <p class="text-gray-600 leading-relaxed text-lg mb-6">
-                            Transparent and fair procurement of maize and rice directly from farmers, 
-                            cutting out middlemen and maximizing farm income.
-                        </p>
-                        <div class="bg-primary/5 rounded-2xl p-6">
-                            <div class="text-sm text-primary font-medium">Farmer Benefits</div>
-                            <div class="text-gray-600 mt-2">Fair pricing • Direct payments • No middlemen</div>
+                        <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                            <p class="text-gray-600 leading-relaxed text-lg mb-6">
+                                Farmers receive high-quality seeds, fertilizers, and pesticides—all coordinated
+                                and delivered through our cooperative framework.
+                            </p>
+                            <div class="bg-primary/5 rounded-2xl p-6">
+                                <div class="text-sm text-primary font-medium">Key Benefits</div>
+                                <div class="text-gray-600 mt-2">Quality assured inputs • Timely delivery • Competitive
+                                    pricing</div>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=600&h=400&fit=crop&crop=center"
+                                alt="Agricultural inputs" class="w-full h-48 object-cover rounded-2xl mt-6 shadow-lg">
                         </div>
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-16 items-center">
-                    <div class="order-2 md:order-1 fade-in">
+                <!-- Step 2 -->
+                <div class="relative mb-24 fade-in">
+                    <div class="lg:w-1/2 lg:ml-auto lg:pl-16">
                         <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center text-lg font-medium mr-6">3</div>
-                            <h3 class="text-2xl font-medium">Professional Management</h3>
+                            <div
+                                class="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center text-xl font-medium mr-6 shadow-lg">
+                                2
+                            </div>
+                            <h3 class="text-xl md:text-3xl font-medium">Direct Procurement</h3>
                         </div>
-                        <p class="text-gray-600 leading-relaxed text-lg mb-6">
-                            Factory operations managed by trained ex-servicemen, combining social responsibility 
-                            with operational excellence.
-                        </p>
-                        <div class="bg-primary/5 rounded-2xl p-6">
-                            <div class="text-sm text-primary font-medium">Excellence Standards</div>
-                            <div class="text-gray-600 mt-2">Disciplined operations • Quality assurance • Reliable management</div>
+                        <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                            <p class="text-gray-600 leading-relaxed text-lg mb-6">
+                                Transparent and fair procurement of maize and rice directly from farmers,
+                                cutting out middlemen and maximizing farm income.
+                            </p>
+                            <div class="bg-primary/5 rounded-2xl p-6">
+                                <div class="text-sm text-primary font-medium">Farmer Benefits</div>
+                                <div class="text-gray-600 mt-2">Fair pricing • Direct payments • No middlemen</div>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=400&fit=crop&crop=center"
+                                alt="Direct procurement" class="w-full h-48 object-cover rounded-2xl mt-6 shadow-lg">
                         </div>
-                    </div>
-                    <div class="order-1 md:order-2 fade-in">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center" 
-                             alt="Professional management" 
-                             class="w-full h-80 object-cover rounded-3xl shadow-xl">
                     </div>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-16 items-center">
-                    <div class="fade-in">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center" 
-                             alt="Green fuel production" 
-                             class="w-full h-80 object-cover rounded-3xl shadow-xl">
-                    </div>
-                    <div class="fade-in">
+                <!-- Step 3 -->
+                <div class="relative mb-24 fade-in">
+                    <div class="lg:w-1/2 lg:pr-16">
                         <div class="flex items-center mb-6">
-                            <div class="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center text-lg font-medium mr-6">4</div>
-                            <h3 class="text-2xl font-medium">Grain to Green Fuel</h3>
+                            <div
+                                class="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center text-xl font-medium mr-6 shadow-lg">
+                                3
+                            </div>
+                            <h3 class="text-xl md:text-3xl font-medium">Professional Management</h3>
                         </div>
-                        <p class="text-gray-600 leading-relaxed text-lg mb-6">
-                            Advanced technology converts procured grain into renewable, eco-friendly ethanol 
-                            that reduces pollution and enhances energy independence.
-                        </p>
-                        <div class="bg-primary/5 rounded-2xl p-6">
-                            <div class="text-sm text-primary font-medium">Environmental Impact</div>
-                            <div class="text-gray-600 mt-2">Clean energy • Reduced emissions • Sustainable future</div>
+                        <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                            <p class="text-gray-600 leading-relaxed text-lg mb-6">
+                                Factory operations managed by trained ex-servicemen, combining social responsibility
+                                with operational excellence.
+                            </p>
+                            <div class="bg-primary/5 rounded-2xl p-6">
+                                <div class="text-sm text-primary font-medium">Excellence Standards</div>
+                                <div class="text-gray-600 mt-2">Disciplined operations • Quality assurance • Reliable
+                                    management</div>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center"
+                                alt="Professional management"
+                                class="w-full h-48 object-cover rounded-2xl mt-6 shadow-lg">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="relative fade-in">
+                    <div class="lg:w-1/2 lg:ml-auto lg:pl-16">
+                        <div class="flex items-center mb-6">
+                            <div
+                                class="w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center text-xl font-medium mr-6 shadow-lg">
+                                4
+                            </div>
+                            <h3 class="text-xl md:text-3xl font-medium">Grain to Green Fuel</h3>
+                        </div>
+                        <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                            <p class="text-gray-600 leading-relaxed text-lg mb-6">
+                                Advanced technology converts procured grain into renewable, eco-friendly ethanol
+                                that reduces pollution and enhances energy independence.
+                            </p>
+                            <div class="bg-primary/5 rounded-2xl p-6">
+                                <div class="text-sm text-primary font-medium">Environmental Impact</div>
+                                <div class="text-gray-600 mt-2">Clean energy • Reduced emissions • Sustainable future
+                                </div>
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&crop=center"
+                                alt="Green fuel production" class="w-full h-48 object-cover rounded-2xl mt-6 shadow-lg">
                         </div>
                     </div>
                 </div>
@@ -281,80 +394,85 @@
                 <h2 class="text-5xl font-light mb-4">Our Impact</h2>
                 <p class="text-xl text-gray-600 font-light">Sustainability in action across our operations</p>
             </div>
-            
+
             <div class="relative fade-in">
-                <div id="gallery-slider" class="flex space-x-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide">
+                <div id="gallery-slider"
+                    class="flex space-x-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide">
                     <div class="flex-shrink-0 snap-start">
-                        <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&h=350&fit=crop&crop=center" 
-                             alt="Farming operations" 
-                             class="w-80 h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&h=350&fit=crop&crop=center"
+                            alt="Farming operations"
+                            class="w-80 h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
                         <div class="mt-4 px-2">
                             <h3 class="font-medium text-gray-900">Sustainable Farming</h3>
                             <p class="text-sm text-gray-600">Supporting local farmers with modern techniques</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex-shrink-0 snap-start">
-                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=350&fit=crop&crop=center" 
-                             alt="Crop processing" 
-                             class="w-80 h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=350&fit=crop&crop=center"
+                            alt="Crop processing"
+                            class="w-80 h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
                         <div class="mt-4 px-2">
                             <h3 class="font-medium text-gray-900">Crop Processing</h3>
                             <p class="text-sm text-gray-600">Advanced processing of maize and rice</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex-shrink-0 snap-start">
-                        <img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=400&h=350&fit=crop&crop=center" 
-                             alt="Ethanol production" 
-                             class="w-80 h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=400&h=350&fit=crop&crop=center"
+                            alt="Ethanol production"
+                            class="w-80 h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
                         <div class="mt-4 px-2">
                             <h3 class="font-medium text-gray-900">Clean Production</h3>
                             <p class="text-sm text-gray-600">State-of-the-art ethanol production facility</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex-shrink-0 snap-start">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=350&fit=crop&crop=center" 
-                             alt="Quality control" 
-                             class="w-80 h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=350&fit=crop&crop=center"
+                            alt="Quality control"
+                            class="w-80 h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
                         <div class="mt-4 px-2">
                             <h3 class="font-medium text-gray-900">Quality Assurance</h3>
                             <p class="text-sm text-gray-600">Rigorous quality control processes</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex-shrink-0 snap-start">
-                        <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=400&h=350&fit=crop&crop=center" 
-                             alt="Cooperative meetings" 
-                             class="w-80 h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=400&h=350&fit=crop&crop=center"
+                            alt="Cooperative meetings"
+                            class="w-80 h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
                         <div class="mt-4 px-2">
                             <h3 class="font-medium text-gray-900">Cooperative Strength</h3>
                             <p class="text-sm text-gray-600">Building farmer communities together</p>
                         </div>
                     </div>
-                    
+
                     <div class="flex-shrink-0 snap-start">
-                        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=500&h=400&fit=crop&crop=center" 
-                             alt="Green energy" 
-                             class="w-80 h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=500&h=400&fit=crop&crop=center"
+                            alt="Green energy"
+                            class="w-80 h-80 object-cover rounded-2xl shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
                         <div class="mt-4 px-2">
                             <h3 class="font-medium text-gray-900">Green Energy</h3>
                             <p class="text-sm text-gray-600">Contributing to India's energy independence</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Gallery Navigation -->
                 <div class="flex justify-center mt-8 space-x-4">
-                    <button id="prev-btn" class="p-3 bg-white border border-gray-200 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors">
+                    <button id="prev-btn"
+                        class="p-3 bg-white border border-gray-200 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                            </path>
                         </svg>
                     </button>
-                    <button id="next-btn" class="p-3 bg-white border border-gray-200 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors">
+                    <button id="next-btn"
+                        class="p-3 bg-white border border-gray-200 rounded-full hover:bg-primary hover:text-white hover:border-primary transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
                         </svg>
                     </button>
                 </div>
@@ -363,202 +481,171 @@
     </section>
 
     <!-- Benefits Section -->
-    <section id="benefits" class="py-24">
+    <section id="benefits" class="py-24 bg-gradient-to-b from-white to-gray-50">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-20 fade-in">
-                <h2 class="text-6xl font-light mb-6">Transforming Lives</h2>
-                <p class="text-2xl text-gray-600 font-light max-w-3xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-5xl font-bold mb-4">Transforming Lives</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
                     Creating sustainable impact for India and empowering farmers through innovation
                 </p>
             </div>
 
-            <!-- Impact Statistics Banner -->
-            <div class="mb-20 fade-in">
-                <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
-                    <div class="grid md:grid-cols-4 gap-8 text-center">
-                        <div>
-                            <div class="text-4xl font-bold text-primary mb-2 counter" data-target="85">0</div>
-                            <div class="text-sm font-medium text-gray-600">Billion Liters</div>
-                            <div class="text-xs text-gray-500 mt-1">Annual Import Reduction</div>
-                        </div>
-                        <div>
-                            <div class="text-4xl font-bold text-primary mb-2 counter" data-target="50000">0</div>
-                            <div class="text-sm font-medium text-gray-600">Farmers</div>
-                            <div class="text-xs text-gray-500 mt-1">Directly Benefited</div>
-                        </div>
-                        <div>
-                            <div class="text-4xl font-bold text-primary mb-2 counter" data-target="30">0</div>
-                            <div class="text-sm font-medium text-gray-600">Percent</div>
-                            <div class="text-xs text-gray-500 mt-1">Income Increase</div>
-                        </div>
-                        <div>
-                            <div class="text-4xl font-bold text-primary mb-2 counter" data-target="1000">0</div>
-                            <div class="text-sm font-medium text-gray-600">Jobs Created</div>
-                            <div class="text-xs text-gray-500 mt-1">Rural Employment</div>
-                        </div>
-                    </div>
+            <!-- Impact Statistics -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+                <div class="text-center fade-in">
+                    <div class="text-4xl font-bold text-primary counter mb-1" data-target="85">0</div>
+                    <div class="text-gray-600">Billion Liters<br />Import Reduction</div>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="text-4xl font-bold text-primary counter mb-1" data-target="50000">0</div>
+                    <div class="text-gray-600">Farmers<br />Empowered</div>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="text-4xl font-bold text-primary counter mb-1" data-target="30">0</div>
+                    <div class="text-gray-600">Percent<br />Income Growth</div>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="text-4xl font-bold text-primary counter mb-1" data-target="1000">0</div>
+                    <div class="text-gray-600">Rural<br />Jobs Created</div>
                 </div>
             </div>
 
-            <!-- Structured Benefits Layout -->
-            <div class="grid lg:grid-cols-2 gap-20">
-                <!-- Benefits to India -->
-                <div class="fade-in">
-                    <div class="text-center mb-12">
-                        <div class="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-3xl mb-6">
-                            <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-3xl font-bold text-gray-900 mb-4">Benefits for India</h3>
-                        <p class="text-gray-600">National impact and energy transformation</p>
+            <!-- Benefits Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- National Benefits -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow fade-in">
+                    <div class="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
                     </div>
-
-                    <div class="space-y-8">
-                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                            <div class="flex items-start space-x-6">
-                                <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-semibold text-gray-900 mb-3">Energy Independence</h4>
-                                    <p class="text-gray-600 mb-4">Reduces crude oil imports by 85 billion liters annually, saving precious foreign exchange</p>
-                                    <div class="text-2xl font-bold text-blue-600">₹42,000 Cr</div>
-                                    <div class="text-sm text-gray-500">Annual savings in foreign exchange</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                            <div class="flex items-start space-x-6">
-                                <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-semibold text-gray-900 mb-3">Climate Action</h4>
-                                    <p class="text-gray-600 mb-4">Significant reduction in carbon emissions supporting India's net-zero commitment</p>
-                                    <div class="text-2xl font-bold text-green-600">2.5M Tons</div>
-                                    <div class="text-sm text-gray-500">CO2 reduced annually</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                            <div class="flex items-start space-x-6">
-                                <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-semibold text-gray-900 mb-3">Manufacturing Boost</h4>
-                                    <p class="text-gray-600 mb-4">Strengthens Make in India with advanced agro-processing and green technology</p>
-                                    <div class="text-2xl font-bold text-purple-600">1000+</div>
-                                    <div class="text-sm text-gray-500">Direct and indirect jobs created</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Energy Independence</h3>
+                    <p class="text-gray-600 mb-4">Reducing crude oil imports and saving ₹42,000 Cr in foreign exchange
+                        annually</p>
+                    <div class="text-blue-600 font-medium">85B Liters Saved</div>
                 </div>
 
-                <!-- Benefits to Farmers -->
-                <div class="fade-in">
-                    <div class="text-center mb-12">
-                        <div class="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-3xl mb-6">
-                            <svg class="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-3xl font-bold text-gray-900 mb-4">Benefits for Farmers</h3>
-                        <p class="text-gray-600">Direct empowerment and prosperity</p>
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow fade-in">
+                    <div class="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-lg mb-4">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+                            </path>
+                        </svg>
                     </div>
+                    <h3 class="text-xl font-semibold mb-2">Climate Action</h3>
+                    <p class="text-gray-600 mb-4">Supporting India's net-zero commitment through sustainable practices
+                    </p>
+                    <div class="text-green-600 font-medium">2.5M Tons CO₂ Reduced</div>
+                </div>
 
-                    <div class="space-y-8">
-                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                            <div class="flex items-start space-x-6">
-                                <div class="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-semibold text-gray-900 mb-3">Higher Income</h4>
-                                    <p class="text-gray-600 mb-4">Direct procurement ensures better prices and eliminates middlemen exploitation</p>
-                                    <div class="text-2xl font-bold text-primary">+30%</div>
-                                    <div class="text-sm text-gray-500">Average income increase</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                            <div class="flex items-start space-x-6">
-                                <div class="w-14 h-14 bg-yellow-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-7 h-7 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-semibold text-gray-900 mb-3">Quality Support</h4>
-                                    <p class="text-gray-600 mb-4">Premium seeds, fertilizers, and technical guidance for better crop yield</p>
-                                    <div class="grid grid-cols-3 gap-3 mt-4">
-                                        <div class="text-center bg-yellow-50 rounded-lg p-3">
-                                            <div class="text-lg font-bold text-yellow-600">98%</div>
-                                            <div class="text-xs text-gray-600">Quality Seeds</div>
-                                        </div>
-                                        <div class="text-center bg-yellow-50 rounded-lg p-3">
-                                            <div class="text-lg font-bold text-yellow-600">24/7</div>
-                                            <div class="text-xs text-gray-600">Support</div>
-                                        </div>
-                                        <div class="text-center bg-yellow-50 rounded-lg p-3">
-                                            <div class="text-lg font-bold text-yellow-600">+25%</div>
-                                            <div class="text-xs text-gray-600">Yield</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
-                            <div class="flex items-start space-x-6">
-                                <div class="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h4 class="text-xl font-semibold text-gray-900 mb-3">Community Strength</h4>
-                                    <p class="text-gray-600 mb-4">Cooperative model builds stronger farming communities and shared prosperity</p>
-                                    <div class="text-2xl font-bold text-indigo-600">50,000+</div>
-                                    <div class="text-sm text-gray-500">Farmers in our network</div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow fade-in">
+                    <div class="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-lg mb-4">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                            </path>
+                        </svg>
                     </div>
+                    <h3 class="text-xl font-semibold mb-2">Manufacturing Growth</h3>
+                    <p class="text-gray-600 mb-4">Boosting Make in India through advanced agro-processing</p>
+                    <div class="text-purple-600 font-medium">1000+ Jobs Created</div>
+                </div>
+
+                <!-- Farmer Benefits -->
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow fade-in">
+                    <div class="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg mb-4">
+                        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Income Growth</h3>
+                    <p class="text-gray-600 mb-4">Direct procurement ensuring better prices for farmers</p>
+                    <div class="text-primary font-medium">30% Average Increase</div>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow fade-in">
+                    <div class="inline-flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-lg mb-4">
+                        <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Quality Support</h3>
+                    <p class="text-gray-600 mb-4">Premium seeds and 24/7 technical guidance</p>
+                    <div class="text-yellow-600 font-medium">25% Higher Yield</div>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow fade-in">
+                    <div class="inline-flex items-center justify-center w-12 h-12 bg-indigo-100 rounded-lg mb-4">
+                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Community Network</h3>
+                    <p class="text-gray-600 mb-4">Building stronger farming communities together</p>
+                    <div class="text-indigo-600 font-medium">50,000+ Farmers United</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-24 bg-primary text-white">
-        <div class="max-w-4xl mx-auto text-center px-6 fade-in">
-            <h2 class="text-5xl font-light mb-6">
-                Join the Green Energy Revolution
-            </h2>
-            <p class="text-xl font-light text-primary-100 mb-12 opacity-90">
-                Partner with us in building a sustainable future through cooperative excellence and innovation
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button class="bg-white text-primary px-8 py-3 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors">
-                    Become a Partner
-                </button>
-                <!-- <button class="border border-white/30 text-white px-8 py-3 rounded-full text-sm font-medium hover:border-white/60 hover:bg-white/10 transition-colors">
-                    Download Brochure
-                </button> -->
+    <section class="relative py-32 overflow-hidden">
+        <!-- Background Image with Blur -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80" alt="Biofuel Field" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-primary/20 backdrop-blur-sm"></div>
+        </div>
+        
+        <!-- Decorative Elements -->
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-0 left-0 w-72 h-72 bg-white rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3"></div>
+            <div class="absolute bottom-0 right-0 w-72 h-72 bg-white rounded-full blur-3xl translate-x-1/3 translate-y-1/3"></div>
+            <div class="absolute top-1/2 right-1/4 w-48 h-48 bg-accent rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-left fade-in">
+                    <span class="inline-block px-4 py-1 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-8">
+                        Join Our Mission
+                    </span>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-light mb-8 text-white leading-tight">
+                        Be Part of India's 
+                        <span class="font-medium">Green Energy Revolution</span>
+                    </h2>
+                    <p class="text-xl md:text-2xl font-light text-white/90 mb-12 max-w-lg leading-relaxed">
+                        Partner with us in building a sustainable future through cooperative excellence and innovation
+                    </p>
+                    <div class="flex flex-wrap gap-6">
+                        <button class="group relative px-8 py-4 bg-white rounded-full text-primary text-sm font-medium overflow-hidden transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <span class="relative z-10">Become a Partner</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-white via-primary/10 to-white -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                        </button>
+                        <button class="group relative px-8 py-4 border-2 border-white/40 rounded-full text-white text-sm font-medium overflow-hidden transform hover:scale-105 transition-all duration-300">
+                            <span class="relative z-10">Download Brochure</span>
+                            <div class="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="relative p-4 bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-300">
+                        <div class="aspect-video rounded-xl overflow-hidden">
+                            <img src="image1.jpg" alt="Biofuel Production" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-4 -right-4 bg-accent/90 backdrop-blur-sm px-6 py-3 rounded-lg shadow-lg">
+                            <p class="text-white font-medium">Learn More</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -582,28 +669,30 @@
                         <div class="text-sm text-gray-400">Prosperity through Cooperation</div>
                     </div>
                 </div>
-                
+
                 <div>
                     <h3 class="font-medium mb-6">Quick Links</h3>
                     <div class="space-y-4">
                         <a href="#vision" class="block text-gray-300 hover:text-white transition-colors">Our Vision</a>
                         <a href="#model" class="block text-gray-300 hover:text-white transition-colors">Our Model</a>
                         <a href="#benefits" class="block text-gray-300 hover:text-white transition-colors">Benefits</a>
-                        <a href="/about.html" class="block text-gray-300 hover:text-white transition-colors">About Us</a>
+                        <a href="/about.html" class="block text-gray-300 hover:text-white transition-colors">About
+                            Us</a>
                     </div>
                 </div>
-                
+
                 <div>
                     <h3 class="font-medium mb-6">Connect</h3>
                     <div class="space-y-4 text-gray-300">
                         <div>India</div>
                         <div>+91 XXXX XXXX</div>
                         <div>info@shreebalaljibiofuels.com</div>
-                        <a href="/contact.html" class="block text-primary hover:text-primary/80 transition-colors">Contact Us →</a>
+                        <a href="/contact.html"
+                            class="block text-primary hover:text-primary/80 transition-colors">Contact Us →</a>
                     </div>
                 </div>
             </div>
-            
+
             <div class="border-t border-gray-700 mt-16 pt-8 text-center text-gray-400">
                 <p>&copy; 2024 Shree Balalji BioFuels. All rights reserved.</p>
             </div>
@@ -616,6 +705,7 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
@@ -643,17 +733,114 @@
         .hover\:shadow-xl:hover {
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
+
+        /* Mobile menu animations */
+        .mobile-nav-link {
+            opacity: 1;
+            /* Set to visible by default */
+            transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s ease, scale 0.2s ease;
+        }
+
+        /* Hamburger animation - Fixed cross icon */
+        #mobile-menu-btn {
+            transition: all 0.3s ease;
+        }
+
+        #mobile-menu-btn span {
+            display: block;
+            transform-origin: center;
+            transition: all 0.3s ease;
+        }
+
+        #mobile-menu-btn.active span:first-child {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        #mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        #mobile-menu-btn.active span:last-child {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* Prevent scrolling when menu is open */
+        body.overflow-hidden {
+            overflow: hidden;
+        }
     </style>
 
     <script>
         // Optimized JavaScript for production
-        
-        // Mobile menu toggle
+
+        // Mobile menu toggle with animations
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        const menuBackdrop = mobileMenu.querySelector('.bg-black\\/80');
+        const menuContent = mobileMenu.querySelector('.absolute.inset-0.flex.flex-col');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        let isMenuOpen = false;
+
+        function toggleMobileMenu() {
+            isMenuOpen = !isMenuOpen;
+
+            // Toggle button state
+            mobileMenuBtn.classList.toggle('active', isMenuOpen);
+
+            if (isMenuOpen) {
+                // Open menu
+                document.body.classList.add('overflow-hidden'); // Prevent scrolling
+                mobileMenu.classList.remove('hidden');
+
+                // Animate in
+                setTimeout(() => {
+                    menuBackdrop.classList.add('opacity-100');
+                    menuContent.classList.remove('translate-y-full');
+
+                    // No need for staggered animation since links are visible by default
+                }, 10);
+            } else {
+                // Animate out
+                menuBackdrop.classList.remove('opacity-100');
+                menuContent.classList.add('translate-y-full');
+
+                // No need to reset nav links since they're visible by default
+
+                // Hide after animation completes
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }, 500);
+            }
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Close menu when clicking on backdrop
+        mobileMenu.addEventListener('click', function (e) {
+            if (e.target === mobileMenu || e.target === menuBackdrop) {
+                if (isMenuOpen) {
+                    toggleMobileMenu();
+                }
+            }
+        });
+
+        // Close menu when pressing escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && isMenuOpen) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Close menu when clicking on any mobile nav link
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                if (isMenuOpen) {
+                    toggleMobileMenu();
+                }
+            });
         });
 
         // Smooth scrolling
@@ -666,7 +853,11 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    mobileMenu.classList.add('hidden');
+
+                    // Close mobile menu if open
+                    if (isMenuOpen) {
+                        toggleMobileMenu();
+                    }
                 }
             });
         });
@@ -675,7 +866,7 @@
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-link');
-            
+
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
@@ -752,6 +943,50 @@
                 gallery.scrollBy({ left: 320, behavior: 'smooth' });
             }
         }, 5000);
+
+        function updateNavbarOnScroll() {
+            const navbar = document.getElementById('main-navbar');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navTitle = document.querySelector('.nav-title');
+            if (window.scrollY > 10) {
+                navbar.classList.add('bg-white', 'border-b', 'border-gray-100');
+                navLinks.forEach(link => {
+                    link.classList.remove('text-white');
+                    link.classList.add('text-gray-800');
+                });
+                if (navTitle) {
+                    navTitle.classList.remove('text-white');
+                    navTitle.classList.add('text-gray-800');
+                }
+            } else {
+                navbar.classList.remove('bg-white', 'border-b', 'border-gray-100');
+                navLinks.forEach(link => {
+                    link.classList.remove('text-gray-800');
+                    link.classList.add('text-white');
+                });
+                if (navTitle) {
+                    navTitle.classList.remove('text-gray-800');
+                    navTitle.classList.add('text-white');
+                }
+            }
+        }
+        window.addEventListener('scroll', updateNavbarOnScroll);
+        window.addEventListener('DOMContentLoaded', updateNavbarOnScroll);
+
+        function updateScrollArrow() {
+            const arrow = document.getElementById('scroll-arrow');
+            if (!arrow) return;
+            if (window.scrollY > 10) {
+                arrow.style.opacity = '0';
+                arrow.style.pointerEvents = 'none';
+            } else {
+                arrow.style.opacity = '1';
+                arrow.style.pointerEvents = 'auto';
+            }
+        }
+        window.addEventListener('scroll', updateScrollArrow);
+        window.addEventListener('DOMContentLoaded', updateScrollArrow);
     </script>
 </body>
+
 </html>
