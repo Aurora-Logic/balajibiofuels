@@ -968,6 +968,7 @@
 
         function toggleMobileMenu() {
             isMenuOpen = !isMenuOpen;
+            const menuBtnSpans = document.querySelectorAll('#mobile-menu-btn span');
 
             // Toggle button state
             mobileMenuBtn.classList.toggle('active', isMenuOpen);
@@ -977,19 +978,34 @@
                 document.body.classList.add('overflow-hidden'); // Prevent scrolling
                 mobileMenu.classList.remove('hidden');
 
+                // Ensure hamburger/close button stays white when menu is open
+                menuBtnSpans.forEach(span => {
+                    span.classList.remove('bg-black');
+                    span.classList.add('bg-white');
+                });
+
                 // Animate in
                 setTimeout(() => {
                     menuBackdrop.classList.add('opacity-100');
-                    menuContent.classList.remove('translate-y-full');
-
-                    // No need for staggered animation since links are visible by default
+                    menuContent.classList.remove('-translate-y-full');
                 }, 10);
             } else {
                 // Animate out
                 menuBackdrop.classList.remove('opacity-100');
-                menuContent.classList.add('translate-y-full');
+                menuContent.classList.add('-translate-y-full');
 
-                // No need to reset nav links since they're visible by default
+                // Restore hamburger color based on scroll position
+                if (window.scrollY > 10) {
+                    menuBtnSpans.forEach(span => {
+                        span.classList.remove('bg-white');
+                        span.classList.add('bg-black');
+                    });
+                } else {
+                    menuBtnSpans.forEach(span => {
+                        span.classList.remove('bg-black');
+                        span.classList.add('bg-white');
+                    });
+                }
 
                 // Hide after animation completes
                 setTimeout(() => {
@@ -1154,6 +1170,8 @@
             const navbar = document.getElementById('main-navbar');
             const navLinks = document.querySelectorAll('.nav-link');
             const navTitle = document.querySelector('.nav-title');
+            const menuBtnSpans = document.querySelectorAll('#mobile-menu-btn span');
+            
             if (window.scrollY > 10) {
                 navbar.classList.add('bg-white', 'border-b', 'border-gray-100');
                 navLinks.forEach(link => {
@@ -1164,6 +1182,14 @@
                     navTitle.classList.remove('text-white');
                     navTitle.classList.add('text-gray-800');
                 }
+                
+                // Change hamburger to black on scroll, but only if menu is closed
+                if (!isMenuOpen) {
+                    menuBtnSpans.forEach(span => {
+                        span.classList.remove('bg-white');
+                        span.classList.add('bg-black');
+                    });
+                }
             } else {
                 navbar.classList.remove('bg-white', 'border-b', 'border-gray-100');
                 navLinks.forEach(link => {
@@ -1173,6 +1199,14 @@
                 if (navTitle) {
                     navTitle.classList.remove('text-gray-800');
                     navTitle.classList.add('text-white');
+                }
+                
+                // Always white hamburger when at top
+                if (!isMenuOpen) {
+                    menuBtnSpans.forEach(span => {
+                        span.classList.remove('bg-black');
+                        span.classList.add('bg-white');
+                    });
                 }
             }
         }
