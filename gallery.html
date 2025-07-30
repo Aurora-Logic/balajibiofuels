@@ -30,51 +30,8 @@
 </head>
 
 <body class="font-jakarta antialiased bg-white text-gray-900">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-xl z-50 border-b border-gray-100">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10  rounded-xl flex items-center justify-center">
-                        <img src="logo.png" alt="">
-                    </div>
-                    <div class="font-semibold text-lg tracking-tight">Shree Balalji BioFuels</div>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="/" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Home</a>
-                    <a href="/about.html"
-                        class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">About</a>
-                    <a href="/#vision"
-                        class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Vision</a>
-                    <a href="/#model"
-                        class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Model</a>
-                    <a href="/#benefits"
-                        class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Benefits</a>
-                    <a href="/gallery.html"
-                        class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Gallery</a>
-                    <a href="/contact.html" class="text-sm font-medium text-primary">Contact</a>
-                </div>
-                <button id="mobile-menu-btn" class="md:hidden p-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
-            <div class="px-6 py-4 space-y-4">
-                <a href="/" class="block text-sm font-medium text-gray-600">Home</a>
-                <a href="/about" class="block text-sm font-medium text-gray-600">About</a>
-                <a href="/#vision" class="block text-sm font-medium text-gray-600">Vision</a>
-                <a href="/#model" class="block text-sm font-medium text-gray-600">Model</a>
-                <a href="/#benefits" class="block text-sm font-medium text-gray-600">Benefits</a>
-                <a href="/gallery.html" class="block text-sm font-medium text-gray-600">Gallery</a>
-                <a href="/contact" class="block text-sm font-medium text-primary">Contact</a>
-            </div>
-        </div>
-    </nav>
+<div id="navbar"></div>
+<div class="h-16"></div>
 
     <!-- Hero Section -->
     <section class="pt-16 pb-12 bg-gray-50">
@@ -620,27 +577,6 @@
     </style>
 
     <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuBtn?.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Initialize gallery on page load
-        document.addEventListener('DOMContentLoaded', function () {
-            // Add sample filter buttons
-            addSampleFilterButtons();
-
-            // Add animation to masonry items
-            setTimeout(() => {
-                document.querySelectorAll('.masonry-item').forEach(item => {
-                    item.classList.add('fade-in');
-                });
-            }, 100);
-        });
-
         // Add sample filter buttons
         function addSampleFilterButtons() {
             const filterButtonsContainer = document.getElementById('filter-buttons');
@@ -651,7 +587,7 @@
                 { id: 'facility', name: 'Facility' },
                 { id: 'production', name: 'Production' },
                 { id: 'research', name: 'Research' },
-                { id: 'sustainability', name: 'Sustainability' }
+                { id: 'sustainability', name: 'Sustainability' }    
             ];
 
             // Add category buttons after the "All" button

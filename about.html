@@ -48,45 +48,7 @@
     </script>
 </head>
 <body class="font-jakarta antialiased bg-white text-gray-900">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-xl z-50 border-b border-gray-100">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
-                        <img src="logo.png" alt="" class="w-6 h-6 object-cover rounded-lg md:rounded-none">
-                    </div>
-                    <div class="font-semibold text-lg tracking-tight">Shree Balalji BioFuels</div>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="/" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Home</a>
-                    <a href="/about.html" class="text-sm font-medium text-primary">About</a>
-                    <a href="/#vision" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Vision</a>
-                    <a href="/#model" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Model</a>
-                    <a href="/#benefits" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Benefits</a>
-                    <a href="/gallery.html" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Gallery</a>
-                    <a href="/contact.html" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Contact</a>
-                </div>
-                <button id="mobile-menu-btn" class="md:hidden p-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
-            <div class="px-6 py-4 space-y-4">
-                <a href="/" class="block text-sm font-medium text-gray-600">Home</a>
-                <a href="/about.html" class="block text-sm font-medium text-primary">About</a>
-                <a href="/#vision" class="block text-sm font-medium text-gray-600">Vision</a>
-                <a href="/#model" class="block text-sm font-medium text-gray-600">Model</a>
-                <a href="/#benefits" class="block text-sm font-medium text-gray-600">Benefits</a>
-                <a href="/gallery.html" class="block text-sm font-medium text-gray-600">Gallery</a>
-                <a href="/contact.html" class="block text-sm font-medium text-gray-600">Contact</a>
-            </div>
-        </div>
-    </nav>
+<div id="navbar"></div>
 
     <!-- Hero Section - Split Layout -->
     <section class="pt-16 min-h-screen flex items-center">
@@ -575,13 +537,99 @@
     </style>
 
     <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar').innerHTML = data;
+                    // Force navbar text to black
+                    const navbar = document.getElementById('main-navbar');
+                    if (navbar) {
+                        navbar.classList.remove('bg-transparent');
+                        navbar.classList.add('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
+                        const navLinks = navbar.querySelectorAll('.nav-link');
+                        navLinks.forEach(link => {
+                            link.classList.remove('text-white');
+                            link.classList.remove('text-gray-600');
+                            link.classList.add('text-gray-900');
+                        });
+                        const navBrand = document.getElementById('nav-brand');
+                        if (navBrand) {
+                            navBrand.classList.remove('text-white');
+                            navBrand.classList.add('text-gray-900');
+                        }
+                        const hamburger = document.querySelector('#mobile-menu-btn svg');
+                        if (hamburger) {
+                            hamburger.classList.remove('text-white');
+                            hamburger.classList.add('text-gray-800');
+                        }
+                    }
+                });
         });
+
+        // Navbar functionality
+        function initializeNavbar() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMobileMenu = document.getElementById('close-mobile-menu');
+            
+            mobileMenuBtn?.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            });
+            
+            closeMobileMenu?.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            });
+            
+            mobileMenu?.addEventListener('click', (e) => {
+                if (e.target === mobileMenu) {
+                    mobileMenu.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }
+            });
+
+            // Dynamic navbar background and text color on scroll
+            function updateNavbarOnScroll() {
+                const navbar = document.getElementById('main-navbar');
+                const navLinks = navbar.querySelectorAll('.nav-link');
+                const navBrand = document.getElementById('nav-brand');
+                const hamburger = document.querySelector('#mobile-menu-btn svg');
+                
+                if (window.scrollY > 10) {
+                    navbar.classList.remove('bg-transparent');
+                    navbar.classList.add('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
+                    navBrand.classList.remove('text-white');
+                    navBrand.classList.add('text-gray-900');
+                    navLinks.forEach(link => {
+                        link.classList.remove('text-white');
+                        link.classList.add('text-gray-900');
+                    });
+                    if (hamburger) {
+                        hamburger.classList.remove('text-white');
+                        hamburger.classList.add('text-gray-800');
+                    }
+                } else {
+                    navbar.classList.add('bg-transparent');
+                    navbar.classList.remove('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
+                    navBrand.classList.add('text-white');
+                    navBrand.classList.remove('text-gray-900');
+                    navLinks.forEach(link => {
+                        link.classList.add('text-white');
+                        link.classList.remove('text-gray-900');
+                    });
+                    if (hamburger) {
+                        hamburger.classList.add('text-white');
+                        hamburger.classList.remove('text-gray-800');
+                    }
+                }
+            }
+            
+            window.addEventListener('scroll', updateNavbarOnScroll);
+            updateNavbarOnScroll(); // Call immediately to set initial state
+        }
 
         // Counter animation
         function animateCounter(element) {
