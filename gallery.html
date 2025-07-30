@@ -49,7 +49,7 @@
     </section>
 
     <!-- Filter Navigation -->
-    <section class="py-8 bg-white sticky top-16 z-40 border-b border-gray-100">
+    <section class="py-8 bg-white sticky top-16 z-40 border-b border-gray-100" style="display:none">
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex justify-center">
                 <div id="filter-buttons" class="flex flex-wrap justify-center gap-4">
@@ -577,6 +577,49 @@
     </style>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add sample filter buttons
+            addSampleFilterButtons();
+            // Add animation to masonry items
+            setTimeout(() => {
+                document.querySelectorAll('.masonry-item').forEach(item => {
+                    item.classList.add('fade-in');
+                });
+            }, 100);
+
+            // Load navigation bar
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar').innerHTML = data;
+
+                    // Force navbar to always be visible and black-on-white
+                    const navbar = document.getElementById('main-navbar');
+                    if (navbar) {
+                        navbar.classList.remove('bg-transparent');
+                        navbar.classList.add('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
+                        // Brand
+                        const navBrand = document.getElementById('nav-brand');
+                        if (navBrand) {
+                            navBrand.classList.remove('text-white');
+                            navBrand.classList.add('text-gray-900');
+                        }
+                        // Desktop links
+                        navbar.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('text-white');
+                            link.classList.remove('text-gray-600');
+                            link.classList.add('text-gray-900');
+                        });
+                        // Hamburger icon
+                        const hamburger = document.querySelector('#mobile-menu-btn svg');
+                        if (hamburger) {
+                            hamburger.classList.remove('text-white');
+                            hamburger.classList.add('text-gray-800');
+                        }
+                    }
+                });
+        });
+
         // Add sample filter buttons
         function addSampleFilterButtons() {
             const filterButtonsContainer = document.getElementById('filter-buttons');
