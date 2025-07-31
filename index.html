@@ -879,6 +879,7 @@
         }
     </style>
 
+    <script src="js/mobile-nav.js"></script>
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -887,159 +888,9 @@
                 .then(data => {
                     document.getElementById('navbar').innerHTML = data;
                     
-                    // Initialize navbar functionality after loading
-                    initializeNavbar();
+                    // Initialize mobile navigation after loading
+                    initializeMobileNavigation();
                 });
-        });
-
-        // Navbar functionality
-        function initializeNavbar() {
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMobileMenu = document.getElementById('close-mobile-menu');
-            
-            mobileMenuBtn?.addEventListener('click', () => {
-                mobileMenu.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden');
-            });
-            
-            closeMobileMenu?.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
-            });
-            
-            mobileMenu?.addEventListener('click', (e) => {
-                if (e.target === mobileMenu) {
-                    mobileMenu.classList.add('hidden');
-                    document.body.classList.remove('overflow-hidden');
-                }
-            });
-
-            // Dynamic navbar background and text color on scroll
-            function updateNavbarOnScroll() {
-                const navbar = document.getElementById('main-navbar');
-                const navLinks = navbar.querySelectorAll('.nav-link');
-                const navBrand = document.getElementById('nav-brand');
-                const hamburger = document.querySelector('#mobile-menu-btn svg');
-                
-                if (window.scrollY > 10) {
-                    navbar.classList.remove('bg-transparent');
-                    navbar.classList.add('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
-                    navBrand.classList.remove('text-white');
-                    navBrand.classList.add('text-gray-900');
-                    navLinks.forEach(link => {
-                        link.classList.remove('text-white');
-                        link.classList.add('text-gray-900');
-                    });
-                    if (hamburger) {
-                        hamburger.classList.remove('text-white');
-                        hamburger.classList.add('text-gray-800');
-                    }
-                } else {
-                    navbar.classList.add('bg-transparent');
-                    navbar.classList.remove('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
-                    navBrand.classList.add('text-white');
-                    navBrand.classList.remove('text-gray-900');
-                    navLinks.forEach(link => {
-                        link.classList.add('text-white');
-                        link.classList.remove('text-gray-900');
-                    });
-                    if (hamburger) {
-                        hamburger.classList.add('text-white');
-                        hamburger.classList.remove('text-gray-800');
-                    }
-                }
-            }
-            
-            window.addEventListener('scroll', updateNavbarOnScroll);
-            updateNavbarOnScroll(); // Call immediately to set initial state
-        }
-        // Optimized JavaScript for production
-
-        // Mobile menu toggle with animations
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuBackdrop = mobileMenu.querySelector('.bg-black\\/80');
-        const menuContent = mobileMenu.querySelector('.absolute.inset-0.flex.flex-col');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-        let isMenuOpen = false;
-
-        function toggleMobileMenu() {
-            isMenuOpen = !isMenuOpen;
-            const menuBtnSpans = document.querySelectorAll('#mobile-menu-btn span');
-
-            // Toggle button state
-            mobileMenuBtn.classList.toggle('active', isMenuOpen);
-
-            if (isMenuOpen) {
-                // Open menu
-                document.body.classList.add('overflow-hidden'); // Prevent scrolling
-                mobileMenu.classList.remove('hidden');
-
-                // Ensure hamburger/close button stays white when menu is open
-                menuBtnSpans.forEach(span => {
-                    span.classList.remove('bg-black');
-                    span.classList.add('bg-white');
-                });
-
-                // Animate in
-                setTimeout(() => {
-                    menuBackdrop.classList.add('opacity-100');
-                    menuContent.classList.remove('-translate-y-full');
-                }, 10);
-            } else {
-                // Animate out
-                menuBackdrop.classList.remove('opacity-100');
-                menuContent.classList.add('-translate-y-full');
-
-                // Restore hamburger color based on scroll position
-                if (window.scrollY > 10) {
-                    menuBtnSpans.forEach(span => {
-                        span.classList.remove('bg-white');
-                        span.classList.add('bg-black');
-                    });
-                } else {
-                    menuBtnSpans.forEach(span => {
-                        span.classList.remove('bg-black');
-                        span.classList.add('bg-white');
-                    });
-                }
-
-                // Hide after animation completes
-                setTimeout(() => {
-                    mobileMenu.classList.add('hidden');
-                    document.body.classList.remove('overflow-hidden');
-                }, 500);
-            }
-        }
-
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-
-        // Close menu when clicking on backdrop
-        mobileMenu.addEventListener('click', function (e) {
-            if (e.target === mobileMenu || e.target === menuBackdrop) {
-                if (isMenuOpen) {
-                    toggleMobileMenu();
-                }
-            }
-        });
-
-        // Close menu when pressing escape key
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && isMenuOpen) {
-                toggleMobileMenu();
-            }
-        });
-
-        // Close menu when clicking on any mobile nav link
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', function () {
-                if (isMenuOpen) {
-                    toggleMobileMenu();
-                }
-            });
         });
 
         // Smooth scrolling
@@ -1166,52 +1017,40 @@
             }
         }, 5000);
 
-        function updateNavbarOnScroll() {
-            const navbar = document.getElementById('main-navbar');
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
             const navLinks = document.querySelectorAll('.nav-link');
-            const navTitle = document.querySelector('.nav-title');
-            const menuBtnSpans = document.querySelectorAll('#mobile-menu-btn span');
-            
-            if (window.scrollY > 10) {
-                navbar.classList.add('bg-white', 'border-b', 'border-gray-100');
-                navLinks.forEach(link => {
-                    link.classList.remove('text-white');
-                    link.classList.add('text-gray-800');
-                });
-                if (navTitle) {
-                    navTitle.classList.remove('text-white');
-                    navTitle.classList.add('text-gray-800');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
                 }
-                
-                // Change hamburger to black on scroll, but only if menu is closed
-                if (!isMenuOpen) {
-                    menuBtnSpans.forEach(span => {
-                        span.classList.remove('bg-white');
-                        span.classList.add('bg-black');
-                    });
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-primary');
                 }
-            } else {
-                navbar.classList.remove('bg-white', 'border-b', 'border-gray-100');
-                navLinks.forEach(link => {
-                    link.classList.remove('text-gray-800');
-                    link.classList.add('text-white');
-                });
-                if (navTitle) {
-                    navTitle.classList.remove('text-gray-800');
-                    navTitle.classList.add('text-white');
-                }
-                
-                // Always white hamburger when at top
-                if (!isMenuOpen) {
-                    menuBtnSpans.forEach(span => {
-                        span.classList.remove('bg-black');
-                        span.classList.add('bg-white');
-                    });
-                }
-            }
-        }
-        window.addEventListener('scroll', updateNavbarOnScroll);
-        window.addEventListener('DOMContentLoaded', updateNavbarOnScroll);
+            });
+        });
 
         function updateScrollArrow() {
             const arrow = document.getElementById('scroll-arrow');

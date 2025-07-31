@@ -576,6 +576,7 @@
         }
     </style>
 
+    <script src="js/mobile-nav.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Add sample filter buttons
@@ -611,12 +612,15 @@
                             link.classList.add('text-gray-900');
                         });
                         // Hamburger icon
-                        const hamburger = document.querySelector('#mobile-menu-btn svg');
-                        if (hamburger) {
-                            hamburger.classList.remove('text-white');
-                            hamburger.classList.add('text-gray-800');
-                        }
+                        const menuBtnSpans = document.querySelectorAll('#mobile-menu-btn span');
+                        menuBtnSpans.forEach(span => {
+                            span.classList.remove('bg-white');
+                            span.classList.add('bg-gray-800');
+                        });
                     }
+                    
+                    // Initialize mobile navigation after loading
+                    initializeMobileNavigation();
                 });
         });
 

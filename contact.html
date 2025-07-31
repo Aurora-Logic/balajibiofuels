@@ -367,13 +367,14 @@
             }
         }
     </style>
+    <script src="js/mobile-nav.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             fetch('nav.html')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById('navbar').innerHTML = data;
-                    // Force navbar text to black
+                    // Force navbar text to black for contact page
                     const navbar = document.getElementById('main-navbar');
                     if (navbar) {
                         navbar.classList.remove('bg-transparent');
@@ -389,78 +390,17 @@
                             navBrand.classList.remove('text-white');
                             navBrand.classList.add('text-gray-900');
                         }
-                        const hamburger = document.querySelector('#mobile-menu-btn svg');
-                        if (hamburger) {
-                            hamburger.classList.remove('text-white');
-                            hamburger.classList.add('text-gray-800');
-                        }
+                        const menuBtnSpans = document.querySelectorAll('#mobile-menu-btn span');
+                        menuBtnSpans.forEach(span => {
+                            span.classList.remove('bg-white');
+                            span.classList.add('bg-gray-800');
+                        });
                     }
+                    
+                    // Initialize mobile navigation after loading
+                    initializeMobileNavigation();
                 });
         });
-
-        // Navbar functionality
-        function initializeNavbar() {
-            // Mobile menu toggle
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMobileMenu = document.getElementById('close-mobile-menu');
-            
-            mobileMenuBtn?.addEventListener('click', () => {
-                mobileMenu.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden');
-            });
-            
-            closeMobileMenu?.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
-            });
-            
-            mobileMenu?.addEventListener('click', (e) => {
-                if (e.target === mobileMenu) {
-                    mobileMenu.classList.add('hidden');
-                    document.body.classList.remove('overflow-hidden');
-                }
-            });
-
-            // Dynamic navbar background and text color on scroll
-            function updateNavbarOnScroll() {
-                const navbar = document.getElementById('main-navbar');
-                const navLinks = navbar.querySelectorAll('.nav-link');
-                const navBrand = document.getElementById('nav-brand');
-                const hamburger = document.querySelector('#mobile-menu-btn svg');
-                
-                if (window.scrollY > 10) {
-                    navbar.classList.remove('bg-transparent');
-                    navbar.classList.add('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
-                    navBrand.classList.remove('text-white');
-                    navBrand.classList.add('text-gray-900');
-                    navLinks.forEach(link => {
-                        link.classList.remove('text-white');
-                        link.classList.add('text-gray-900');
-                    });
-                    if (hamburger) {
-                        hamburger.classList.remove('text-white');
-                        hamburger.classList.add('text-gray-800');
-                    }
-                } else {
-                    navbar.classList.add('bg-transparent');
-                    navbar.classList.remove('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
-                    navBrand.classList.add('text-white');
-                    navBrand.classList.remove('text-gray-900');
-                    navLinks.forEach(link => {
-                        link.classList.add('text-white');
-                        link.classList.remove('text-gray-900');
-                    });
-                    if (hamburger) {
-                        hamburger.classList.add('text-white');
-                        hamburger.classList.remove('text-gray-800');
-                    }
-                }
-            }
-            
-            window.addEventListener('scroll', updateNavbarOnScroll);
-            updateNavbarOnScroll(); // Call immediately to set initial state
-        }
 
         // Contact form submission
         document.getElementById('contact-form').addEventListener('submit', function(e) {
