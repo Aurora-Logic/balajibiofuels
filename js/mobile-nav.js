@@ -15,7 +15,7 @@ style.textContent = `
     }
 
     #mobile-menu-btn.active span:first-child {
-        transform: rotate(45deg) translate(6px, 6px);
+        transform: rotate(45deg) translate(4px, 4px);
     }
 
     #mobile-menu-btn.active span:nth-child(2) {
@@ -24,7 +24,7 @@ style.textContent = `
     }
 
     #mobile-menu-btn.active span:last-child {
-        transform: rotate(-45deg) translate(6px, -6px);
+        transform: rotate(-45deg) translate(4px, -4px);
     }
 
     /* Prevent scrolling when menu is open */
@@ -90,8 +90,8 @@ class MobileNavigation {
         });
         
         if (this.mobileMenu) {
-            this.menuBackdrop = this.mobileMenu.querySelector('.bg-black\\/70');
-            this.menuContent = this.mobileMenu.querySelector('.transform.-translate-y-full');
+            this.menuBackdrop = this.mobileMenu.querySelector('.bg-black\\/80');
+            this.menuContent = this.mobileMenu.querySelector('.absolute.inset-0.flex.flex-col.justify-between');
         }
 
         // Add event listeners
@@ -107,10 +107,10 @@ class MobileNavigation {
             this.mobileMenuBtn.addEventListener('click', () => this.toggleMobileMenu());
         }
 
-        // Close button
-        if (this.closeMobileMenu) {
-            this.closeMobileMenu.addEventListener('click', () => this.closeMenu());
-        }
+        // Close button (removed since new design uses backdrop click)
+        // if (this.closeMobileMenu) {
+        //     this.closeMobileMenu.addEventListener('click', () => this.closeMenu());
+        // }
 
         // Close on backdrop click
         if (this.mobileMenu) {
@@ -129,7 +129,7 @@ class MobileNavigation {
         });
 
         // Close on nav link click
-        const mobileNavLinks = this.mobileMenu?.querySelectorAll('.nav-link');
+        const mobileNavLinks = this.mobileMenu?.querySelectorAll('.mobile-nav-link');
         if (mobileNavLinks) {
             mobileNavLinks.forEach(link => {
                 link.addEventListener('click', () => this.closeMenu());
@@ -213,17 +213,30 @@ class MobileNavigation {
                 span.classList.add('bg-white');
             });
         } else {
-            // Restore color based on scroll position
+            // Check if we're on the home page
+            const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html' || window.location.pathname.endsWith('/');
+            
             if (window.scrollY > 10) {
+                // Scrolled state - always dark hamburger
                 menuBtnSpans.forEach(span => {
                     span.classList.remove('bg-white');
                     span.classList.add('bg-gray-800');
                 });
             } else {
-                menuBtnSpans.forEach(span => {
-                    span.classList.remove('bg-gray-800');
-                    span.classList.add('bg-white');
-                });
+                // Top of page state
+                if (isHomePage) {
+                    // Home page - white hamburger
+                    menuBtnSpans.forEach(span => {
+                        span.classList.remove('bg-gray-800');
+                        span.classList.add('bg-white');
+                    });
+                } else {
+                    // Other pages - dark hamburger
+                    menuBtnSpans.forEach(span => {
+                        span.classList.remove('bg-white');
+                        span.classList.add('bg-gray-800');
+                    });
+                }
             }
         }
     }
@@ -235,7 +248,11 @@ class MobileNavigation {
             const navBrand = document.getElementById('nav-brand');
             const menuBtnSpans = document.querySelectorAll('#mobile-menu-btn span');
             
+            // Check if we're on the home page
+            const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html' || window.location.pathname.endsWith('/');
+            
             if (window.scrollY > 10) {
+                // Scrolled state - always white background with dark text
                 navbar?.classList.remove('bg-transparent');
                 navbar?.classList.add('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
                 navBrand?.classList.remove('text-white');
@@ -253,21 +270,43 @@ class MobileNavigation {
                     });
                 }
             } else {
-                navbar?.classList.add('bg-transparent');
-                navbar?.classList.remove('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
-                navBrand?.classList.add('text-white');
-                navBrand?.classList.remove('text-gray-900');
-                
-                navLinks?.forEach(link => {
-                    link.classList.add('text-white');
-                    link.classList.remove('text-gray-900');
-                });
-                
-                if (!this.isMenuOpen) {
-                    menuBtnSpans.forEach(span => {
-                        span.classList.remove('bg-gray-800');
-                        span.classList.add('bg-white');
+                // Top of page state
+                if (isHomePage) {
+                    // Home page - transparent background with white text
+                    navbar?.classList.add('bg-transparent');
+                    navbar?.classList.remove('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
+                    navBrand?.classList.add('text-white');
+                    navBrand?.classList.remove('text-gray-900');
+                    
+                    navLinks?.forEach(link => {
+                        link.classList.add('text-white');
+                        link.classList.remove('text-gray-900');
                     });
+                    
+                    if (!this.isMenuOpen) {
+                        menuBtnSpans.forEach(span => {
+                            span.classList.remove('bg-gray-800');
+                            span.classList.add('bg-white');
+                        });
+                    }
+                } else {
+                    // Other pages - always white background with dark text
+                    navbar?.classList.remove('bg-transparent');
+                    navbar?.classList.add('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
+                    navBrand?.classList.remove('text-white');
+                    navBrand?.classList.add('text-gray-900');
+                    
+                    navLinks?.forEach(link => {
+                        link.classList.remove('text-white');
+                        link.classList.add('text-gray-900');
+                    });
+                    
+                    if (!this.isMenuOpen) {
+                        menuBtnSpans.forEach(span => {
+                            span.classList.remove('bg-white');
+                            span.classList.add('bg-gray-800');
+                        });
+                    }
                 }
             }
         };
