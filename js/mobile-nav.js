@@ -15,8 +15,9 @@ style.textContent = `
 
     /* Hide hamburger when menu is open */
     #mobile-menu-btn.menu-open {
-        opacity: 0;
-        pointer-events: none;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        visibility: hidden !important;
     }
 
     /* Prevent scrolling when menu is open */
