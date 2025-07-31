@@ -3,28 +3,20 @@
 // Add CSS for hamburger animation and mobile menu
 const style = document.createElement('style');
 style.textContent = `
-    /* Hamburger animation */
+    /* Hamburger button */
     #mobile-menu-btn {
         transition: all 0.3s ease;
     }
 
     #mobile-menu-btn span {
         display: block;
-        transform-origin: center;
         transition: all 0.3s ease;
     }
 
-    #mobile-menu-btn.active span:first-child {
-        transform: rotate(45deg) translate(4px, 4px);
-    }
-
-    #mobile-menu-btn.active span:nth-child(2) {
+    /* Hide hamburger when menu is open */
+    #mobile-menu-btn.menu-open {
         opacity: 0;
-        transform: scale(0);
-    }
-
-    #mobile-menu-btn.active span:last-child {
-        transform: rotate(-45deg) translate(4px, -4px);
+        pointer-events: none;
     }
 
     /* Prevent scrolling when menu is open */
@@ -45,6 +37,25 @@ style.textContent = `
         #mobile-menu-btn {
             display: block !important;
         }
+    }
+
+    /* Ensure social icons are visible */
+    #mobile-menu .flex.space-x-6 {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    #mobile-menu .flex.space-x-6 a {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    #mobile-menu .flex.space-x-6 svg {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     /* Ensure desktop menu is hidden on mobile */
@@ -107,10 +118,10 @@ class MobileNavigation {
             this.mobileMenuBtn.addEventListener('click', () => this.toggleMobileMenu());
         }
 
-        // Close button (removed since new design uses backdrop click)
-        // if (this.closeMobileMenu) {
-        //     this.closeMobileMenu.addEventListener('click', () => this.closeMenu());
-        // }
+        // Close button
+        if (this.closeMobileMenu) {
+            this.closeMobileMenu.addEventListener('click', () => this.closeMenu());
+        }
 
         // Close on backdrop click
         if (this.mobileMenu) {
@@ -148,9 +159,9 @@ class MobileNavigation {
     openMenu() {
         this.isMenuOpen = true;
         
-        // Update button state
+        // Hide hamburger button
         if (this.mobileMenuBtn) {
-            this.mobileMenuBtn.classList.add('active');
+            this.mobileMenuBtn.classList.add('menu-open');
         }
 
         // Show menu
@@ -170,17 +181,14 @@ class MobileNavigation {
                 this.menuContent.classList.remove('-translate-y-full');
             }
         }, 10);
-
-        // Update hamburger color
-        this.updateHamburgerColor(true);
     }
 
     closeMenu() {
         this.isMenuOpen = false;
         
-        // Update button state
+        // Show hamburger button
         if (this.mobileMenuBtn) {
-            this.mobileMenuBtn.classList.remove('active');
+            this.mobileMenuBtn.classList.remove('menu-open');
         }
 
         // Animate out
@@ -198,48 +206,9 @@ class MobileNavigation {
             }
             document.body.classList.remove('overflow-hidden');
         }, 300);
-
-        // Update hamburger color
-        this.updateHamburgerColor(false);
     }
 
-    updateHamburgerColor(isMenuOpen) {
-        const menuBtnSpans = document.querySelectorAll('#mobile-menu-btn span');
-        
-        if (isMenuOpen) {
-            // Keep white when menu is open
-            menuBtnSpans.forEach(span => {
-                span.classList.remove('bg-gray-800');
-                span.classList.add('bg-white');
-            });
-        } else {
-            // Check if we're on the home page
-            const isHomePage = window.location.pathname === '/' || window.location.pathname === '/index.html' || window.location.pathname.endsWith('/');
-            
-            if (window.scrollY > 10) {
-                // Scrolled state - always dark hamburger
-                menuBtnSpans.forEach(span => {
-                    span.classList.remove('bg-white');
-                    span.classList.add('bg-gray-800');
-                });
-            } else {
-                // Top of page state
-                if (isHomePage) {
-                    // Home page - white hamburger
-                    menuBtnSpans.forEach(span => {
-                        span.classList.remove('bg-gray-800');
-                        span.classList.add('bg-white');
-                    });
-                } else {
-                    // Other pages - dark hamburger
-                    menuBtnSpans.forEach(span => {
-                        span.classList.remove('bg-white');
-                        span.classList.add('bg-gray-800');
-                    });
-                }
-            }
-        }
-    }
+
 
     initNavbarScroll() {
         const updateNavbarOnScroll = () => {
@@ -262,13 +231,6 @@ class MobileNavigation {
                     link.classList.remove('text-white');
                     link.classList.add('text-gray-900');
                 });
-                
-                if (!this.isMenuOpen) {
-                    menuBtnSpans.forEach(span => {
-                        span.classList.remove('bg-white');
-                        span.classList.add('bg-gray-800');
-                    });
-                }
             } else {
                 // Top of page state
                 if (isHomePage) {
@@ -282,13 +244,6 @@ class MobileNavigation {
                         link.classList.add('text-white');
                         link.classList.remove('text-gray-900');
                     });
-                    
-                    if (!this.isMenuOpen) {
-                        menuBtnSpans.forEach(span => {
-                            span.classList.remove('bg-gray-800');
-                            span.classList.add('bg-white');
-                        });
-                    }
                 } else {
                     // Other pages - always white background with dark text
                     navbar?.classList.remove('bg-transparent');
@@ -300,13 +255,6 @@ class MobileNavigation {
                         link.classList.remove('text-white');
                         link.classList.add('text-gray-900');
                     });
-                    
-                    if (!this.isMenuOpen) {
-                        menuBtnSpans.forEach(span => {
-                            span.classList.remove('bg-white');
-                            span.classList.add('bg-gray-800');
-                        });
-                    }
                 }
             }
         };
