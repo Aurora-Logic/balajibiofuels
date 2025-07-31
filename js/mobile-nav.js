@@ -50,9 +50,23 @@ style.textContent = `
         display: inline-block !important;
         visibility: visible !important;
         opacity: 1 !important;
+        border-radius: 50% !important;
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        padding: 12px !important;
+        width: 48px !important;
+        height: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 
     #mobile-menu .flex.space-x-6 svg {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    #mobile-menu .flex.space-x-6 i {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
