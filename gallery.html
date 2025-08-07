@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -29,10 +26,46 @@
         }
     </script>
 </head>
-
 <body class="font-jakarta antialiased bg-white text-gray-900">
-<div id="navbar"></div>
-<div class="h-16"></div>
+    <!-- Navigation -->
+      <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-xl z-50 border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10  rounded-xl flex items-center justify-center">
+                       <img src="logo.png" alt="">
+                    </div>
+                    <div class="font-semibold text-lg tracking-tight">Shree Balalji BioFuels</div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Home</a>
+                    <a href="/about.html" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">About</a>
+                    <a href="/#vision" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Vision</a>
+                    <a href="/#model" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Model</a>
+                    <a href="/#benefits" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Benefits</a>
+                    <a href="/gallery.html" class="text-sm font-medium text-gray-600 hover:text-primary transition-colors">Gallery</a>
+                    <a href="/contact.html" class="text-sm font-medium text-primary">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-6 py-4 space-y-4">
+                <a href="/" class="block text-sm font-medium text-gray-600">Home</a>
+                <a href="/about" class="block text-sm font-medium text-gray-600">About</a>
+                <a href="/#vision" class="block text-sm font-medium text-gray-600">Vision</a>
+                <a href="/#model" class="block text-sm font-medium text-gray-600">Model</a>
+                <a href="/#benefits" class="block text-sm font-medium text-gray-600">Benefits</a>
+                <a href="/gallery.html" class="block text-sm font-medium text-gray-600">Gallery</a>
+                <a href="/contact" class="block text-sm font-medium text-primary">Contact</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
     <section class="pt-16 pb-12 bg-gray-50">
@@ -42,7 +75,7 @@
                     Our <span class="font-medium text-primary">Gallery</span>
                 </h1>
                 <p class="text-2xl font-light text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                    Witness sustainability in action - from grain to green energy, see how we're transforming
+                    Witness sustainability in action - from grain to green energy, see how we're transforming 
                     India's energy landscape through cooperative excellence
                 </p>
             </div>
@@ -50,7 +83,7 @@
     </section>
 
     <!-- Filter Navigation -->
-    <section class="py-8 bg-white sticky top-16 z-40 border-b border-gray-100" style="display:none">
+    <section class="py-8 bg-white sticky top-16 z-40 border-b border-gray-100">
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex justify-center">
                 <div id="filter-buttons" class="flex flex-wrap justify-center gap-4">
@@ -61,327 +94,70 @@
         </div>
     </section>
 
+  
 
-
-    <!-- Photo Gallery Section - Masonry Grid -->
+    <!-- Photo Gallery Sections -->
     <section class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6">
-            <!-- Masonry Gallery -->
-            <div class="masonry-grid">
-                <!-- Image 1 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1591634616938-1dfa7ee2e617?auto=format&fit=crop&w=800&q=80', title: 'Biofuel Production Facility', description: 'Modern biofuel processing plant with sustainable energy solutions'}, 0)">
-                        <img src="https://images.unsplash.com/photo-1591634616938-1dfa7ee2e617?auto=format&fit=crop&w=800&q=80"
-                            alt="Biofuel Production"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-square">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Biofuel Production Facility</h3>
-                            <p class="text-gray-600 text-sm mt-1">Modern biofuel processing plant with sustainable
-                                energy solutions</p>
-                        </div>
-                    </div>
+            <!-- Loading State -->
+            <div id="loading-state" class="text-center py-20">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                <p class="mt-4 text-gray-600">Loading gallery...</p>
+            </div>
+            
+            <!-- Error State -->
+            <div id="error-state" class="text-center py-20 hidden">
+                <div class="text-red-500 text-xl mb-4">⚠️</div>
+                <p class="text-gray-600" id="error-message">Failed to load gallery content.</p>
+                <button onclick="loadGallery()" class="mt-4 px-6 py-2 bg-primary text-white rounded-full hover:bg-accent transition-colors">
+                    Try Again
+                </button>
+            </div>
+            
+            <!-- Dynamic Masonry Gallery Content -->
+            <div id="gallery-content" class="hidden">
+                <div id="masonry-container" class="masonry-grid">
+                    <!-- Dynamic masonry items will be loaded here -->
                 </div>
-
-                <!-- Image 2 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1498084393753-b411b2d26b34?auto=format&fit=crop&w=800&q=80', title: 'Ethanol Plant Operations', description: 'Inside view of our ethanol distillation process'}, 1)">
-                        <img src="https://images.unsplash.com/photo-1498084393753-b411b2d26b34?auto=format&fit=crop&w=800&q=80"
-                            alt="Ethanol Plant"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-vertical">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Ethanol Plant Operations</h3>
-                            <p class="text-gray-600 text-sm mt-1">Inside view of our ethanol distillation process</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 3 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80', title: 'Grain Storage Silos', description: 'State-of-the-art grain storage facilities for biofuel production'}, 2)">
-                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80"
-                            alt="Grain Storage"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-horizontal">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Grain Storage Silos</h3>
-                            <p class="text-gray-600 text-sm mt-1">State-of-the-art grain storage facilities for biofuel
-                                production</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 4 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80', title: 'Bioethanol Research Lab', description: 'Our scientists developing next-generation biofuels'}, 3)">
-                        <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80"
-                            alt="Research Lab"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-small">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Bioethanol Research Lab</h3>
-                            <p class="text-gray-600 text-sm mt-1">Our scientists developing next-generation biofuels</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 5 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1473308822086-710304d7d30c?auto=format&fit=crop&w=800&q=80', title: 'Sugarcane Fields', description: 'Sustainable sugarcane cultivation for ethanol production'}, 4)">
-                        <img src="https://images.unsplash.com/photo-1473308822086-710304d7d30c?auto=format&fit=crop&w=800&q=80"
-                            alt="Sugarcane Fields"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-large">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Sugarcane Fields</h3>
-                            <p class="text-gray-600 text-sm mt-1">Sustainable sugarcane cultivation for ethanol
-                                production</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 6 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1536697246787-1f7ae568d89a?auto=format&fit=crop&w=800&q=80', title: 'Quality Testing', description: 'Rigorous quality control ensures our biofuels meet the highest standards'}, 5)">
-                        <img src="https://images.unsplash.com/photo-1536697246787-1f7ae568d89a?auto=format&fit=crop&w=800&q=80"
-                            alt="Quality Testing"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-square">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Quality Testing</h3>
-                            <p class="text-gray-600 text-sm mt-1">Rigorous quality control ensures our biofuels meet the
-                                highest standards</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 7 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1472145246862-b24cf25c4a36?auto=format&fit=crop&w=800&q=80', title: 'Transport Fleet', description: 'Our eco-friendly distribution network delivers biofuels across the region'}, 6)">
-                        <img src="https://images.unsplash.com/photo-1472145246862-b24cf25c4a36?auto=format&fit=crop&w=800&q=80"
-                            alt="Transport Fleet"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-horizontal">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Transport Fleet</h3>
-                            <p class="text-gray-600 text-sm mt-1">Our eco-friendly distribution network delivers
-                                biofuels across the region</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 8 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80', title: 'Sustainable Forestry', description: 'Forest management practices supporting our carbon-neutral initiatives'}, 7)">
-                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
-                            alt="Sustainable Forestry"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-vertical">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Sustainable Forestry</h3>
-                            <p class="text-gray-600 text-sm mt-1">Forest management practices supporting our
-                                carbon-neutral initiatives</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 9 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07?auto=format&fit=crop&w=800&q=80', title: 'Community Outreach', description: 'Educational programs helping local communities understand biofuel benefits'}, 8)">
-                        <img src="https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07?auto=format&fit=crop&w=800&q=80"
-                            alt="Community Outreach"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-small">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Community Outreach</h3>
-                            <p class="text-gray-600 text-sm mt-1">Educational programs helping local communities
-                                understand biofuel benefits</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 10 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80', title: 'Control Room', description: 'Advanced monitoring systems ensure optimal production efficiency'}, 9)">
-                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80"
-                            alt="Control Room"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-square">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Control Room</h3>
-                            <p class="text-gray-600 text-sm mt-1">Advanced monitoring systems ensure optimal production
-                                efficiency</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 11 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1617469165786-8007eda3caa7?auto=format&fit=crop&w=800&q=80', title: 'Biofuel Research', description: 'Innovative approaches to next-generation renewable fuels'}, 10)">
-                        <img src="https://images.unsplash.com/photo-1617469165786-8007eda3caa7?auto=format&fit=crop&w=800&q=80"
-                            alt="Biofuel Research"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-large">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Biofuel Research</h3>
-                            <p class="text-gray-600 text-sm mt-1">Innovative approaches to next-generation renewable
-                                fuels</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 12 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80', title: 'Corporate Headquarters', description: 'Our main office where strategic planning and development happens'}, 11)">
-                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
-                            alt="Corporate Headquarters"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-horizontal">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Corporate Headquarters</h3>
-                            <p class="text-gray-600 text-sm mt-1">Our main office where strategic planning and
-                                development happens</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 13 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1455165814004-1126a7199f9b?auto=format&fit=crop&w=800&q=80', title: 'Innovation Lab', description: 'Where our engineers develop new sustainable energy solutions'}, 12)">
-                        <img src="https://images.unsplash.com/photo-1455165814004-1126a7199f9b?auto=format&fit=crop&w=800&q=80"
-                            alt="Innovation Lab"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-vertical">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Innovation Lab</h3>
-                            <p class="text-gray-600 text-sm mt-1">Where our engineers develop new sustainable energy
-                                solutions</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 14 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1543489822-c49534f3271f?auto=format&fit=crop&w=800&q=80', title: 'Fermentation Tanks', description: 'Industrial-scale fermentation process for biofuel production'}, 13)">
-                        <img src="https://images.unsplash.com/photo-1543489822-c49534f3271f?auto=format&fit=crop&w=800&q=80"
-                            alt="Fermentation Tanks"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-horizontal">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Fermentation Tanks</h3>
-                            <p class="text-gray-600 text-sm mt-1">Industrial-scale fermentation process for biofuel
-                                production</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 15 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80', title: 'Sunrise at the Plant', description: 'Early morning operations at our main production facility'}, 14)">
-                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80"
-                            alt="Sunrise at the Plant"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-vertical">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Sunrise at the Plant</h3>
-                            <p class="text-gray-600 text-sm mt-1">Early morning operations at our main production
-                                facility</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 16 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?auto=format&fit=crop&w=800&q=80', title: 'Quality Assurance', description: 'Ensuring our biofuels meet the highest industry standards'}, 15)">
-                        <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?auto=format&fit=crop&w=800&q=80"
-                            alt="Quality Assurance"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-vertical">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Quality Assurance</h3>
-                            <p class="text-gray-600 text-sm mt-1">Ensuring our biofuels meet the highest industry
-                                standards</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 17 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1473181488821-2d23949a045a?auto=format&fit=crop&w=800&q=80', title: 'Green Technology', description: 'Implementing eco-friendly solutions throughout our production process'}, 16)">
-                        <img src="https://images.unsplash.com/photo-1473181488821-2d23949a045a?auto=format&fit=crop&w=800&q=80"
-                            alt="Green Technology"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-small">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Green Technology</h3>
-                            <p class="text-gray-600 text-sm mt-1">Implementing eco-friendly solutions throughout our
-                                production process</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 18 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&w=800&q=80', title: 'Sustainable Agriculture', description: 'Partnering with local farmers for sustainable biofuel crops'}, 17)">
-                        <img src="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&w=800&q=80"
-                            alt="Sustainable Agriculture"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-square">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Sustainable Agriculture</h3>
-                            <p class="text-gray-600 text-sm mt-1">Partnering with local farmers for sustainable biofuel
-                                crops</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image 19 -->
-                <div class="masonry-item">
-                    <div class="gallery-item cursor-pointer"
-                        onclick="openImageLightbox({media_path: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80', title: 'Engineering Excellence', description: 'Our engineering team designing innovative biofuel production solutions'}, 18)">
-                        <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80"
-                            alt="Engineering Excellence"
-                            class="w-full rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 img-horizontal">
-                        <div class="mt-4">
-                            <h3 class="font-semibold text-gray-900">Engineering Excellence</h3>
-                            <p class="text-gray-600 text-sm mt-1">Our engineering team designing innovative biofuel
-                                production solutions</p>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            
+            <!-- Load More Button -->
+            <div id="load-more-container" class="text-center mt-12 hidden">
+                <button id="load-more-btn" class="px-8 py-3 bg-primary text-white rounded-full hover:bg-accent transition-colors">
+                    Load More
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Video Modal Removed - Only Using Image Lightbox -->
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="relative max-w-4xl w-full mx-4">
+            <button id="close-video" class="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div class="bg-black rounded-lg overflow-hidden">
+                <div id="video-content" class="aspect-w-16 aspect-h-9">
+                    <!-- Video content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Image Lightbox -->
     <div id="image-lightbox" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden">
-        <div class="relative max-w-6xl mx-4 flex flex-col items-center">
-            <button id="close-lightbox"
-                class="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors">
+        <div class="relative max-w-6xl max-h-screen mx-4">
+            <button id="close-lightbox" class="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                    </path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
-            <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[70vh] object-contain rounded-lg">
-            <div id="lightbox-caption" class="mt-6 text-center">
-                <h3 id="lightbox-title" class="text-2xl font-semibold text-white mb-2"></h3>
-                <p id="lightbox-description" class="text-lg text-gray-300 max-w-2xl mx-auto"></p>
-            </div>
-            <div class="flex justify-center items-center mt-6 space-x-8">
-                <button id="prev-image" class="text-white hover:text-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                    </svg>
-                </button>
-                <button id="next-image" class="text-white hover:text-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </button>
+            <img id="lightbox-image" src="" alt="" class="max-w-full max-h-screen object-contain rounded-lg">
+            <div id="lightbox-caption" class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 text-white p-4 rounded-b-lg">
+                <h3 id="lightbox-title" class="font-semibold"></h3>
+                <p id="lightbox-description" class="text-sm text-gray-300"></p>
             </div>
         </div>
     </div>
@@ -425,30 +201,28 @@
                         <div class="text-sm text-gray-400">Prosperity through Cooperation</div>
                     </div>
                 </div>
-
+                
                 <div>
                     <h3 class="font-medium mb-6">Quick Links</h3>
                     <div class="space-y-4">
                         <a href="/#vision" class="block text-gray-300 hover:text-white transition-colors">Our Vision</a>
                         <a href="/#model" class="block text-gray-300 hover:text-white transition-colors">Our Model</a>
                         <a href="/#benefits" class="block text-gray-300 hover:text-white transition-colors">Benefits</a>
-                        <a href="/about.html" class="block text-gray-300 hover:text-white transition-colors">About
-                            Us</a>
+                        <a href="/about.html" class="block text-gray-300 hover:text-white transition-colors">About Us</a>
                     </div>
                 </div>
-
+                
                 <div>
                     <h3 class="font-medium mb-6">Connect</h3>
                     <div class="space-y-4 text-gray-300">
                         <div>Maharashtra, India</div>
                         <div>+91 20 XXXX XXXX</div>
                         <div>info@shreebalaljibiofuels.com</div>
-                        <a href="/contact.html"
-                            class="block text-primary hover:text-primary/80 transition-colors">Contact Us →</a>
+                        <a href="/contact.html" class="block text-primary hover:text-primary/80 transition-colors">Contact Us →</a>
                     </div>
                 </div>
             </div>
-
+            
             <div class="border-t border-gray-700 mt-16 pt-8 text-center text-gray-400">
                 <p>&copy; 2024 Shree Balalji BioFuels. All rights reserved.</p>
             </div>
@@ -491,63 +265,6 @@
             border-color: #10b981;
         }
 
-        /* Masonry Grid Styles */
-        .masonry-grid {
-            column-count: 1;
-            column-gap: 1.5rem;
-        }
-
-        @media (min-width: 640px) {
-            .masonry-grid {
-                column-count: 2;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .masonry-grid {
-                column-count: 3;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .masonry-grid {
-                column-count: 4;
-            }
-        }
-
-        .masonry-item {
-            display: inline-block;
-            width: 100%;
-            margin-bottom: 1.5rem;
-            break-inside: avoid;
-        }
-
-        /* Image sizing classes for masonry effect */
-        .img-square {
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .img-vertical {
-            height: 450px;
-            object-fit: cover;
-        }
-
-        .img-horizontal {
-            height: 220px;
-            object-fit: cover;
-        }
-
-        .img-large {
-            height: 500px;
-            object-fit: cover;
-        }
-
-        .img-small {
-            height: 180px;
-            object-fit: cover;
-        }
-
         .gallery-item img {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -577,6 +294,7 @@
             overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 1;
+            line-clamp: 1;
             -webkit-box-orient: vertical;
         }
 
@@ -584,73 +302,145 @@
             overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
+        }
+
+        /* Masonry Grid Styles */
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .masonry-grid {
+                column-count: 3;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masonry-grid {
+                column-count: 4;
+            }
+        }
+
+        .masonry-item {
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            break-inside: avoid;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .masonry-item.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image sizing classes for masonry effect */
+        .img-square {
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .img-vertical {
+            height: 450px;
+            object-fit: cover;
+        }
+
+        .img-horizontal {
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .img-large {
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .img-small {
+            height: 180px;
+            object-fit: cover;
         }
     </style>
 
-    <script src="js/mobile-nav.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Add sample filter buttons
-            addSampleFilterButtons();
-            // Add animation to masonry items
-            setTimeout(() => {
-                document.querySelectorAll('.masonry-item').forEach(item => {
-                    item.classList.add('fade-in');
-                });
-            }, 100);
+        // Global variables
+        let currentFilter = 'all';
+        let currentPage = 1;
+        let allCategories = [];
+        let isLoading = false;
 
-            // Load navigation bar
-            fetch('nav.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('navbar').innerHTML = data;
-
-                    // Force navbar to always be visible and black-on-white
-                    const navbar = document.getElementById('main-navbar');
-                    if (navbar) {
-                        navbar.classList.remove('bg-transparent');
-                        navbar.classList.add('bg-white', 'border-b', 'border-gray-100', 'shadow-sm');
-                        // Brand
-                        const navBrand = document.getElementById('nav-brand');
-                        if (navBrand) {
-                            navBrand.classList.remove('text-white');
-                            navBrand.classList.add('text-gray-900');
-                        }
-                        // Desktop links
-                        navbar.querySelectorAll('.nav-link').forEach(link => {
-                            link.classList.remove('text-white');
-                            link.classList.remove('text-gray-600');
-                            link.classList.add('text-gray-900');
-                        });
-                        // Hamburger icon
-                        const menuBtnSpans = document.querySelectorAll('#mobile-menu-btn span');
-                        menuBtnSpans.forEach(span => {
-                            span.classList.remove('bg-white');
-                            span.classList.add('bg-gray-800');
-                        });
-                    }
-                    
-                    // Initialize mobile navigation after loading
-                    initializeMobileNavigation();
-                });
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn?.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
         });
 
-        // Add sample filter buttons
-        function addSampleFilterButtons() {
+        // Initialize gallery on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCategories();
+            loadGallery();
+        });
+
+        // Load categories from database
+        async function loadCategories() {
+            try {
+                // Get categories from the gallery data itself
+                const response = await fetch('dbs/gallery_combined.php?limit=1000'); // Get all items to extract categories
+                
+                if (response.status === 404 || !response.ok) {
+                    console.log('Gallery endpoint not available');
+                    return;
+                }
+                
+                const result = await response.json();
+                console.log('Gallery data loaded for categories:', result); // Debug log
+                
+                if (result.success && result.data) {
+                    // Extract unique categories from gallery items
+                    const categoryMap = new Map();
+                    
+                    result.data.forEach(item => {
+                        if (item.category_id && item.category_name) {
+                            categoryMap.set(item.category_id, {
+                                id: item.category_id,
+                                name: item.category_name
+                            });
+                        }
+                    });
+                    
+                    allCategories = Array.from(categoryMap.values());
+                    console.log('Extracted categories:', allCategories); // Debug log
+                    renderCategoryButtons();
+                }
+            } catch (error) {
+                console.error('Error loading categories:', error);
+                // Continue without categories if they fail to load
+            }
+        }
+
+        // Render category filter buttons
+        function renderCategoryButtons() {
             const filterButtonsContainer = document.getElementById('filter-buttons');
             const allButton = filterButtonsContainer.querySelector('[data-filter="all"]');
-
-            // Sample categories for the static gallery
-            const sampleCategories = [
-                { id: 'facility', name: 'Facility' },
-                { id: 'production', name: 'Production' },
-                { id: 'research', name: 'Research' },
-                { id: 'sustainability', name: 'Sustainability' }    
-            ];
-
+            
+            console.log('Rendering category buttons for:', allCategories); // Debug log
+            
             // Add category buttons after the "All" button
-            sampleCategories.forEach(category => {
+            allCategories.forEach(category => {
+                console.log('Processing category:', category); // Debug log
+                // Remove the image/video count condition to show all categories
                 const button = document.createElement('button');
                 button.className = 'filter-btn';
                 button.dataset.filter = category.id;
@@ -663,58 +453,261 @@
             allButton.addEventListener('click', () => filterGallery('all'));
         }
 
-        // Filter gallery by category (simplified static version)
+        // Filter gallery by category
         function filterGallery(filter) {
+            if (isLoading) return;
+            
+            currentFilter = filter;
+            currentPage = 1;
+            
             // Update active button
             const filterBtns = document.querySelectorAll('.filter-btn');
             filterBtns.forEach(btn => btn.classList.remove('active'));
             document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
+            
+            // Clear current gallery content and recreate masonry container
+            const galleryContent = document.getElementById('gallery-content');
+            galleryContent.innerHTML = `<div id="masonry-container" class="masonry-grid"></div>`;
+            document.getElementById('load-more-container').classList.add('hidden');
+            
+            // Load filtered content
+            loadGallery(true);
+        }
 
-            // Alert that this is a static demo
-            if (filter !== 'all') {
-                console.log('This is a static gallery demo - filtering functionality would filter by: ' + filter);
-                // In a real implementation, you would filter the items here
+        // Load gallery content from database
+        async function loadGallery(replace = false) {
+            if (isLoading) return;
+            isLoading = true;
+
+            const loadingState = document.getElementById('loading-state');
+            const errorState = document.getElementById('error-state');
+            const galleryContent = document.getElementById('gallery-content');
+            const loadMoreContainer = document.getElementById('load-more-container');
+
+            if (replace || currentPage === 1) {
+                loadingState.classList.remove('hidden');
+                galleryContent.classList.add('hidden');
+                errorState.classList.add('hidden');
+            }
+
+            try {
+                const params = new URLSearchParams({
+                    page: currentPage,
+                    limit: 12
+                });
+
+                if (currentFilter !== 'all') {
+                    params.append('category_id', currentFilter);
+                }
+
+                const response = await fetch(`dbs/gallery_combined.php?${params}`);
+                
+                // Check if the endpoint exists
+                if (response.status === 404) {
+                    throw new Error('Gallery endpoint not found. Please ensure dbs/gallery_combined.php exists.');
+                }
+                
+                if (response.status === 401) {
+                    throw new Error('Unauthorized access. Please check authentication.');
+                }
+                
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Ensure masonry container exists
+                    if (!document.getElementById('masonry-container')) {
+                        galleryContent.innerHTML = `<div id="masonry-container" class="masonry-grid"></div>`;
+                    }
+                    
+                    renderGalleryItems(result.data);
+                    
+                    // Handle pagination
+                    if (result.pagination && result.pagination.current_page < result.pagination.total_pages) {
+                        loadMoreContainer.classList.remove('hidden');
+                    } else {
+                        loadMoreContainer.classList.add('hidden');
+                    }
+                    
+                    loadingState.classList.add('hidden');
+                    galleryContent.classList.remove('hidden');
+                } else {
+                    throw new Error(result.error || 'Failed to load gallery');
+                }
+            } catch (error) {
+                console.error('Error loading gallery:', error);
+                loadingState.classList.add('hidden');
+                errorState.classList.remove('hidden');
+                document.getElementById('error-message').textContent = error.message;
+            } finally {
+                isLoading = false;
             }
         }
 
-        // Global variables for lightbox navigation
-        let currentImageIndex = 0;
-        let galleryItems = [];
+        // Render gallery items with masonry grid
+        function renderGalleryItems(items) {
+            let masonryContainer = document.getElementById('masonry-container');
+            
+            // Ensure masonry container exists
+            if (!masonryContainer) {
+                const galleryContent = document.getElementById('gallery-content');
+                galleryContent.innerHTML = `<div id="masonry-container" class="masonry-grid"></div>`;
+                masonryContainer = document.getElementById('masonry-container');
+            }
+            
+            if (items.length === 0 && currentPage === 1) {
+                const galleryContent = document.getElementById('gallery-content');
+                galleryContent.innerHTML = `
+                    <div class="text-center py-20">
+                        <div class="text-gray-400 text-6xl mb-4">📷</div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">No media found</h3>
+                        <p class="text-gray-600">Try selecting a different category or check back later.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // If first page or filter change, clear existing content
+            if (currentPage === 1) {
+                masonryContainer.innerHTML = '';
+            }
+
+            // Array of image size classes for variety
+            const imageSizes = ['img-square', 'img-vertical', 'img-horizontal', 'img-large', 'img-small'];
+            
+            items.forEach((item, index) => {
+                const itemElement = createMasonryGalleryItem(item, index);
+                masonryContainer.appendChild(itemElement);
+            });
+
+            // Trigger animations
+            setTimeout(() => {
+                const newItems = masonryContainer.querySelectorAll('.masonry-item:not(.fade-in-done)');
+                newItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('fade-in');
+                        item.classList.add('fade-in-done');
+                    }, index * 100);
+                });
+            }, 100);
+        }
+
+        // Create individual masonry gallery item
+        function createMasonryGalleryItem(item, index) {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'masonry-item gallery-item cursor-pointer opacity-0 transform translate-y-4 transition-all duration-300';
+            itemDiv.dataset.category = item.category_id;
+            itemDiv.dataset.mediaType = item.media_type;
+
+            const isVideo = item.media_type === 'video';
+            const mediaPath = item.media_path;
+            
+            // Array of image size classes for variety
+            const imageSizes = ['img-square', 'img-vertical', 'img-horizontal', 'img-large', 'img-small'];
+            // Use index to determine size class for variety
+            const sizeClass = imageSizes[index % imageSizes.length];
+
+            itemDiv.innerHTML = `
+                <div class="relative group">
+                    ${isVideo ? `
+                        <video 
+                            class="w-full ${sizeClass} rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:scale-105"
+                            poster=""
+                            preload="metadata">
+                            <source src="${mediaPath}" type="video/mp4">
+                        </video>
+                        <div class="absolute inset-0 bg-black bg-opacity-40 rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div class="bg-white bg-opacity-20 rounded-full p-4">
+                                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    ` : `
+                        <img 
+                            src="${mediaPath}" 
+                            alt="${item.title}" 
+                            class="w-full ${sizeClass} rounded-2xl shadow-lg group-hover:shadow-2xl transition-all duration-300 group-hover:scale-105"
+                        >
+                    `}
+                </div>
+                <div class="mt-4 p-4 bg-white rounded-xl shadow-sm">
+                    <h3 class="font-semibold text-gray-900 line-clamp-1">${item.title}</h3>
+                    <p class="text-gray-600 text-sm line-clamp-2 mt-1">${item.description || ''}</p>
+                    ${item.category_name ? `<p class="text-primary text-xs mt-2 font-medium">${item.category_name}</p>` : ''}
+                    <div class="flex items-center justify-between mt-2">
+                        <span class="text-xs text-gray-500">${new Date(item.uploaded_at).toLocaleDateString()}</span>
+                        ${isVideo ? '<span class="text-xs text-blue-500 font-medium">Video</span>' : '<span class="text-xs text-green-500 font-medium">Image</span>'}
+                    </div>
+                </div>
+            `;
+
+            // Add click event listener
+            itemDiv.addEventListener('click', () => {
+                if (isVideo) {
+                    openVideoModal(item);
+                } else {
+                    openImageLightbox(item);
+                }
+            });
+
+            return itemDiv;
+        }
+
+        // Open video modal
+        function openVideoModal(item) {
+            const videoModal = document.getElementById('video-modal');
+            const videoContent = document.getElementById('video-content');
+            
+            videoContent.innerHTML = `
+                <video controls autoplay class="w-full h-full rounded-lg">
+                    <source src="${item.media_path}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 text-white p-4 rounded-b-lg">
+                    <h3 class="font-semibold">${item.title}</h3>
+                    ${item.description ? `<p class="text-sm text-gray-300 mt-1">${item.description}</p>` : ''}
+                </div>
+            `;
+            
+            videoModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
 
         // Open image lightbox
-        function openImageLightbox(item, index = 0) {
+        function openImageLightbox(item) {
             const imageLightbox = document.getElementById('image-lightbox');
             const lightboxImage = document.getElementById('lightbox-image');
             const lightboxTitle = document.getElementById('lightbox-title');
             const lightboxDescription = document.getElementById('lightbox-description');
-
-            // Store current index and get all gallery items
-            currentImageIndex = index;
-            galleryItems = Array.from(document.querySelectorAll('.gallery-item')).map((item, idx) => {
-                const img = item.querySelector('img');
-                const title = item.querySelector('h3').textContent;
-                const description = item.querySelector('p').textContent;
-                return {
-                    media_path: img.src,
-                    title: title,
-                    description: description,
-                    index: idx
-                };
-            });
-
+            
             lightboxImage.src = item.media_path;
             lightboxImage.alt = item.title;
             lightboxTitle.textContent = item.title;
             lightboxDescription.textContent = item.description || '';
-
+            
             imageLightbox.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
-            
-            // Update navigation buttons
-            updateNavigationButtons();
         }
 
+        // Load more functionality
+        document.getElementById('load-more-btn')?.addEventListener('click', () => {
+            currentPage++;
+            loadGallery();
+        });
+
         // Modal close functionality
+        document.getElementById('close-video')?.addEventListener('click', () => {
+            const videoModal = document.getElementById('video-modal');
+            const videoContent = document.getElementById('video-content');
+            videoModal.classList.add('hidden');
+            videoContent.innerHTML = '';
+            document.body.style.overflow = '';
+        });
+
         document.getElementById('close-lightbox')?.addEventListener('click', () => {
             const imageLightbox = document.getElementById('image-lightbox');
             imageLightbox.classList.add('hidden');
@@ -724,14 +717,28 @@
         // Close modals on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
+                const videoModal = document.getElementById('video-modal');
                 const imageLightbox = document.getElementById('image-lightbox');
-
+                const videoContent = document.getElementById('video-content');
+                
+                videoModal?.classList.add('hidden');
                 imageLightbox?.classList.add('hidden');
+                if (videoContent) videoContent.innerHTML = '';
                 document.body.style.overflow = '';
             }
         });
 
         // Close modals on backdrop click
+        document.getElementById('video-modal')?.addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                const videoModal = document.getElementById('video-modal');
+                const videoContent = document.getElementById('video-content');
+                videoModal.classList.add('hidden');
+                videoContent.innerHTML = '';
+                document.body.style.overflow = '';
+            }
+        });
+
         document.getElementById('image-lightbox')?.addEventListener('click', (e) => {
             if (e.target === e.currentTarget) {
                 const imageLightbox = document.getElementById('image-lightbox');
@@ -739,51 +746,6 @@
                 document.body.style.overflow = '';
             }
         });
-
-        // Navigation functions
-        function updateNavigationButtons() {
-            const prevBtn = document.getElementById('prev-image');
-            const nextBtn = document.getElementById('next-image');
-            
-            prevBtn.disabled = currentImageIndex === 0;
-            nextBtn.disabled = currentImageIndex === galleryItems.length - 1;
-        }
-
-        function showImage(index) {
-            if (index >= 0 && index < galleryItems.length) {
-                const item = galleryItems[index];
-                const lightboxImage = document.getElementById('lightbox-image');
-                const lightboxTitle = document.getElementById('lightbox-title');
-                const lightboxDescription = document.getElementById('lightbox-description');
-
-                lightboxImage.src = item.media_path;
-                lightboxImage.alt = item.title;
-                lightboxTitle.textContent = item.title;
-                lightboxDescription.textContent = item.description;
-
-                currentImageIndex = index;
-                updateNavigationButtons();
-            }
-        }
-
-        function showPreviousImage() {
-            if (currentImageIndex > 0) {
-                showImage(currentImageIndex - 1);
-            }
-        }
-
-        function showNextImage() {
-            if (currentImageIndex < galleryItems.length - 1) {
-                showImage(currentImageIndex + 1);
-            }
-        }
-
-        // Add event listeners for navigation buttons
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('prev-image')?.addEventListener('click', showPreviousImage);
-            document.getElementById('next-image')?.addEventListener('click', showNextImage);
-        });
     </script>
 </body>
-
 </html>
